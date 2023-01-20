@@ -3,7 +3,10 @@ import { Router } from "@reach/router";
 import jwt_decode from "jwt-decode";
 
 import NotFound from "./pages/NotFound.js";
-import Skeleton from "./pages/Skeleton.js";
+import Title from "./pages/Title.js";
+import HowToPlay from "./pages/HowToPlay.js";
+import Game from "./pages/Game.js";
+import Profile from "./pages/Profile.js";
 
 import "../utilities.css";
 
@@ -44,10 +47,12 @@ const App = () => {
   return (
     <>
       <Router>
-        <Skeleton path="/" handleLogin={handleLogin} handleLogout={handleLogout} userId={userId} />
+        <Title path="/" handleLogin={handleLogin} handleLogout={handleLogout} userId={userId} />
+        <HowToPlay path="/howtoplay/" userId={userId} />
+        <Profile path="/profile/" userId={userId} />
+        <Game path="/game/" userId={userId} />
         <NotFound default />
       </Router>
-      <h3>testing, delete this later</h3>
     </>
   );
 };
