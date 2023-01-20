@@ -1,13 +1,37 @@
 import React, { useState, useEffect, useRef } from "react";
+import { Link } from "@reach/router";
+import SingleWord from "../modules/SingleWord.js";
+import { NewWord } from "../modules/NewWordInput.js";
+import { get, post } from "../../utilities";
 //import { socket } from "../../client-socket.js";
-//import { get, post } from "../../utilities";
 //import { drawCanvas } from "../../canvasManager";
 //import { handleInput } from "../../input";
-import { Link } from "@reach/router";
 
 import "../../utilities.css";
 
-const Game = (props) => {
+const Game = () => {
+  const [words, setWords] = useState([]);
+
+  useEffect(() => {
+    get("/api/word").then((wordsObjs) => {
+      setWords(wordsObjs);
+    });
+  }, []);
+
+  const addNewWord = (wordsObjs) => {
+    setWords([wordsObjs].concat(words));
+  };
+
+  let wordsList = null;
+  const hasWords = words.length !== 0;
+  if (hasWords) {
+    wordsList = words.map((wordsObjs) => (
+      <SingleWord input_user={wordsObjs.input_user} content={wordsObjs.content} />
+    ));
+  } else {
+    wordsList = <div>No words!</div>;
+  }
+
   return (
     <div>
       <h1>Game</h1>
@@ -15,6 +39,10 @@ const Game = (props) => {
       <h1>
         <Link to="/">Back </Link>
       </h1>
+      <div>
+        <NewWord addNewWord={addNewWord} />
+        {wordsList}
+      </div>
     </div>
   );
 };
