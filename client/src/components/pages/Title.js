@@ -29,6 +29,7 @@ const Title = ({ userId, handleLogin, handleLogout }) => {
           Check out this getting started guide
         </a>
       </GoogleOAuthProvider>
+      <h1>FRU&IT</h1>
       <h1>
         <Link to="/game/">Play </Link>
       </h1>

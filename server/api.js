@@ -11,6 +11,9 @@ const express = require("express");
 
 // import models so we can interact with the database
 const User = require("./models/user");
+const Userstats = require("./models/userstats");
+const Gamestats = require("./models/gamestats");
+const wordinput = require("./models/wordinput");
 
 // import authentication library
 const auth = require("./auth");
