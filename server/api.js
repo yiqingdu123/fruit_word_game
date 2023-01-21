@@ -47,11 +47,11 @@ router.post("/initsocket", (req, res) => {
 // | write your API methods below!|
 // |------------------------------|
 
-router.get("/words", (req, res) => {
+router.get("/wordinput", (req, res) => {
   Word.find({}).then((words) => res.send(words));
 });
 
-router.post("/word", (req, res) => {
+router.post("/wordinput", (req, res) => {
   const newWord = new Word({
     content: req.body.content,
   });

@@ -13,7 +13,7 @@ const Game = () => {
   const [words, setWords] = useState([]);
 
   useEffect(() => {
-    get("/api/wordinput").then((wordsObjs) => {
+    get("/api/words").then((wordsObjs) => {
       setWords(wordsObjs);
     });
   }, []);
