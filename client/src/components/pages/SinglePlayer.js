@@ -35,13 +35,13 @@ const Game = () => {
   return (
     <div>
       <h1>Game</h1>
-      <p>Here is the game.</p>
+      <p>Here is the single player game.</p>
       <h1>
         <Link to="/">Back </Link>
       </h1>
       <div>
         <NewWord addNewWord={addNewWord} />
-        {wordsList}
+        {wordsList}S
       </div>
     </div>
   );

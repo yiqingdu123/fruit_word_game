@@ -5,8 +5,10 @@ import jwt_decode from "jwt-decode";
 import NotFound from "./pages/NotFound.js";
 import Title from "./pages/Title.js";
 import HowToPlay from "./pages/HowToPlay.js";
-import Game from "./pages/Game.js";
+import GameMenu from "./pages/GameMenu.js";
 import Profile from "./pages/Profile.js";
+import SinglePlayerGame from "./pages/SinglePlayerGame.js";
+import MultiPlayerGame from "./pages/MultiPlayerGame.js";
 
 import "../utilities.css";
 
@@ -35,6 +37,7 @@ const App = () => {
     console.log(`Logged in as ${decodedCredential.name}`);
     post("/api/login", { token: userToken }).then((user) => {
       setUserId(user._id);
+      console.log("I logged in with socket ", socket.id);
       post("/api/initsocket", { socketid: socket.id });
     });
   };
@@ -50,8 +53,10 @@ const App = () => {
         <Title path="/" handleLogin={handleLogin} handleLogout={handleLogout} userId={userId} />
         <HowToPlay path="/howtoplay/" userId={userId} />
         <Profile path="/profile/" userId={userId} />
-        <Game path="/game/" userId={userId} />
+        <GameMenu path="/gamemenu/" userId={userId} />
         <NotFound default />
+        <SinglePlayerGame path="/singleplayer" userId={userId} />
+        <MultiPlayerGame path="/multiplayer" userId={userId} />
       </Router>
     </>
   );

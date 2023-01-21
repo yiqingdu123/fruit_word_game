@@ -31,7 +31,7 @@ const Title = ({ userId, handleLogin, handleLogout }) => {
       </GoogleOAuthProvider>
       <h1>FRU&IT</h1>
       <h1>
-        <Link to="/game/">Play </Link>
+        <Link to="/gamemenu/">Play </Link>
       </h1>
       <h1>
         <Link to="/howtoplay/">How To Play</Link>
