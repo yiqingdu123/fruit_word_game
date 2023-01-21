@@ -5,10 +5,8 @@ import jwt_decode from "jwt-decode";
 import NotFound from "./pages/NotFound.js";
 import Title from "./pages/Title.js";
 import HowToPlay from "./pages/HowToPlay.js";
-import GameMenu from "./pages/GameMenu.js";
+import Game from "./pages/Game.js";
 import Profile from "./pages/Profile.js";
-import SinglePlayerGame from "./pages/SinglePlayerGame.js";
-import MultiPlayerGame from "./pages/MultiPlayerGame.js";
 
 import "../utilities.css";
 
@@ -53,10 +51,9 @@ const App = () => {
         <Title path="/" handleLogin={handleLogin} handleLogout={handleLogout} userId={userId} />
         <HowToPlay path="/howtoplay/" userId={userId} />
         <Profile path="/profile/" userId={userId} />
-        <GameMenu path="/gamemenu/" userId={userId} />
+        <Game path="/game/" userId={userId} />
+
         <NotFound default />
-        <SinglePlayerGame path="/singleplayer" userId={userId} />
-        <MultiPlayerGame path="/multiplayer" userId={userId} />
       </Router>
     </>
   );
