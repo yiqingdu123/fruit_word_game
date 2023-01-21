@@ -2,6 +2,11 @@ import React from "react";
 import { Link } from "@reach/router";
 
 const Profile = (props) => {
+  let loginModal = null;
+  if (!props.userId) {
+    loginModal = <div> Please Login First! </div>;
+  }
+
   return (
     <div>
       <h1>Profile</h1>

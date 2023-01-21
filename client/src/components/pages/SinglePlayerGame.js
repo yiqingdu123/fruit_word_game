@@ -4,7 +4,7 @@ import SingleWord from "../modules/SingleWord.js";
 import { NewWord } from "../modules/NewWordInput.js";
 import { get, post } from "../../utilities";
 import DeleteWords from "../modules/DeleteWords.js";
-//import { socket } from "../../client-socket.js";
+import { socket } from "../../client-socket.js";
 //import { drawCanvas } from "../../canvasManager";
 //import { handleInput } from "../../input";
 
@@ -45,6 +45,12 @@ const Game = () => {
     setWords([]);
     // post("/api/delete");
   };
+
+  useEffect(() => {
+    socket.on("update", (update) => {
+      processUpdate(update);
+    });
+  }, []);
 
   return (
     <div>

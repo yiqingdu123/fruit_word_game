@@ -36,8 +36,9 @@ const Title = ({ userId, handleLogin, handleLogout }) => {
       <h1>
         <Link to="/howtoplay/">How To Play</Link>
       </h1>
+
       <h1>
-        <Link to="/profile/">Profile / Log In</Link>
+        <Link to="/profile/">Profile</Link>
       </h1>
     </>
   );
