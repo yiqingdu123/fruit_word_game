@@ -1,19 +1,23 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { post } from "../../utilities";
 
 const NewWordInput = (props) => {
   const [value, setValue] = useState("");
 
-  // called whenever the user types in the new post input box
   const handleChange = (event) => {
     setValue(event.target.value);
   };
 
-  // called when the user hits "Submit" for a new post
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  const handleSubmit = () => {
     props.onSubmit && props.onSubmit(value);
     setValue("");
+  };
+
+  const handleEnter = (event) => {
+    if (event.key === "Enter") {
+      console.log("enter");
+      handleSubmit();
+    }
   };
 
   return (
@@ -23,6 +27,7 @@ const NewWordInput = (props) => {
         placeholder={props.defaultText}
         value={value}
         onChange={handleChange}
+        onKeyPress={handleEnter}
         //className=""
       />
       <button
@@ -39,10 +44,12 @@ const NewWordInput = (props) => {
 
 const NewWord = (props) => {
   const addWord = (value) => {
-    const body = { content: value };
-    post("/api/word", body).then((word) => {
-      props.addNewWord(word);
-    });
+    if (value != "") {
+      const body = { content: value };
+      post("/api/word", body).then((word) => {
+        props.addNewWord(word);
+      });
+    }
   };
 
   return <NewWordInput defaultText="Input Word" onSubmit={addWord} />;

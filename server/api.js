@@ -59,6 +59,13 @@ router.post("/word", (req, res) => {
   newWord.save().then((word) => res.send(word));
 });
 
+router.post("/despawn", (req, res) => {
+  if (req.user) {
+    socketManager.removeUserFromGame(req.user);
+  }
+  res.send({});
+});
+
 // router.post("/delete", (req,res) => {
 //   Word.findOneAndDelete()/*gameId: req.body.gameId}).then(() => res.status(200))*/
 // })

@@ -14,10 +14,10 @@ const Game = () => {
   const [words, setWords] = useState([]);
 
   useEffect(() => {
-    //   window.addEventListener("keydown", (event) => {
-    //     if (event.key === "Enter") {
-    //     }
-    //   });
+    // window.addEventListener("keydown", (event) => {
+    //   if (event.key === "Enter") {
+    //   }
+    // });
     // get("/api/words").then((wordsObjs) => {
     //   const hasWords = wordsObjs.length !== 0;
     //   if (hasWords) {
@@ -56,6 +56,7 @@ const Game = () => {
       <div>
         <NewWord addNewWord={addNewWord} />
         {words}
+        {words.length}
       </div>
       <div>
         <DeleteWords handleSubmit={clearList} />
