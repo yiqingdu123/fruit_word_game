@@ -13,7 +13,6 @@ const express = require("express");
 const User = require("./models/user");
 const Userstats = require("./models/userstats");
 const Gamestats = require("./models/gamestats");
-const Wordinput = require("./models/wordinput");
 const Word = require("./models/word");
 
 // import authentication library
@@ -48,8 +47,8 @@ router.post("/initsocket", (req, res) => {
 // | write your API methods below!|
 // |------------------------------|
 
-router.get("/wordinput", (req, res) => {
-  Wordinput.find({}).then((words) => res.send(words));
+router.get("/words", (req, res) => {
+  Word.find({}).then((words) => res.send(words));
 });
 
 router.post("/word", (req, res) => {
