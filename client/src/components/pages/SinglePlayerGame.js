@@ -26,7 +26,11 @@ const Game = () => {
   const hasWords = words.length !== 0;
   if (hasWords) {
     wordsList = words.map((wordsObjs) => (
-      <SingleWord input_user={wordsObjs.input_user} content={wordsObjs.content} />
+      <SingleWord
+        key={wordsObjs._id}
+        input_user={wordsObjs.input_user}
+        content={wordsObjs.content}
+      />
     ));
   } else {
     wordsList = <div>No words!</div>;
