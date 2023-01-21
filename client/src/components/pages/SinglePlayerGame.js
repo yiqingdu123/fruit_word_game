@@ -41,7 +41,7 @@ const Game = () => {
       <h1>Game</h1>
       <p>Here is the single player game.</p>
       <h1>
-        <Link to="/">Back </Link>
+        <Link to="/gamemenu">Back </Link>
       </h1>
       <div>
         <NewWord addNewWord={addNewWord} />
