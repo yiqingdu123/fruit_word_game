@@ -13,7 +13,8 @@ const express = require("express");
 const User = require("./models/user");
 const Userstats = require("./models/userstats");
 const Gamestats = require("./models/gamestats");
-const wordinput = require("./models/wordinput");
+const Wordinput = require("./models/wordinput");
+const Word = require("./models/word");
 
 // import authentication library
 const auth = require("./auth");
@@ -25,6 +26,7 @@ const router = express.Router();
 const socketManager = require("./server-socket");
 
 router.post("/login", auth.login);
+
 router.post("/logout", auth.logout);
 router.get("/whoami", (req, res) => {
   if (!req.user) {
@@ -46,10 +48,22 @@ router.post("/initsocket", (req, res) => {
 // | write your API methods below!|
 // |------------------------------|
 
-// anything else falls to this "not found" case
-router.all("*", (req, res) => {
-  console.log(`API route not found: ${req.method} ${req.url}`);
-  res.status(404).send({ msg: "API route not found" });
+router.get("/wordinput", (req, res) => {
+  Wordinput.find({}).then((words) => res.send(words));
 });
+
+router.post("/word", (req, res) => {
+  const newWord = new Word({
+    content: req.body.content,
+  });
+
+  newWord.save().then((word) => res.send(word));
+});
+
+router // anything else falls to this "not found" case
+  .all("*", (req, res) => {
+    console.log(`API route not found: ${req.method} ${req.url}`);
+    res.status(404).send({ msg: "API route not found" });
+  });
 
 module.exports = router;
