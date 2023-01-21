@@ -3,6 +3,7 @@ import { Link } from "@reach/router";
 import SingleWord from "../modules/SingleWord.js";
 import { NewWord } from "../modules/NewWordInput.js";
 import { get, post } from "../../utilities";
+import DeleteWords from "../modules/DeleteWords.js";
 //import { socket } from "../../client-socket.js";
 //import { drawCanvas } from "../../canvasManager";
 //import { handleInput } from "../../input";
@@ -13,28 +14,33 @@ const Game = () => {
   const [words, setWords] = useState([]);
 
   useEffect(() => {
-    get("/api/words").then((wordsObjs) => {
-      setWords(wordsObjs);
-    });
+    // //get("/api/words").then((wordsObjs) => {
+    //   const hasWords = wordsObjs.length !== 0;
+    //   if (hasWords) {
+    //     setWords(
+    //       wordsObjs.map((wordsObj) => (
+    //         <SingleWord
+    //           key={wordsObj._id}
+    //           input_user={wordsObj.input_user}
+    //           content={wordsObj.content}
+    //         />
+    //       ))
+    //     );
+    //   }
+    //});
   }, []);
 
-  const addNewWord = (wordsObjs) => {
-    setWords([wordsObjs].concat(words));
+  const addNewWord = (wordsObj) => {
+    const newWordsObj = (
+      <SingleWord key={wordsObj._id} input_user={wordsObj.input_user} content={wordsObj.content} />
+    );
+    setWords([...words, newWordsObj]);
   };
 
-  let wordsList = null;
-  const hasWords = words.length !== 0;
-  if (hasWords) {
-    wordsList = words.map((wordsObjs) => (
-      <SingleWord
-        key={wordsObjs._id}
-        input_user={wordsObjs.input_user}
-        content={wordsObjs.content}
-      />
-    ));
-  } else {
-    wordsList = <div>No words!</div>;
-  }
+  const clearList = () => {
+    setWords([]);
+    // post("/api/delete");
+  };
 
   return (
     <div>
@@ -45,7 +51,10 @@ const Game = () => {
       </h1>
       <div>
         <NewWord addNewWord={addNewWord} />
-        {wordsList}
+        {words}
+      </div>
+      <div>
+        <DeleteWords handleSubmit={clearList} />
       </div>
     </div>
   );

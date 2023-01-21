@@ -59,6 +59,10 @@ router.post("/word", (req, res) => {
   newWord.save().then((word) => res.send(word));
 });
 
+// router.post("/delete", (req,res) => {
+//   Word.findOneAndDelete()/*gameId: req.body.gameId}).then(() => res.status(200))*/
+// })
+
 router // anything else falls to this "not found" case
   .all("*", (req, res) => {
     console.log(`API route not found: ${req.method} ${req.url}`);
