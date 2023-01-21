@@ -45,7 +45,7 @@ const Game = () => {
       </h1>
       <div>
         <NewWord addNewWord={addNewWord} />
-        {wordsList}S
+        {wordsList}
       </div>
     </div>
   );
