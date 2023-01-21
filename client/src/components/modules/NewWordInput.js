@@ -40,7 +40,7 @@ const NewWordInput = (props) => {
 const NewWord = (props) => {
   const addWord = (value) => {
     const body = { content: value };
-    post("/api/wordinput", body).then((word) => {
+    post("/api/word", body).then((word) => {
       props.addNewWord(word);
     });
   };
