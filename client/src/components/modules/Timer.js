@@ -82,7 +82,10 @@ const Timer = () => {
   useEffect(() => {
     //   clearTimer(getDeadTime());
     //   noTime();
-    return () => clearInterval(Ref.current);
+    return () => {
+      clearInterval(Ref.current);
+      fails = 0;
+    };
   }, []);
 
   return (
