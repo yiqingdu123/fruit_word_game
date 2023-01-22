@@ -9,6 +9,7 @@ import SinglePlayerGame from "./pages/SinglePlayerGame.js";
 import MultiPlayerGame from "./pages/MultiPlayerGame.js";
 import Profile from "./pages/Profile.js";
 import GameMenu from "./pages/GameMenu.js";
+import Timer from "./modules/Timer.js";
 
 import "../utilities.css";
 
@@ -53,9 +54,10 @@ const App = () => {
         <Title path="/" handleLogin={handleLogin} handleLogout={handleLogout} userId={userId} />
         <HowToPlay path="/howtoplay/" userId={userId} />
         <Profile path="/profile/" userId={userId} />
-        <SinglePlayerGame path="/singleplayer" userId={userId} />
-        <MultiPlayerGame path="/multiplayer" userId={userId} />
-        <GameMenu path="/gamemenu" userId={userId} />
+        <SinglePlayerGame path="/singleplayer/" userId={userId} />
+        <MultiPlayerGame path="/multiplayer/" userId={userId} />
+        <GameMenu path="/gamemenu/" userId={userId} />
+        <Timer path="/timer/" userId={userId} />
         <NotFound default />
       </Router>
     </>

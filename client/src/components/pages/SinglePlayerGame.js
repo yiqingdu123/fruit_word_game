@@ -5,12 +5,19 @@ import { NewWord } from "../modules/NewWordInput.js";
 import { get, post } from "../../utilities";
 import DeleteWords from "../modules/DeleteWords.js";
 import { socket } from "../../client-socket.js";
+import { Timer } from "../modules/Timer.js";
 //import { drawCanvas } from "../../canvasManager";
 //import { handleInput } from "../../input";
 
 import "../../utilities.css";
 
-const Game = () => {
+/*
+
+Code for adding new words is from Weblab Staff / Catbook-React
+
+*/
+
+const SinglePlayerGame = () => {
   const [words, setWords] = useState([]);
 
   useEffect(() => {
@@ -57,7 +64,10 @@ const Game = () => {
       <h1>Game</h1>
       <p>Here is the single player game.</p>
       <h1>
-        <Link to="/gamemenu">Back </Link>
+        <Link to="/gamemenu/">Back </Link>
+      </h1>
+      <h1>
+        <Link to="/timer/">temp timer</Link>
       </h1>
       <div>
         <NewWord addNewWord={addNewWord} />
@@ -71,4 +81,4 @@ const Game = () => {
   );
 };
 
-export default Game;
+export default SinglePlayerGame;

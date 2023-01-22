@@ -19,10 +19,10 @@ const GameMenu = (props) => {
       <div>
         <h1>Game Menu</h1>
         <h1>
-          <Link to="/singleplayer"> Single Player </Link>
+          <Link to="/singleplayer/"> Single Player </Link>
         </h1>
         <h1>
-          <Link to="/multiplayer"> Multi Player </Link>
+          <Link to="/multiplayer/"> Multi Player </Link>
         </h1>
         <h1>
           <Link to="/"> Back to Menu </Link>
