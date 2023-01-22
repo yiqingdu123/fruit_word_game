@@ -5,7 +5,7 @@ import { NewWord } from "../modules/NewWordInput.js";
 import { get, post } from "../../utilities";
 import DeleteWords from "../modules/DeleteWords.js";
 import { socket } from "../../client-socket.js";
-import { Timer } from "../modules/Timer.js";
+import Timer from "../modules/Timer.js";
 //import { drawCanvas } from "../../canvasManager";
 //import { handleInput } from "../../input";
 
@@ -66,9 +66,6 @@ const SinglePlayerGame = () => {
       <h1>
         <Link to="/gamemenu/">Back </Link>
       </h1>
-      <h1>
-        <Link to="/timer/">temp timer</Link>
-      </h1>
       <div>
         <NewWord addNewWord={addNewWord} />
         {words}
@@ -76,6 +73,10 @@ const SinglePlayerGame = () => {
       </div>
       <div>
         <DeleteWords handleSubmit={clearList} />
+      </div>
+      <h2>Timer</h2>
+      <div>
+        <Timer />
       </div>
     </div>
   );
