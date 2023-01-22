@@ -7,7 +7,7 @@ const MultiPlayerGame = (props) => {
       <h1>Multi Player</h1>
       <p>Here is the multiplayer game.</p>
       <h1>
-        <Link to="/gamemenu">Back </Link>
+        <Link to="/gamemenu/">Back </Link>
       </h1>
     </div>
   );

@@ -1,6 +1,3 @@
-We still need to edit the .env file once we set up mongo
-
-
 # How to code a webapp with this skeleton
 
 ## Initial setup
