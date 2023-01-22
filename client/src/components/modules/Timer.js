@@ -12,6 +12,15 @@ let fails = 0;
 const Timer = () => {
   const Ref = useRef(null);
 
+  //   window.addEventListener("keydown", (event) => {
+  //     if (event.key === "Enter") {
+  //       if (words.length === WordCount) {
+  //         clearTimer(getDeadTime());
+  //         WordCount = WordCount + 1;
+  //       }
+  //     }
+  //   });
+
   // The state for our timer
   const [timer, setTimer] = useState("00");
 
@@ -63,16 +72,24 @@ const Timer = () => {
     fails = 0;
   };
 
-  //   useEffect(() => {
-  //     clearTimer(getDeadTime());
-  //     noTime();
-  //   }, []);
+  //   const WordCount = 1;
+
+  //   if (words.length === WordCount) {
+  //     //clearTimer(getDeadTime());
+  //     WordCount = WordCount + 1;
+  //   }
+
+  useEffect(() => {
+    //   clearTimer(getDeadTime());
+    //   noTime();
+    return () => clearInterval(Ref.current);
+  }, []);
 
   return (
     <div>
       <h2>{timer}</h2>
       <h2>{fails}</h2>
-      <button onClick={onClickReset}>Reset</button>
+      <button onClick={onClickReset}>Start</button>
     </div>
   );
 };
