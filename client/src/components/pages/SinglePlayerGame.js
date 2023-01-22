@@ -17,6 +17,17 @@ Code for adding new words is from Weblab Staff / Catbook-React
 
 */
 
+// const Clock = () => {
+//   const [time, setTime] = useState(8);
+//   useEffect(() => {
+//     const timer = setInterval(() => {
+//       setTime((oldTime) => oldTime - 1);
+//     }, 1000);
+//     return () => clearInterval(timer);
+//   }, []);
+//   return <>Time: {time}</>;
+// };
+
 const SinglePlayerGame = () => {
   const [words, setWords] = useState([]);
 
@@ -50,6 +61,7 @@ const SinglePlayerGame = () => {
 
   const clearList = () => {
     setWords([]);
+    WordCount = 1;
     // post("/api/delete");
   };
 
@@ -58,6 +70,13 @@ const SinglePlayerGame = () => {
       processUpdate(update);
     });
   }, []);
+
+  const WordCount = 1;
+
+  // if (words.length === WordCount) {
+  //   clearTimer(getDeadTime());
+  //   WordCount = WordCount + 1;
+  // }
 
   return (
     <div>
@@ -71,13 +90,16 @@ const SinglePlayerGame = () => {
         {words}
         {words.length}
       </div>
-      <div>
+      {/* <div>
         <DeleteWords handleSubmit={clearList} />
-      </div>
+      </div> */}
       <h2>Timer</h2>
       <div>
         <Timer />
       </div>
+      {/* <div>
+        <Clock />
+      </div> */}
     </div>
   );
 };
