@@ -102,9 +102,14 @@ const Timer = (props) => {
 
   const [resetTemp, setResetTemp] = useState(0);
 
+  let handleReset = () => {
+    setResetTemp(0);
+  };
+
   if (props.reset === 1 && setResetTemp === 0) {
     clearTimer(getDeadTime());
     setResetTemp(1);
+    setTimeout(handleReset, 10);
   }
 
   return (
