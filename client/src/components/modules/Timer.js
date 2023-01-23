@@ -109,8 +109,8 @@ const Timer = (props) => {
 
   return (
     <div>
-      <h2>{timer}</h2>
-      <h2>{fails}</h2>
+      <h2>Time Left: {timer}</h2>
+      <h2>Lives Lost: {fails}</h2>
       <button onClick={onClickReset}>Start</button>
     </div>
   );
