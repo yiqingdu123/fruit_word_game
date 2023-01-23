@@ -32,22 +32,20 @@ const Title = ({ userId, handleLogin, handleLogout }) => {
       </GoogleOAuthProvider>
 
       <div class="background"></div>
+
       <div class="fruit"> FRU&IT </div>
-      <button class="button1">
-        <div class="icons">
-          <Link to="/gamemenu/">Play</Link>
-        </div>
-      </button>
-      <button class="button2">
-        <div class="icons">
-          <Link to="/howtoplay/">How To Play</Link>
-        </div>
-      </button>
-      <button class="button3">
-        <div class="icons">
-          <Link to="/profile/">Profile</Link>
-        </div>
-      </button>
+
+      <a href="gamemenu" class="button1">
+        <div class="icons">Play</div>
+      </a>
+
+      <a href="howtoplay" class="button2">
+        <div class="icons">How To Play</div>
+      </a>
+
+      <a href="profile" class="button3">
+        <div class="icons">Profile</div>
+      </a>
     </>
   );
 };
