@@ -21,12 +21,14 @@ Code for adding new words is from Weblab Staff / Catbook-React
 
 const SinglePlayerGame = (props) => {
   const [words, setWords] = useState([]);
-  // const [inMasterList, setInMasterList] = useState(false);
-  // const [notRepeated, setNotRepeated] = useState(false);
-  // const [containsBigram, setContainsBigram] = useState(false);
-  // const [validWord, setValidWord] = useState(false);
+  const [inMasterList, setInMasterList] = useState(false);
+  const [notRepeated, setNotRepeated] = useState(false);
+  const [containsBigram, setContainsBigram] = useState(false);
+  const [validWord, setValidWord] = useState(false);
 
   // const bigram = "";
+
+  //bigram = "bi";
 
   useEffect(() => {
     // window.addEventListener("keydown", (event) => {
@@ -49,40 +51,44 @@ const SinglePlayerGame = (props) => {
     //});
   }, []);
 
-  // const verifyWordInMasterList = (wordObj) => {
-  //   setInMasterList(MasterWordList.includes(wordObj));
-  //   return inMasterList;
-  // };
+  const verifyWordInMasterList = (wordObj) => {
+    const result = MasterWordList.includes(wordObj);
+    setInMasterList(result);
+    return result;
+  };
 
-  // function verifyNotRepeated(wordsObj) {
-  //   const wordList = words.map((word) => word.content);
+  const verifyNotRepeated = (wordsObj) => {
+    const wordList = words.map((word) => word.content);
+    const result = !wordList.includes(wordsObj);
+    setNotRepeated(result);
+    return result;
+  };
 
-  //   setNotRepeated(wordList.includes(wordsObj));
-  //   return notRepeated;
-  // }
+  const verifyContainsBigram = (wordsObj) => {
+    const result = wordsObj.includes("bi");
+    setContainsBigram(result);
+    return result;
+  };
 
-  // const verifyContainsBigram = (wordsObj) => {
-  //   setContainsBigram(wordsObj.includes(bigram));
-  //   return containsBigram;
-  // };
+  const verifyWord = (wordObj) => {
+    const result =
+      verifyWordInMasterList(wordObj) &&
+      verifyNotRepeated(wordObj) &&
+      verifyContainsBigram(wordObj);
+    setValidWord(result);
 
-  // const verifyWord = (wordObj) => {
-  //   setValidWord(
-  //     verifyWordInMasterList(wordObj) && verifyNotRepeated(wordObj) && verifyContainsBigram(wordObj)
-  //   );
-
-  //   return validWord;
-  // };
+    return result;
+  };
 
   const addNewWord = (wordObj) => {
     const newWordsObj = (
       <SingleWord key={wordObj._id} input_user={wordObj.input_user} content={wordObj.content} />
     );
-    setWords([...words, newWordsObj]);
+    //setWords([...words, newWordsObj]);
 
-    // if (verifyWord(wordObj.content)) {
-    //   setWords([...words, newWordsObj]);
-    // }
+    if (verifyWord(wordObj.content)) {
+      setWords([...words, newWordsObj]);
+    }
   };
 
   const clearList = () => {
