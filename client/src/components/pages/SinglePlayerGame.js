@@ -26,9 +26,7 @@ const SinglePlayerGame = (props) => {
   const [containsBigram, setContainsBigram] = useState(false);
   const [validWord, setValidWord] = useState(false);
 
-  // const bigram = "";
-
-  //bigram = "bi";
+  const [bigram, setBigram] = useState("ui");
 
   useEffect(() => {
     // window.addEventListener("keydown", (event) => {
@@ -65,7 +63,7 @@ const SinglePlayerGame = (props) => {
   };
 
   const verifyContainsBigram = (wordsObj) => {
-    const result = wordsObj.includes("bi");
+    const result = wordsObj.includes(bigram);
     setContainsBigram(result);
     return result;
   };
