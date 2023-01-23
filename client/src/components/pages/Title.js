@@ -30,6 +30,8 @@ const Title = ({ userId, handleLogin, handleLogout }) => {
           Check out this getting started guide HI
         </a> */}
       </GoogleOAuthProvider>
+
+      <div class="background"></div>
       <div class="fruit"> FRU&IT </div>
       <button class="button1">
         <div class="icons">
