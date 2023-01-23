@@ -24,22 +24,27 @@ const Title = ({ userId, handleLogin, handleLogout }) => {
         ) : (
           <GoogleLogin onSuccess={handleLogin} onError={(err) => console.log(err)} />
         )}
-        <h1>Good luck on your project :)</h1>
+        {/* <h1>Good luck on your project :)</h1>
         <a href="https://docs.google.com/document/d/110JdHAn3Wnp3_AyQLkqH2W8h5oby7OVsYIeHYSiUzRs/edit?usp=sharing">
           Check out this getting started guide HI
-        </a>
+        </a> */}
       </GoogleOAuthProvider>
-      <h1>FRU&IT</h1>
-      <h1>
-        <Link to="/gamemenu/">Play </Link>
-      </h1>
-      <h1>
-        <Link to="/howtoplay/">How To Play</Link>
-      </h1>
-
-      <h1>
-        <Link to="/profile/">Profile</Link>
-      </h1>
+      <div class="fruit"> FRU&IT </div>
+      <button class="button1">
+        <div class="icons">
+          <Link to="/gamemenu/">Play</Link>
+        </div>
+      </button>
+      <button class="button2">
+        <div class="icons">
+          <Link to="/howtoplay/">How To Play</Link>
+        </div>
+      </button>
+      <button class="button3">
+        <div class="icons">
+          <Link to="/profile/">Profile</Link>
+        </div>
+      </button>
     </>
   );
 };
