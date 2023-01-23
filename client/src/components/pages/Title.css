@@ -83,3 +83,30 @@
 
   margin-top: 150px;
 }
+
+.buttonLogIn {
+  box-sizing: border-box;
+
+  /* position: absolute; */
+  width: 150px;
+  height: 100px;
+  left: 20px;
+  top: 20px;
+
+  background: rgba(255, 255, 255, 0.9);
+  border: 10px solid #ff6f6f;
+  border-radius: 60px;
+
+  margin-top: 0px;
+}
+
+.TextLogIn {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 77px;
+  text-align: center;
+
+  color: #ff6f6f;
+}

@@ -18,8 +18,9 @@ const Title = ({ userId, handleLogin, handleLogout }) => {
               googleLogout();
               handleLogout();
             }}
+            class="buttonLogIn"
           >
-            Logout
+            <div class="TextLogIn">Logout</div>
           </button>
         ) : (
           <GoogleLogin onSuccess={handleLogin} onError={(err) => console.log(err)} />
