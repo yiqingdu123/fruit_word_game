@@ -6,6 +6,8 @@ import { get, post } from "../../utilities";
 import DeleteWords from "../modules/DeleteWords.js";
 import { socket } from "../../client-socket.js";
 import Timer from "../modules/Timer.js";
+import { MasterWordList } from "../modules/MasterWordList.js";
+import { BigramList } from "../modules/BigramList.js";
 //import { drawCanvas } from "../../canvasManager";
 //import { handleInput } from "../../input";
 
@@ -28,8 +30,14 @@ Code for adding new words is from Weblab Staff / Catbook-React
 //   return <>Time: {time}</>;
 // };
 
-const SinglePlayerGame = () => {
+const SinglePlayerGame = (props) => {
   const [words, setWords] = useState([]);
+  // const [inMasterList, setInMasterList] = useState(false);
+  // const [notRepeated, setNotRepeated] = useState(false);
+  // const [containsBigram, setContainsBigram] = useState(false);
+  // const [validWord, setValidWord] = useState(false);
+
+  // const bigram = "";
 
   useEffect(() => {
     // window.addEventListener("keydown", (event) => {
@@ -52,11 +60,40 @@ const SinglePlayerGame = () => {
     //});
   }, []);
 
-  const addNewWord = (wordsObj) => {
+  // const verifyWordInMasterList = (wordObj) => {
+  //   setInMasterList(MasterWordList.includes(wordObj));
+  //   return inMasterList;
+  // };
+
+  // function verifyNotRepeated(wordsObj) {
+  //   const wordList = words.map((word) => word.content);
+
+  //   setNotRepeated(wordList.includes(wordsObj));
+  //   return notRepeated;
+  // }
+
+  // const verifyContainsBigram = (wordsObj) => {
+  //   setContainsBigram(wordsObj.includes(bigram));
+  //   return containsBigram;
+  // };
+
+  // const verifyWord = (wordObj) => {
+  //   setValidWord(
+  //     verifyWordInMasterList(wordObj) && verifyNotRepeated(wordObj) && verifyContainsBigram(wordObj)
+  //   );
+
+  //   return validWord;
+  // };
+
+  const addNewWord = (wordObj) => {
     const newWordsObj = (
-      <SingleWord key={wordsObj._id} input_user={wordsObj.input_user} content={wordsObj.content} />
+      <SingleWord key={wordObj._id} input_user={wordObj.input_user} content={wordObj.content} />
     );
     setWords([...words, newWordsObj]);
+
+    // if (verifyWord(wordObj.content)) {
+    //   setWords([...words, newWordsObj]);
+    // }
   };
 
   const clearList = () => {
