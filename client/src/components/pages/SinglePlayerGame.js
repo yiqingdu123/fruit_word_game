@@ -19,17 +19,6 @@ Code for adding new words is from Weblab Staff / Catbook-React
 
 */
 
-// const Clock = () => {
-//   const [time, setTime] = useState(8);
-//   useEffect(() => {
-//     const timer = setInterval(() => {
-//       setTime((oldTime) => oldTime - 1);
-//     }, 1000);
-//     return () => clearInterval(timer);
-//   }, []);
-//   return <>Time: {time}</>;
-// };
-
 const SinglePlayerGame = (props) => {
   const [words, setWords] = useState([]);
   // const [inMasterList, setInMasterList] = useState(false);
@@ -138,13 +127,10 @@ const SinglePlayerGame = (props) => {
     <div>
       <h1>Game</h1>
       <p>Here is the single player game.</p>
-      <h1>
-        <Link to="/gamemenu/">Back </Link>
-      </h1>
+      <h3>Input a word to begin!</h3>
       <div>
         <NewWord addNewWord={addNewWord} />
-        {words}
-        {words.length}
+        <br></br>Number of Words Submitted: {words.length}
       </div>
       {/* <div>
         <DeleteWords handleSubmit={clearList} />
@@ -153,9 +139,10 @@ const SinglePlayerGame = (props) => {
       <div>
         <Timer reset={reset} handleWordCount={handleWordCount} />
       </div>
-      {/* <div>
-        <Clock />
-      </div> */}
+      <h1>
+        <Link to="/gamemenu/">Back </Link>
+      </h1>
+      <div>Temporary Word List: {words}</div>
     </div>
   );
 };

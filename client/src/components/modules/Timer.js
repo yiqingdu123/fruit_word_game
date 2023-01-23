@@ -116,7 +116,7 @@ const Timer = (props) => {
     <div>
       <h2>Time Left: {timer}</h2>
       <h2>Lives Lost: {fails}</h2>
-      <button onClick={onClickReset}>Start</button>
+      {/* <button onClick={onClickReset}>Start</button> */}
     </div>
   );
 };
