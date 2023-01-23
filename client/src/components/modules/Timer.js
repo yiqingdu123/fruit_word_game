@@ -64,7 +64,7 @@ const Timer = (props) => {
   const getDeadTime = () => {
     let deadline = new Date();
 
-    deadline.setSeconds(deadline.getSeconds() + 3);
+    deadline.setSeconds(deadline.getSeconds() + 8);
     return deadline;
   };
 
