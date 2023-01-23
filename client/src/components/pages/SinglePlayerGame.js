@@ -108,11 +108,30 @@ const SinglePlayerGame = (props) => {
     });
   }, []);
 
-  const WordCount = 1;
+  let [WordCount, setWordCount] = useState(0);
 
-  // if (words.length === WordCount) {
-  //   clearTimer(getDeadTime());
-  //   WordCount = WordCount + 1;
+  let handleWordCount = () => {
+    setReset(0);
+  };
+
+  const [reset, setReset] = useState(0);
+  //const [resetTemp, setResetTemp] = useState(0);
+  //let reset = 0;
+
+  if (words.length === WordCount + 1) {
+    setReset(1);
+    //setResetTemp(1);
+    setWordCount(WordCount + 1);
+    console.log("wordcount" + WordCount);
+    console.log("length" + words.length);
+    //setReset(0);
+    setTimeout(handleWordCount, 1);
+  }
+  // else if (words.length != WordCount && reset === 1) {
+  //   //setResetTemp(0);
+  //   //setTimeout(handleWordCount, 1000);
+  //   setReset(0);
+  //   console.log("no reset");
   // }
 
   return (
@@ -132,7 +151,7 @@ const SinglePlayerGame = (props) => {
       </div> */}
       <h2>Timer</h2>
       <div>
-        <Timer />
+        <Timer reset={reset} handleWordCount={handleWordCount} />
       </div>
       {/* <div>
         <Clock />

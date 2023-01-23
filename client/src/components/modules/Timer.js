@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Link } from "@reach/router";
+import { socket } from "../../client-socket.js";
 
 /*
 
@@ -9,7 +10,7 @@ Code obtained from https://www.geeksforgeeks.org/how-to-create-a-countdown-timer
 
 let fails = 0;
 
-const Timer = () => {
+const Timer = (props) => {
   const Ref = useRef(null);
 
   //   window.addEventListener("keydown", (event) => {
@@ -80,6 +81,9 @@ const Timer = () => {
   //   }
 
   useEffect(() => {
+    socket.on("update", (update) => {
+      processUpdate(update);
+    });
     //   clearTimer(getDeadTime());
     //   noTime();
     return () => {
@@ -88,10 +92,30 @@ const Timer = () => {
     };
   }, []);
 
+  useEffect(() => {
+    if (props.reset === 1) {
+      clearTimer(getDeadTime());
+    }
+  }, [props.reset]);
+
+  console.log(props.reset);
+
+  const [resetTemp, setResetTemp] = useState(0);
+
+  let handleReset = () => {
+    setResetTemp(0);
+  };
+
+  if (props.reset === 1 && setResetTemp === 0) {
+    clearTimer(getDeadTime());
+    setResetTemp(1);
+    setTimeout(handleReset, 10);
+  }
+
   return (
     <div>
-      <h2>{timer}</h2>
-      <h2>{fails}</h2>
+      <h2>Time Left: {timer}</h2>
+      <h2>Lives Lost: {fails}</h2>
       <button onClick={onClickReset}>Start</button>
     </div>
   );
