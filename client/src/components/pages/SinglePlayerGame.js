@@ -140,7 +140,7 @@ const SinglePlayerGame = (props) => {
         <Timer reset={reset} handleWordCount={handleWordCount} />
       </div>
       <h1>
-        <Link to="/gamemenu/">Back </Link>
+        <Link to="/gamemenu">Back </Link>
       </h1>
       <div>Temporary Word List: {words}</div>
     </div>

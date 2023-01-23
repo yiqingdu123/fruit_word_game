@@ -1,0 +1,127 @@
+.menu {
+  position: absolute;
+  width: 800px;
+  height: 218px;
+  left: 320px;
+  top: 177px;
+
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 1000;
+  font-size: 120px;
+  line-height: 218px;
+  /* identical to box height */
+  text-align: center;
+
+  color: #ff6f6f;
+
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+  margin-top: -150px;
+}
+
+.icons {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 64px;
+  line-height: 77px;
+  text-align: center;
+
+  color: #ff6f6f;
+}
+
+.buttonLogIn {
+  box-sizing: border-box;
+
+  /* position: absolute; */
+  width: 100px;
+  height: 40px;
+  left: 20px;
+  top: 20px;
+
+  background: rgba(255, 255, 255, 0.9);
+  border: 10px solid #ff6f6f;
+  border-radius: 60px;
+
+  margin-top: 0px;
+}
+
+.TextLogIn {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 77px;
+  text-align: center;
+
+  color: #ff6f6f;
+
+  margin-top: -30px;
+}
+
+.button1 {
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+
+  /* text-decoration: none;
+    color: initial; */
+
+  box-sizing: border-box;
+
+  position: absolute;
+  width: 788px;
+  height: 111px;
+  left: 326px;
+  top: 453px;
+
+  background: rgba(255, 255, 255, 0.9);
+  border: 10px solid #ff6f6f;
+  border-radius: 60px;
+
+  margin-top: -150px;
+}
+
+.button2 {
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+
+  /* text-decoration: none;
+    color: initial; */
+
+  box-sizing: border-box;
+
+  position: absolute;
+  width: 788px;
+  height: 111px;
+  left: 326px;
+  top: 453px;
+
+  background: rgba(255, 255, 255, 0.9);
+  border: 10px solid #ff6f6f;
+  border-radius: 60px;
+
+  margin-top: 0px;
+}
+
+.button3 {
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+
+  box-sizing: border-box;
+
+  position: absolute;
+  width: 788px;
+  height: 111px;
+  left: 326px;
+  top: 453px;
+
+  background: rgba(255, 255, 255, 0.9);
+  border: 10px solid #ff6f6f;
+  border-radius: 60px;
+
+  margin-top: 150px;
+}

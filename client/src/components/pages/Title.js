@@ -35,15 +35,15 @@ const Title = ({ userId, handleLogin, handleLogout }) => {
 
       <div class="fruit"> FRU&IT </div>
 
-      <a href="gamemenu" class="button1">
+      <a href="/gamemenu" class="button1">
         <div class="icons">Play</div>
       </a>
 
-      <a href="howtoplay" class="button2">
+      <a href="/howtoplay" class="button2">
         <div class="icons">How To Play</div>
       </a>
 
-      <a href="profile" class="button3">
+      <a href="/profile" class="button3">
         <div class="icons">Profile</div>
       </a>
     </>

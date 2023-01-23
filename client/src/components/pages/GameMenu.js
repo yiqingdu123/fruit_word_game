@@ -1,6 +1,9 @@
 import React from "react";
 import { Link } from "@reach/router";
 
+import "../../utilities.css";
+import "./GameMenu.css";
+
 const GameMenu = (props) => {
   let loginModal = null;
   if (!props.userId) {
@@ -17,7 +20,23 @@ const GameMenu = (props) => {
   if (props.userId) {
     page = (
       <div>
-        <h1>Game Menu</h1>
+        <div class="background"></div>
+
+        <div class="menu">GAME MENU</div>
+
+        <a href="/singleplayer" class="button1">
+          <div class="icons">Single Player</div>
+        </a>
+
+        <a href="/multiplayer" class="button2">
+          <div class="icons">Multi Player</div>
+        </a>
+
+        <a href="/" class="button3">
+          <div class="icons">Menu</div>
+        </a>
+
+        {/* <h1>Game Menu</h1>
         <h1>
           <Link to="/singleplayer/"> Single Player </Link>
         </h1>
@@ -26,7 +45,7 @@ const GameMenu = (props) => {
         </h1>
         <h1>
           <Link to="/"> Back to Menu </Link>
-        </h1>
+        </h1> */}
       </div>
     );
   }
