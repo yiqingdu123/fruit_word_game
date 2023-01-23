@@ -64,7 +64,7 @@ const Timer = (props) => {
   const getDeadTime = () => {
     let deadline = new Date();
 
-    deadline.setSeconds(deadline.getSeconds() + 8);
+    deadline.setSeconds(deadline.getSeconds() + 3);
     return deadline;
   };
 
@@ -110,6 +110,11 @@ const Timer = (props) => {
     clearTimer(getDeadTime());
     setResetTemp(1);
     setTimeout(handleReset, 10);
+  }
+
+  if (fails >= 3) {
+    console.log("game over");
+    window.location.href = "/gameover";
   }
 
   return (

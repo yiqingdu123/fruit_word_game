@@ -18,9 +18,9 @@ const Title = ({ userId, handleLogin, handleLogout }) => {
               googleLogout();
               handleLogout();
             }}
-            class="buttonLogIn"
+            className="buttonLogIn"
           >
-            <div class="TextLogIn">Logout</div>
+            <div className="TextLogIn">Logout</div>
           </button>
         ) : (
           <GoogleLogin onSuccess={handleLogin} onError={(err) => console.log(err)} />
@@ -31,20 +31,20 @@ const Title = ({ userId, handleLogin, handleLogout }) => {
         </a> */}
       </GoogleOAuthProvider>
 
-      <div class="background"></div>
+      <div className="background"></div>
 
-      <div class="fruit"> FRU&IT </div>
+      <div className="fruit"> FRU&IT </div>
 
-      <a href="/gamemenu" class="button1">
-        <div class="icons">Play</div>
+      <a href="/gamemenu" className="button1">
+        <div className="icons">Play</div>
       </a>
 
-      <a href="/howtoplay" class="button2">
-        <div class="icons">How To Play</div>
+      <a href="/howtoplay" className="button2">
+        <div className="icons">How To Play</div>
       </a>
 
-      <a href="/profile" class="button3">
-        <div class="icons">Profile</div>
+      <a href="/profile" className="button3">
+        <div className="icons">Profile</div>
       </a>
     </>
   );

@@ -20,20 +20,20 @@ const GameMenu = (props) => {
   if (props.userId) {
     page = (
       <div>
-        <div class="background"></div>
+        <div className="background"></div>
 
-        <div class="menu">GAME MENU</div>
+        <div className="menu">GAME MENU</div>
 
-        <a href="/singleplayer" class="button1">
-          <div class="icons">Single Player</div>
+        <a href="/singleplayer" className="button1">
+          <div className="icons">Single Player</div>
         </a>
 
-        <a href="/multiplayer" class="button2">
-          <div class="icons">Multi Player</div>
+        <a href="/multiplayer" className="button2">
+          <div className="icons">Multi Player</div>
         </a>
 
-        <a href="/" class="button3">
-          <div class="icons">Menu</div>
+        <a href="/" className="button3">
+          <div className="icons">Menu</div>
         </a>
 
         {/* <h1>Game Menu</h1>
