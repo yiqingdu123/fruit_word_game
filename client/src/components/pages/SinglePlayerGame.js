@@ -80,6 +80,8 @@ const SinglePlayerGame = (props) => {
     return result;
   };
 
+  const [score, setScore] = useState(0);
+
   const addNewWord = (wordObj) => {
     const newWordsObj = (
       <SingleWord key={wordObj._id} input_user={wordObj.input_user} content={wordObj.content} />
@@ -90,6 +92,7 @@ const SinglePlayerGame = (props) => {
       setWords([...words, newWordsObj]);
       setWordsList([...wordsList, wordObj.content]);
       setHandleValid("");
+      setScore(score + wordObj.content.length);
     } else if (!verifyNotRepeated(wordObj.content)) {
       setHandleValid("Word Already Used");
     } else {
@@ -135,6 +138,8 @@ const SinglePlayerGame = (props) => {
   //   console.log("no reset");
   // }
 
+  //<GameOver score={score} />;
+
   return (
     <div>
       <h1>Game</h1>
@@ -152,6 +157,7 @@ const SinglePlayerGame = (props) => {
       <div>
         <Timer reset={reset} handleWordCount={handleWordCount} />
       </div>
+      <h1>Score: {score}</h1>
       <h1>
         <Link to="/gamemenu">Back </Link>
       </h1>
