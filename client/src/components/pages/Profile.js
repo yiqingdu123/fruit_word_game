@@ -19,7 +19,7 @@ const Profile = (props) => {
   }
   if (props.userId) {
     console.log(user.scoreslistSP);
-    const spScore = user.scoreslistSP.map((score) => <li>{score}</li>);
+    const spScore = user.scoreslistSP.map((score, i) => <li key={i}>{score}</li>);
     page = (
       <div>
         <h1>Profile</h1>
