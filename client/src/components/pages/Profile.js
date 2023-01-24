@@ -18,12 +18,18 @@ const Profile = (props) => {
     return <div> Loading! </div>;
   }
   if (props.userId) {
-    let userName = user.name;
+    console.log(user.scoreslistSP);
+    const spScore = user.scoreslistSP.map((score) => <li>{score}</li>);
     page = (
       <div>
         <h1>Profile</h1>
-        <p>Name: {userName}</p>
+        <p>Name: {user.name}</p>
+        <p>Highest Singleplayer score: {user.highscoreSP}</p>
+        <p>Highest Multiplayer score: {user.highscoreMP}</p>
+        <p>Number of Wins in Multiplayer: {user.MPwins}</p>
+        <p>Singleplayer Scores: {spScore}</p>
 
+        <p>Multiplayer Scores: {user.scoreslistMP}</p>
         <h1>
           <Link to="/">Back </Link>
         </h1>
