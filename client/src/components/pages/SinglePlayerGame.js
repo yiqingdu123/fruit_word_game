@@ -93,6 +93,8 @@ const SinglePlayerGame = (props) => {
       setWordsList([...wordsList, wordObj.content]);
       setHandleValid("");
       setScore(score + wordObj.content.length);
+      let randomBigram = BigramList[Math.floor(Math.random() * BigramList.length)];
+      setBigram(randomBigram);
     } else if (!verifyNotRepeated(wordObj.content)) {
       setHandleValid("Word Already Used");
     } else {
@@ -145,6 +147,7 @@ const SinglePlayerGame = (props) => {
       <h1>Game</h1>
       <p>Here is the single player game.</p>
       <h3>Input a word to begin!</h3>
+      <h3>Include: {bigram}</h3>
       <div>
         <div>{handleValid}</div>
         <NewWord addNewWord={addNewWord} />
