@@ -6,7 +6,7 @@ import { get, post } from "../../utilities";
 
 /*
 
-Code obtained from https://www.geeksforgeeks.org/how-to-create-a-countdown-timer-using-reactjs/
+Code modified from https://www.geeksforgeeks.org/how-to-create-a-countdown-timer-using-reactjs/
 
 */
 
