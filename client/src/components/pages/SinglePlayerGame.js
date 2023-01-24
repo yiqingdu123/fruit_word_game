@@ -68,6 +68,8 @@ const SinglePlayerGame = (props) => {
     return result;
   };
 
+  const [handleValid, setHandleValid] = useState(" ");
+
   const verifyWord = (wordObj) => {
     const result =
       verifyWordInMasterList(wordObj) &&
@@ -87,6 +89,11 @@ const SinglePlayerGame = (props) => {
     if (verifyWord(wordObj.content)) {
       setWords([...words, newWordsObj]);
       setWordsList([...wordsList, wordObj.content]);
+      setHandleValid("");
+    } else if (!verifyNotRepeated(wordObj.content)) {
+      setHandleValid("Word Already Used");
+    } else {
+      setHandleValid("Invalid Word");
     }
   };
 
@@ -134,6 +141,7 @@ const SinglePlayerGame = (props) => {
       <p>Here is the single player game.</p>
       <h3>Input a word to begin!</h3>
       <div>
+        <div>{handleValid}</div>
         <NewWord addNewWord={addNewWord} />
         <br></br>Number of Words Submitted: {words.length}
       </div>
