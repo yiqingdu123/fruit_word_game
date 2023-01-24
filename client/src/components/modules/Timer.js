@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Link } from "@reach/router";
 import { socket } from "../../client-socket.js";
+import { BigramList } from "../modules/BigramList.js";
 
 /*
 
@@ -34,8 +35,11 @@ const Timer = (props) => {
     };
   };
 
-  const noTime = () => {
+  const noTime = (props) => {
     console.log("fail");
+
+    let randomBigram = BigramList[Math.floor(Math.random() * BigramList.length)];
+    props.handleBigram();
 
     fails = fails + 1;
     clearTimer(getDeadTime());
@@ -47,7 +51,7 @@ const Timer = (props) => {
       setTimer(seconds > 9 ? seconds : "0" + seconds);
     }
     if (total === 0) {
-      noTime();
+      noTime(props);
     }
   };
 

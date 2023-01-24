@@ -102,6 +102,11 @@ const SinglePlayerGame = (props) => {
     }
   };
 
+  const handleBigram = () => {
+    let randomBigram = BigramList[Math.floor(Math.random() * BigramList.length)];
+    setBigram(randomBigram);
+  };
+
   const clearList = () => {
     setWords([]);
     WordCount = 1;
@@ -158,7 +163,12 @@ const SinglePlayerGame = (props) => {
       </div> */}
       <h2>Timer</h2>
       <div>
-        <Timer reset={reset} handleWordCount={handleWordCount} />
+        <Timer
+          reset={reset}
+          handleWordCount={handleWordCount}
+          bigram={bigram}
+          handleBigram={handleBigram}
+        />
       </div>
       <h1>Score: {score}</h1>
       <h1>
