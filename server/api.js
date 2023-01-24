@@ -11,7 +11,7 @@ const express = require("express");
 
 // import models so we can interact with the database
 const User = require("./models/user");
-const Userstats = require("./models/userstats");
+// const Userstats = require("./models/userstats");
 const Gamestats = require("./models/gamestats");
 const Word = require("./models/word");
 
@@ -27,6 +27,7 @@ const socketManager = require("./server-socket");
 router.post("/login", auth.login);
 
 router.post("/logout", auth.logout);
+
 router.get("/whoami", (req, res) => {
   if (!req.user) {
     // not logged in
@@ -64,6 +65,39 @@ router.post("/despawn", (req, res) => {
     socketManager.removeUserFromGame(req.user);
   }
   res.send({});
+});
+
+router.get("/user", (req, res) => {
+  User.find({ id: req.query.id }).then((user) => {
+    res.send(user);
+  });
+});
+
+// router.post("/user", (req, res) => {
+//   const newUser = new User({
+//     name: req.body.name,
+//     googleid: req.body.googleid,
+//     id: req.body.id,
+//     highscoreSP: req.body.highscoreSP,
+//     highscoreMP: req.body.highscoreMP,
+//     MPwins: req.body.MPwins,
+//     scoreslistSP: req.body.scoreslistSP,
+//     scoreslistMP: req.body.scoreslistMP,
+//   });
+
+//   newUser.save().then((user) => res.send(user));
+// });
+
+router.post("/userupdateSP", (req, res) => {
+  User.findById(req.body.id).then((user) => {
+    user.scoreslistSP.push(req.body.score);
+
+    if (req.body.score > user.highscoreSP) {
+      user.highscoreSP = req.body.score;
+    }
+
+    user.save();
+  });
 });
 
 // router.post("/delete", (req,res) => {

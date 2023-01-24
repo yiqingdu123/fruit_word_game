@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { Link } from "@reach/router";
 import { socket } from "../../client-socket.js";
 import { BigramList } from "../modules/BigramList.js";
+import { get, post } from "../../utilities";
 
 /*
 
@@ -119,8 +120,9 @@ const Timer = (props) => {
   if (fails >= 3) {
     console.log("game over");
 
-    // insert here
-
+    const body = { id: props.userId, score: props.score };
+    console.log(body);
+    post("/api/userupdateSP", body);
     window.location.href = "/gameover";
   }
 

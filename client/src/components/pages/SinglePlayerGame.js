@@ -169,6 +169,7 @@ const SinglePlayerGame = (props) => {
           bigram={bigram}
           handleBigram={handleBigram}
           score={score}
+          userId={props.userId}
         />
       </div>
       <h1>Score: {score}</h1>
