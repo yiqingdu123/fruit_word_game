@@ -118,6 +118,9 @@ const Timer = (props) => {
 
   if (fails >= 3) {
     console.log("game over");
+
+    // insert here
+
     window.location.href = "/gameover";
   }
 

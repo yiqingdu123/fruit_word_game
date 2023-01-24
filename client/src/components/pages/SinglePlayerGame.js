@@ -168,6 +168,7 @@ const SinglePlayerGame = (props) => {
           handleWordCount={handleWordCount}
           bigram={bigram}
           handleBigram={handleBigram}
+          score={score}
         />
       </div>
       <h1>Score: {score}</h1>
