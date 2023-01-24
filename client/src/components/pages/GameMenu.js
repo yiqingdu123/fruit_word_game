@@ -24,16 +24,16 @@ const GameMenu = (props) => {
 
         <div className="menu">GAME MENU</div>
 
-        <a href="/singleplayer" className="button1">
-          <div className="icons">Single Player</div>
+        <a href="/singleplayer" className="button11">
+          <div className="icons1">Single Player</div>
         </a>
 
-        <a href="/multiplayer" className="button2">
-          <div className="icons">Multi Player</div>
+        <a href="/multiplayer" className="button22">
+          <div className="icons1">Multi Player</div>
         </a>
 
-        <a href="/" className="button3">
-          <div className="icons">Menu</div>
+        <a href="/" className="button33">
+          <div className="icons1">Menu</div>
         </a>
 
         {/* <h1>Game Menu</h1>
