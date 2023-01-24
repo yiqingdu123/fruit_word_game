@@ -43,9 +43,13 @@ const Title = ({ userId, handleLogin, handleLogout }) => {
         <div className="icons">How To Play</div>
       </a>
 
-      <a href="/profile" className="button3">
-        <div className="icons">Profile</div>
-      </a>
+      {userId && (
+        <div className="icons">
+          <Link to={`/profile/${userId}`} className="button3">
+            Profile
+          </Link>
+        </div>
+      )}
     </>
   );
 };

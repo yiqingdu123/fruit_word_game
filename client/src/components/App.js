@@ -54,7 +54,7 @@ const App = () => {
       <Router>
         <Title path="/" handleLogin={handleLogin} handleLogout={handleLogout} userId={userId} />
         <HowToPlay path="/howtoplay/" userId={userId} />
-        <Profile path="/profile/" userId={userId} />
+        <Profile path="/profile/:userId" userId={userId} />
         <SinglePlayerGame path="/singleplayer/" userId={userId} />
         <MultiPlayerGame path="/multiplayer/" userId={userId} />
         <GameMenu path="/gamemenu/" userId={userId} />
