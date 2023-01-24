@@ -25,6 +25,7 @@ const SinglePlayerGame = (props) => {
   const [notRepeated, setNotRepeated] = useState(false);
   const [containsBigram, setContainsBigram] = useState(false);
   const [validWord, setValidWord] = useState(false);
+  const [wordsList, setWordsList] = useState([]);
 
   const [bigram, setBigram] = useState("ui");
 
@@ -56,8 +57,7 @@ const SinglePlayerGame = (props) => {
   };
 
   const verifyNotRepeated = (wordsObj) => {
-    const wordList = words.map((word) => word.content);
-    const result = !wordList.includes(wordsObj);
+    const result = !wordsList.includes(wordsObj);
     setNotRepeated(result);
     return result;
   };
@@ -86,6 +86,7 @@ const SinglePlayerGame = (props) => {
 
     if (verifyWord(wordObj.content)) {
       setWords([...words, newWordsObj]);
+      setWordsList([...wordsList, wordObj.content]);
     }
   };
 
