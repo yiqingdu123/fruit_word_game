@@ -150,7 +150,7 @@ const SinglePlayerGame = (props) => {
   return (
     <div>
       <h1>Game</h1>
-      <p>Here is the single player game.</p>
+      <p>Here is the single player game. CSS to be added.</p>
       <h3>Input a word to begin!</h3>
       <h3>Include: {bigram}</h3>
       <div>
