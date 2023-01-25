@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import { post } from "../../utilities";
 
+import "../pages/SinglePlayerGame.css";
+
 const NewWordInput = (props) => {
   const [value, setValue] = useState("");
 
@@ -28,14 +30,9 @@ const NewWordInput = (props) => {
         value={value}
         onChange={handleChange}
         onKeyPress={handleEnter}
-        //className=""
+        className="input"
       />
-      <button
-        type="submit"
-        //className=""
-        value="Submit"
-        onClick={handleSubmit}
-      >
+      <button type="submit" className="submit" value="Submit" onClick={handleSubmit}>
         Submit
       </button>
     </div>

@@ -11,6 +11,8 @@ import { BigramList } from "../modules/BigramList.js";
 //import { drawCanvas } from "../../canvasManager";
 //import { handleInput } from "../../input";
 
+import "./SinglePlayerGame.css";
+import "../pages/Title.js";
 import "../../utilities.css";
 
 /*
@@ -148,8 +150,8 @@ const SinglePlayerGame = (props) => {
   //<GameOver score={score} />;
 
   return (
-    <div>
-      <h1>Game</h1>
+    <div className="background">
+      <h1 className="nomargin">Game</h1>
       <p>Here is the single player game. CSS to be added.</p>
       <h3>Input a word to begin!</h3>
       <h3>Include: {bigram}</h3>
@@ -172,9 +174,11 @@ const SinglePlayerGame = (props) => {
           userId={props.userId}
         />
       </div>
-      <h1>Score: {score}</h1>
+      <h1 className="score">Score: {score}</h1>
       <h1>
-        <Link to="/gamemenu">Back </Link>
+        <Link to="/gamemenu" className="quit">
+          Quit Game
+        </Link>
       </h1>
       <div>Temporary Word List: {words}</div>
     </div>
