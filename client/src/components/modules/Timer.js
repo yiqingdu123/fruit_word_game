@@ -4,6 +4,7 @@ import { socket } from "../../client-socket.js";
 import { BigramList } from "../modules/BigramList.js";
 import { get, post } from "../../utilities";
 
+import "../pages/SinglePlayerGame.css";
 /*
 
 Code modified from https://www.geeksforgeeks.org/how-to-create-a-countdown-timer-using-reactjs/
@@ -44,6 +45,17 @@ const Timer = (props) => {
 
     fails = fails + 1;
     clearTimer(getDeadTime());
+    if (fails >= 1) {
+      setHeart1("hidden");
+    }
+
+    if (fails >= 2) {
+      setHeart2("hidden");
+    }
+
+    if (fails >= 3) {
+      setHeart3("hidden");
+    }
   };
 
   const startTimer = (e) => {
@@ -126,11 +138,17 @@ const Timer = (props) => {
     window.location.href = "/gameover";
   }
 
+  const [heart1, setHeart1] = useState("visible");
+  const [heart2, setHeart2] = useState("visible");
+  const [heart3, setHeart3] = useState("visible");
+
   return (
     <div>
       <h2>Time Left: {timer}</h2>
-      <h2>Lives Lost: {fails}</h2>
-      <img src="heart.png" alt="Heart"></img>
+      <div className="heartContainer">Lives: </div>
+      <div style={{ visibility: heart1 }} className="heart1" />
+      <div style={{ visibility: heart2 }} className="heart2" />
+      <div style={{ visibility: heart3 }} className="heart3" />
       {/* <button onClick={onClickReset}>Start</button> */}
     </div>
   );

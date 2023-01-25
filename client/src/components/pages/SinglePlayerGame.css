@@ -87,9 +87,99 @@
   border: 4px solid #ff6f6f;
   border-radius: 15px;
 
-  padding: 5px 8px;
+  padding: 5px 10px;
 
   margin-top: -110px;
 
   font-size: 24px;
+}
+
+.heartContainer {
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+
+  box-sizing: border-box;
+
+  position: fixed;
+  width: 235px;
+  height: 50px;
+  right: 40px;
+  bottom: 50px;
+
+  background: rgba(255, 255, 255, 0.7);
+  border: 4px solid #ff6f6f;
+  border-radius: 15px;
+
+  font-size: 24px;
+  padding: 5px 10px;
+}
+
+.heart1 {
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+
+  box-sizing: border-box;
+
+  position: fixed;
+  width: 250px;
+  height: 50px;
+  right: 40px;
+  bottom: 50px;
+
+  border: 4px solid #ff6f6f00;
+  border-radius: 15px;
+
+  background-repeat: no-repeat;
+
+  background-image: url("../../../../images/heart.png");
+  background-size: 17%;
+  background-position-x: 100px;
+}
+
+.heart2 {
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+
+  box-sizing: border-box;
+
+  position: fixed;
+  width: 250px;
+  height: 50px;
+  right: 40px;
+  bottom: 50px;
+
+  border: 4px solid #ff6f6f00;
+  border-radius: 15px;
+
+  background-repeat: no-repeat;
+
+  background-image: url("../../../../images/heart.png");
+  background-size: 17%;
+  background-position-x: 145px;
+}
+
+.heart3 {
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+
+  box-sizing: border-box;
+
+  position: fixed;
+  width: 250px;
+  height: 50px;
+  right: 40px;
+  bottom: 50px;
+
+  border: 4px solid #ff6f6f00;
+  border-radius: 15px;
+
+  background-repeat: no-repeat;
+
+  background-image: url("../../../../images/heart.png");
+  background-size: 17%;
+  background-position-x: 190px;
 }
