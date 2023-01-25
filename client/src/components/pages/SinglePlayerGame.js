@@ -174,7 +174,7 @@ const SinglePlayerGame = (props) => {
           userId={props.userId}
         />
       </div>
-      <h1 className="score">Score: {score}</h1>
+      <p className="score">Score: {score}</p>
       <h1>
         <Link to="/gamemenu" className="quit">
           Quit Game
