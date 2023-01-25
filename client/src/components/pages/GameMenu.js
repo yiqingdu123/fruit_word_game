@@ -3,6 +3,7 @@ import { Link } from "@reach/router";
 
 import "../../utilities.css";
 import "./GameMenu.css";
+import "./Title.css";
 
 const GameMenu = (props) => {
   let loginModal = null;

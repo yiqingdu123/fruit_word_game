@@ -10,7 +10,7 @@ const GOOGLE_CLIENT_ID = "916377425501-fasr2q6tninefd92hna7hucorskncctc.apps.goo
 
 const Title = ({ userId, handleLogin, handleLogout }) => {
   return (
-    <>
+    <div className="background">
       <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
         {userId ? (
           <button
@@ -31,8 +31,6 @@ const Title = ({ userId, handleLogin, handleLogout }) => {
         </a> */}
       </GoogleOAuthProvider>
 
-      <div className="background"></div>
-
       <div className="fruit"> FRU&IT </div>
 
       <a href="/gamemenu" className="button1">
@@ -50,7 +48,7 @@ const Title = ({ userId, handleLogin, handleLogout }) => {
           </Link>
         </div>
       )}
-    </>
+    </div>
   );
 };
 

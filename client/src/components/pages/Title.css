@@ -45,10 +45,13 @@
   top: 20px;
 
   background: rgba(255, 255, 255, 0.9);
-  border: 10px solid #ff6f6f;
+  border: 7px solid #ff6f6f;
   border-radius: 60px;
 
   margin-top: 0px;
+  padding: 5px;
+
+  position: fixed;
 }
 
 .TextLogIn {
