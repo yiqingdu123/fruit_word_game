@@ -126,14 +126,11 @@ const Timer = (props) => {
     window.location.href = "/gameover";
   }
 
-  if (fails === 0) {
-    return <img src="heart.png" alt="Heart"></img>;
-  }
-
   return (
     <div>
       <h2>Time Left: {timer}</h2>
       <h2>Lives Lost: {fails}</h2>
+      <img src="heart.png" alt="Heart"></img>
       {/* <button onClick={onClickReset}>Start</button> */}
     </div>
   );
