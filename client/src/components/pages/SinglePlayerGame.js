@@ -149,6 +149,10 @@ const SinglePlayerGame = (props) => {
 
   //<GameOver score={score} />;
 
+  // const image = () => {
+
+  // }
+
   return (
     <div className="background">
       <h1 className="nomargin">Game</h1>
