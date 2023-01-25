@@ -29,6 +29,7 @@ function getOrCreateUser(user) {
       highscoreSP: 0,
       highscoreMP: 0,
       MPwins: 0,
+      lobby: "",
       scoreslistSP: [],
       scoreslistMP: [],
     });
