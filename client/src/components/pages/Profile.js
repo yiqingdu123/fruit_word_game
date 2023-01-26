@@ -20,20 +20,42 @@ const Profile = (props) => {
   }
   if (props.userId) {
     const spScore = user.scoreslistSP.map((score, i) => <li key={i}>{score}</li>);
+    console.log(spScore);
     page = (
       <div className="background">
         <div className="backbox">
           <div className="userInfo">
             <h1>Profile</h1>
             <div className="profile-avatar"></div>
-            <p>Name: {user.name}</p>
+            <h3>{user.name}</h3>
           </div>
-          <div className="userScores">
-            <p>Highest Singleplayer score: {user.highscoreSP}</p>
-            <p>Highest Multiplayer score: {user.highscoreMP}</p>
-            <p>Number of Wins in Multiplayer: {user.MPwins}</p>
-            <p>Singleplayer Scores: {spScore}</p>
-            <p>Multiplayer Scores: {user.scoreslistMP}</p>
+          <div className="user-scores">
+            <h1>User Stats</h1>
+            <div className="pinkbox">
+              <div className="stat-display">
+                <div className="label">Highest Singleplayer Score:</div>
+                <div className="scores-num">{user.highscoreSP}</div>
+              </div>
+              <div className="stat-display">
+                <div className="label">Highest Multiplayer Score:</div>
+                <div className="scores-num">{user.highscoreMP}</div>
+              </div>
+              <div className="stat-display">
+                <div className="label">Number of Wins in Multiplayer:</div>
+                <div className="scores-num">{user.MPwins}</div>
+              </div>
+
+              <div className="scoreslist-box">
+                <div className="scoreslist-text">
+                  <div className="scoreslist-label">Singleplayer Scores</div>
+                  <div className="scoreslist-list">17 and {spScore}</div>
+                </div>
+                <div className="scoreslist-text">
+                  <div className="scoreslist-label">Multiplayer Scores</div>
+                  <div className="scoreslist-list">15 and {user.scoreslistMP}</div>
+                </div>
+              </div>
+            </div>
           </div>
           <h1>
             <Link to="/">Back </Link>

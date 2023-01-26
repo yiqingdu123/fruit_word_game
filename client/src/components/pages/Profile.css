@@ -1,6 +1,5 @@
 .backbox {
   position: absolute;
-  border: 3px solid pink;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -15,15 +14,14 @@
 .userInfo {
   display: flex;
   flex-direction: column;
-  flex-grow: 1;
-  margin: 30 px;
-  border-right: 1px solid rgb(0, 0, 0);
+  flex-grow: 2;
 }
 
-.userScores {
+.user-scores {
   display: flex;
   flex-direction: column;
   flex-grow: 5;
+  border-left: 1px solid rgb(0, 0, 0);
 }
 
 .profile-avatar {
@@ -35,7 +33,7 @@
   padding-top: 100%;
 
   /* make it a circle */
-  border-radius: 50%;
+  border-radius: 70%;
 
   /* Centering on image`s center*/
   background-position-y: center;
@@ -43,7 +41,7 @@
   background-repeat: no-repeat;
 
   /* it makes the clue thing, takes smaller dimension to fill div */
-  background-size: cover;
+  background-size: 70%;
 
   /* it is optional, for making this div centered in parent*/
   margin: 0 auto;
@@ -54,7 +52,77 @@
   background-image: url("../../images/defaulpfp.png");
 }
 
+.pinkbox {
+  position: fixed;
+  top: 55%;
+  left: 60%;
+  transform: translate(-40%, -50%);
+  padding: 100 px;
+  height: 80%;
+  width: 60%;
+  background: #ff6f6f;
+  border-radius: 30px;
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-display {
+  flex-grow: 1;
+  margin: 8px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 60px;
+  display: flex;
+  flex-direction: row;
+}
+
+.scoreslist-box {
+  flex-grow: 6;
+  margin: 8px;
+  display: flex;
+  flex-direction: row;
+}
+
+.scoreslist-text {
+  flex-grow: 1;
+  flex-direction: row;
+  margin: 8px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 60px;
+}
+
+.scoreslist-label {
+  text-align: center;
+  margin-top: 10px;
+  font-size: 20px;
+}
+
+.scoreslist-list {
+  text-align: left;
+  margin-left: 20px;
+  margin-top: 10px;
+}
+.label {
+  flex-grow: 9;
+  text-align: left;
+  margin: auto;
+  margin-left: 20px;
+  font-size: 20px;
+}
+
+.scores-num {
+  flex-grow: 1;
+  text-align: right;
+  margin: auto;
+  margin-right: 20px;
+}
+
 h1 {
   color: white;
   font: 40px;
+}
+
+h3 {
+  color: rgb(0, 0, 0);
+  font-size: 30px;
+  text-align: center;
 }
