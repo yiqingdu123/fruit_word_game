@@ -174,7 +174,6 @@ const SinglePlayerGame = (props) => {
       {/* <div>
         <DeleteWords handleSubmit={clearList} />
       </div> */}
-      <h2>Timer</h2>
       <div>
         <Timer
           reset={reset}

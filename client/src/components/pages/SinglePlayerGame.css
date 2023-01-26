@@ -58,7 +58,7 @@
   position: fixed;
   width: 180px;
   height: 50px;
-  right: 20px;
+  right: 10px;
   top: 120px;
 
   background: rgba(255, 255, 255, 0.7);
@@ -87,7 +87,7 @@
   border: 4px solid #ff6f6f;
   border-radius: 15px;
 
-  padding: 5px 10px;
+  padding: 6px 15px;
 
   margin-top: -110px;
 
@@ -112,7 +112,7 @@
   border-radius: 15px;
 
   font-size: 24px;
-  padding: 5px 10px;
+  padding: 6px 15px;
 }
 
 .heart1 {
@@ -135,7 +135,7 @@
 
   background-image: url("../../../../images/heart.png");
   background-size: 17%;
-  background-position-x: 100px;
+  background-position-x: 104px;
 }
 
 .heart2 {
@@ -158,7 +158,7 @@
 
   background-image: url("../../../../images/heart.png");
   background-size: 17%;
-  background-position-x: 145px;
+  background-position-x: 147px;
 }
 
 .heart3 {
@@ -201,7 +201,7 @@
   border: 4px solid #ff6f6f;
   border-radius: 15px;
 
-  padding: 5px 10px;
+  padding: 6px 15px;
 
   margin-top: -110px;
 
@@ -290,4 +290,70 @@
   background-image: url("../../../../images/apple.png");
   background-size: 60%;
   background-position-x: 100px;
+}
+
+.orange {
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+
+  box-sizing: border-box;
+
+  position: absolute;
+  width: 300px;
+  height: 200px;
+
+  border: 4px solid #ff6f6f00;
+  border-radius: 15px;
+
+  background-repeat: no-repeat;
+
+  background-image: url("../../../../images/orange.png");
+  background-size: 60%;
+  background-position-x: 100px;
+}
+
+.peach {
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+
+  box-sizing: border-box;
+
+  position: absolute;
+  width: 300px;
+  height: 200px;
+
+  border: 4px solid #ff6f6f00;
+  border-radius: 15px;
+
+  background-repeat: no-repeat;
+
+  background-image: url("../../../../images/peach.png");
+  background-size: 60%;
+  background-position-x: 100px;
+}
+
+.timer {
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+
+  box-sizing: border-box;
+
+  position: fixed;
+  width: 200px;
+  height: 200px;
+  left: 10px;
+  top: -90px;
+
+  background: rgba(255, 255, 255, 0.7);
+  border: 10px solid #ff6f6f;
+  border-radius: 100px;
+
+  padding: 18px 10px;
+
+  font-size: 120px;
+  text-align: center;
+  color: #ff6f6f;
 }

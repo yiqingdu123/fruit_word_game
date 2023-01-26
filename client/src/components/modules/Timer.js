@@ -12,6 +12,7 @@ Code modified from https://www.geeksforgeeks.org/how-to-create-a-countdown-timer
 */
 
 let fails = 0;
+let startFall = 0;
 
 const Timer = (props) => {
   const Ref = useRef(null);
@@ -26,11 +27,18 @@ const Timer = (props) => {
   //   });
 
   // The state for our timer
-  const [timer, setTimer] = useState("0");
+  const [timer, setTimer] = useState("8");
 
   const getTimeRemaining = (e) => {
     const total = Date.parse(e) - Date.parse(new Date());
     const seconds = Math.floor((total / 1000) % 60);
+    startFall = 1;
+
+    ///////
+    //setPositionY(total / 10 + 78 - 150);
+    //setFruitPositionY(total / 10 - 150);
+    ///////
+
     return {
       total,
       seconds,
@@ -38,8 +46,6 @@ const Timer = (props) => {
   };
 
   const noTime = (props) => {
-    console.log("fail");
-
     let randomBigram = BigramList[Math.floor(Math.random() * BigramList.length)];
     props.handleBigram();
 
@@ -60,6 +66,7 @@ const Timer = (props) => {
 
   const startTimer = (e) => {
     let { total, seconds } = getTimeRemaining(e);
+    startFall = 1;
     if (total >= 0) {
       setTimer(seconds > 9 ? seconds : seconds);
     }
@@ -68,20 +75,70 @@ const Timer = (props) => {
     }
   };
 
+  ///////
+
+  //const [reRender, setReRender] = useState("");
+
+  // let subPos = 0;
+  //
+  // useEffect(() => {
+  //   const interval = setInterval((e) => {
+  //     if (startFall === 1) {
+  //       if (resetTemp === 0) {
+  //         subPos = 0;
+  //         console.log(subPos);
+  //       }
+  //       setPositionY(778 - 50 - subPos);
+  //       setFruitPositionY(700 - 50 - subPos);
+  //       subPos = subPos + 1;
+  //     }
+  //   }, 12.5);
+  //   return () => clearInterval(interval);
+  // }, []);
+
+  ///////
+
+  let [subPos, setSubPos] = useState(0);
+
+  useEffect(() => {
+    if (fails < 3) {
+      const interval = setInterval((e) => {
+        if (startFall === 1 && fails < 3) {
+          setPositionY(778 + 50 - subPos);
+          setFruitPositionY(700 + 50 - subPos);
+          setSubPos(subPos + 3);
+        }
+      }, 23);
+      return () => clearInterval(interval);
+    }
+  }, [subPos]);
+
+  if (props.score != 0) {
+    startFall = 1;
+  }
+  ///////
+
   const clearTimer = (e) => {
-    setTimer("08");
+    setTimer("8");
 
     if (Ref.current) clearInterval(Ref.current);
     const id = setInterval(() => {
       startTimer(e);
     }, 1000);
     Ref.current = id;
-    setPositionX(Math.floor(Math.random() * 1000) + 150 + "px");
+    let tempPos = Math.random() * 1000;
+    setPositionX(Math.floor(tempPos) + 150 + "px");
+    setFruitPositionX(Math.floor(tempPos) + 10 + "px");
+    chooseFruit();
   };
 
   const getDeadTime = () => {
     let deadline = new Date();
 
+    setPositionY(778 + 50);
+    setFruitPositionY(700 + 50);
+
+    setSubPos(0);
     deadline.setSeconds(deadline.getSeconds() + 8);
     return deadline;
   };
@@ -116,8 +173,6 @@ const Timer = (props) => {
     }
   }, [props.reset]);
 
-  console.log(props.reset);
-
   const [resetTemp, setResetTemp] = useState(0);
 
   let handleReset = () => {
@@ -144,14 +199,28 @@ const Timer = (props) => {
   const [heart3, setHeart3] = useState("visible");
 
   const [positionX, setPositionX] = useState("669px");
-  const [positionY, setPositionY] = useState("454px");
+  const [positionY, setPositionY] = useState(454);
 
   const [fruitPositionX, setFruitPositionX] = useState("529px");
-  const [fruitPositionY, setFruitPositionY] = useState("376px");
+  const [fruitPositionY, setFruitPositionY] = useState(376);
+
+  const [fruitID, setFruitID] = useState("apple");
+  const chooseFruit = () => {
+    let randomFruit = Math.floor(Math.random() * 3);
+    if (randomFruit === 0) {
+      setFruitID("apple");
+    }
+    if (randomFruit === 1) {
+      setFruitID("orange");
+    }
+    if (randomFruit === 2) {
+      setFruitID("peach");
+    }
+  };
 
   return (
     <div>
-      <h2>Time Left: {timer}</h2>
+      <h2 className="timer">{timer}</h2>
       <div className="heartContainer">Lives: </div>
       <div style={{ visibility: heart1 }} className="heart1" />
       <div style={{ visibility: heart2 }} className="heart2" />
@@ -161,8 +230,8 @@ const Timer = (props) => {
       <div className="initialInstruction" style={{ visibility: props.initialApplePos }}>
         Input a word to begin!
       </div>
-      <div className="apple" style={{ left: fruitPositionX, bottom: fruitPositionY }} />
-      <div className="bigram" style={{ left: positionX, bottom: positionY }}>
+      <div className={fruitID} style={{ left: fruitPositionX, bottom: fruitPositionY + "px" }} />
+      <div className="bigram" style={{ left: positionX, bottom: positionY + "px" }}>
         {props.bigram}
       </div>
     </div>
