@@ -357,3 +357,7 @@
   text-align: center;
   color: #ff6f6f;
 }
+
+noScroll {
+  overflow-y: hidden;
+}

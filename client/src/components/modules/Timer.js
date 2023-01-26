@@ -104,11 +104,11 @@ const Timer = (props) => {
     if (fails < 3) {
       const interval = setInterval((e) => {
         if (startFall === 1 && fails < 3) {
-          setPositionY(778 + 50 - subPos);
-          setFruitPositionY(700 + 50 - subPos);
+          setPositionY(778 + 70 - subPos);
+          setFruitPositionY(700 + 70 - subPos);
           setSubPos(subPos + 3);
         }
-      }, 23);
+      }, 22);
       return () => clearInterval(interval);
     }
   }, [subPos]);
@@ -135,8 +135,8 @@ const Timer = (props) => {
   const getDeadTime = () => {
     let deadline = new Date();
 
-    setPositionY(778 + 50);
-    setFruitPositionY(700 + 50);
+    setPositionY(778 + 70);
+    setFruitPositionY(700 + 70);
 
     setSubPos(0);
     deadline.setSeconds(deadline.getSeconds() + 8);
@@ -185,13 +185,14 @@ const Timer = (props) => {
     setTimeout(handleReset, 10);
   }
 
-  if (fails >= 3) {
+  if (fails === 3) {
     console.log("game over");
 
     const body = { id: props.userId, score: props.score };
     console.log(body);
     post("/api/userupdateSP", body);
     window.location.href = "/gameover";
+    fails = 4;
   }
 
   const [heart1, setHeart1] = useState("visible");

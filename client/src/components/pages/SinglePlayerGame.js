@@ -175,6 +175,7 @@ const SinglePlayerGame = (props) => {
         <DeleteWords handleSubmit={clearList} />
       </div> */}
       <div>
+        <p className="score">Score: {score}</p>
         <Timer
           reset={reset}
           handleWordCount={handleWordCount}
@@ -192,7 +193,6 @@ const SinglePlayerGame = (props) => {
         <NewWord addNewWord={addNewWord} />
       </div>
 
-      <p className="score">Score: {score}</p>
       <h1>
         <Link to="/gamemenu" className="quit">
           Quit Game
