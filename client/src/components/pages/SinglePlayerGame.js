@@ -100,6 +100,7 @@ const SinglePlayerGame = (props) => {
       let randomBigram = BigramList[Math.floor(Math.random() * BigramList.length)];
       setBigram(randomBigram);
       setValidOpacity("hidden");
+      setInitialApplePos("hidden");
     } else if (!verifyNotRepeated(wordObj.content)) {
       setHandleValid("Word Already Used");
       setValidOpacity("visible");
@@ -158,21 +159,15 @@ const SinglePlayerGame = (props) => {
 
   // }
 
+  const [initialApplePos, setInitialApplePos] = useState("visible");
+
   return (
     <div className="background">
       <h1 className="nomargin" style={{ visibility: "hidden" }}>
         Game
       </h1>
       {/* <p>Here is the single player game. CSS to be added.</p> */}
-      <h3>Input a word to begin!</h3>
-      <h3>Include: {bigram}</h3>
       <div>
-        <div className="wordContainer">
-          <div className="invalidWord" style={{ visibility: validOpacity }}>
-            {handleValid}
-          </div>
-          <NewWord addNewWord={addNewWord} />
-        </div>
         <br></br>
         <div className="wordlength">Words: {words.length}</div>
       </div>
@@ -188,8 +183,16 @@ const SinglePlayerGame = (props) => {
           handleBigram={handleBigram}
           score={score}
           userId={props.userId}
+          initialApplePos={initialApplePos}
         />
       </div>
+      <div className="wordContainer">
+        <div className="invalidWord" style={{ visibility: validOpacity }}>
+          {handleValid}
+        </div>
+        <NewWord addNewWord={addNewWord} />
+      </div>
+
       <p className="score">Score: {score}</p>
       <h1>
         <Link to="/gamemenu" className="quit">

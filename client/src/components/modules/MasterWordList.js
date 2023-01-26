@@ -267751,7 +267751,14 @@ const MasterWordList = [
   "zyzzyva",
   "zyzzyvas",
   "zzz",
-  "zzzs"
+  "zzzs",
+  "monday",
+  "tuesday",
+  "wednesday",
+  "thursday",
+  "friday",
+  "saturday",
+  "sunday",
 ];
 
 export { MasterWordList };

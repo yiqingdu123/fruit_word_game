@@ -26,7 +26,7 @@ const Timer = (props) => {
   //   });
 
   // The state for our timer
-  const [timer, setTimer] = useState("00");
+  const [timer, setTimer] = useState("0");
 
   const getTimeRemaining = (e) => {
     const total = Date.parse(e) - Date.parse(new Date());
@@ -61,7 +61,7 @@ const Timer = (props) => {
   const startTimer = (e) => {
     let { total, seconds } = getTimeRemaining(e);
     if (total >= 0) {
-      setTimer(seconds > 9 ? seconds : "0" + seconds);
+      setTimer(seconds > 9 ? seconds : seconds);
     }
     if (total === 0) {
       noTime(props);
@@ -76,6 +76,7 @@ const Timer = (props) => {
       startTimer(e);
     }, 1000);
     Ref.current = id;
+    setPositionX(Math.floor(Math.random() * 1000) + 150 + "px");
   };
 
   const getDeadTime = () => {
@@ -142,6 +143,12 @@ const Timer = (props) => {
   const [heart2, setHeart2] = useState("visible");
   const [heart3, setHeart3] = useState("visible");
 
+  const [positionX, setPositionX] = useState("669px");
+  const [positionY, setPositionY] = useState("454px");
+
+  const [fruitPositionX, setFruitPositionX] = useState("529px");
+  const [fruitPositionY, setFruitPositionY] = useState("376px");
+
   return (
     <div>
       <h2>Time Left: {timer}</h2>
@@ -150,6 +157,14 @@ const Timer = (props) => {
       <div style={{ visibility: heart2 }} className="heart2" />
       <div style={{ visibility: heart3 }} className="heart3" />
       {/* <button onClick={onClickReset}>Start</button> */}
+      {/* <div className="initialApple" style={{ visibility: props.initialApplePos }} /> */}
+      <div className="initialInstruction" style={{ visibility: props.initialApplePos }}>
+        Input a word to begin!
+      </div>
+      <div className="apple" style={{ left: fruitPositionX, bottom: fruitPositionY }} />
+      <div className="bigram" style={{ left: positionX, bottom: positionY }}>
+        {props.bigram}
+      </div>
     </div>
   );
 };
