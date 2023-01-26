@@ -112,14 +112,23 @@ router.post("/userlobbyupdate", (req, res) => {
     user.lobby = req.body.lobby;
     user.save();
   });
+
+  Lobby.find({ content: req.body.lobby }).then((lob) => {
+    if (lob.length == 0) {
+      const newLobby = new Lobby({
+        content: req.body.lobby,
+      });
+
+      newLobby.save().then((lobby) => res.send(lobby));
+    }
+  });
 });
 
-router.post("/lobbydbupdate", (req, res) => {
-  const newWord = new Lobby({
-    content: req.body.content,
+router.get("/lobbyusers", (req, res) => {
+  User.find({ lobby: req.body.lobby }).then((users) => {
+    console.log(users);
+    res.send(users);
   });
-
-  newWord.save().then((lobby) => res.send(lobby));
 });
 
 // router.post("/delete", (req,res) => {
