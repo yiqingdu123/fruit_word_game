@@ -14,6 +14,7 @@ const User = require("./models/user");
 // const Userstats = require("./models/userstats");
 const Gamestats = require("./models/gamestats");
 const Word = require("./models/word");
+const Lobby = require("./models/lobby");
 
 // import authentication library
 const auth = require("./auth");
@@ -104,6 +105,21 @@ router.post("/userupdateSP", (req, res) => {
 
     user.save();
   });
+});
+
+router.post("/userlobbyupdate", (req, res) => {
+  User.findById(req.body.id).then((user) => {
+    user.lobby = req.body.lobby;
+    user.save();
+  });
+});
+
+router.post("/lobbydbupdate", (req, res) => {
+  const newWord = new Lobby({
+    content: req.body.content,
+  });
+
+  newWord.save().then((lobby) => res.send(lobby));
 });
 
 // router.post("/delete", (req,res) => {

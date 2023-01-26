@@ -6,6 +6,7 @@ const UserSchema = new mongoose.Schema({
   highscoreSP: Number,
   highscoreMP: Number,
   MPwins: Number,
+  lobby: String,
   scoreslistSP: [Number],
   scoreslistMP: [Number],
 });
