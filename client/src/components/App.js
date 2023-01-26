@@ -18,9 +18,8 @@ import { socket } from "../client-socket.js";
 
 import { get, post } from "../utilities";
 
-/**
- * Define the "App" component
- */
+//Favicon Icon made by Freepik from www.flaticon.com
+
 const App = () => {
   const [userId, setUserId] = useState(undefined);
 
