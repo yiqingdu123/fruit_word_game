@@ -108,7 +108,7 @@ const Timer = (props) => {
           setFruitPositionY(700 + 70 - subPos);
           setSubPos(subPos + 3);
         }
-      }, 22);
+      }, 23);
       return () => clearInterval(interval);
     }
   }, [subPos]);
