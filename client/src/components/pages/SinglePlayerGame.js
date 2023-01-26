@@ -84,6 +84,8 @@ const SinglePlayerGame = (props) => {
 
   const [score, setScore] = useState(0);
 
+  const [validOpacity, setValidOpacity] = useState("hidden");
+
   const addNewWord = (wordObj) => {
     const newWordsObj = (
       <SingleWord key={wordObj._id} input_user={wordObj.input_user} content={wordObj.content} />
@@ -97,10 +99,13 @@ const SinglePlayerGame = (props) => {
       setScore(score + wordObj.content.length);
       let randomBigram = BigramList[Math.floor(Math.random() * BigramList.length)];
       setBigram(randomBigram);
+      setValidOpacity("hidden");
     } else if (!verifyNotRepeated(wordObj.content)) {
       setHandleValid("Word Already Used");
+      setValidOpacity("visible");
     } else {
       setHandleValid("Invalid Word");
+      setValidOpacity("visible");
     }
   };
 
@@ -155,14 +160,21 @@ const SinglePlayerGame = (props) => {
 
   return (
     <div className="background">
-      <h1 className="nomargin">Game</h1>
-      <p>Here is the single player game. CSS to be added.</p>
+      <h1 className="nomargin" style={{ visibility: "hidden" }}>
+        Game
+      </h1>
+      {/* <p>Here is the single player game. CSS to be added.</p> */}
       <h3>Input a word to begin!</h3>
       <h3>Include: {bigram}</h3>
       <div>
-        <div>{handleValid}</div>
-        <NewWord addNewWord={addNewWord} />
-        <br></br>Number of Words Submitted: {words.length}
+        <div className="wordContainer">
+          <div className="invalidWord" style={{ visibility: validOpacity }}>
+            {handleValid}
+          </div>
+          <NewWord addNewWord={addNewWord} />
+        </div>
+        <br></br>
+        <div className="wordlength">Words: {words.length}</div>
       </div>
       {/* <div>
         <DeleteWords handleSubmit={clearList} />
@@ -184,7 +196,6 @@ const SinglePlayerGame = (props) => {
           Quit Game
         </Link>
       </h1>
-      <div>Temporary Word List: {words}</div>
     </div>
   );
 };

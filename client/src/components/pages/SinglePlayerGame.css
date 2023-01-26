@@ -183,3 +183,45 @@
   background-size: 17%;
   background-position-x: 190px;
 }
+
+.wordlength {
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+
+  box-sizing: border-box;
+
+  position: fixed;
+  width: 250px;
+  height: 50px;
+  left: 40px;
+  bottom: 105px;
+
+  background: rgba(255, 255, 255, 0.7);
+  border: 4px solid #ff6f6f;
+  border-radius: 15px;
+
+  padding: 5px 10px;
+
+  margin-top: -110px;
+
+  font-size: 24px;
+}
+
+.invalidWord {
+  position: fixed;
+  bottom: 105px;
+  left: 600px;
+
+  font-size: 24px;
+  color: #ff6f6f;
+  font-weight: 600;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 15px;
+  padding: 5px;
+}
+
+.wordContainer {
+  display: flex;
+  justify-content: center;
+}
