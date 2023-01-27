@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "@reach/router";
 import { NewWord } from "../modules/NewWordInput.js";
 import { get, post } from "../../utilities";
+import { socket } from "../../client-socket.js";
 
 import "../pages/Title.js";
 import "../../utilities.css";
@@ -16,10 +17,6 @@ const MultiPlayerGame = (props) => {
       console.log(usersObjs);
 
       setNames(usersObjs.map((x) => x.name));
-
-      // for (let i = 0; i < usersObjs.length; i++) {
-      //   setNames([...names, usersObjs[i].name]);
-      // }
     });
   };
 
@@ -32,6 +29,17 @@ const MultiPlayerGame = (props) => {
     updatingUsers(lobbyObj);
     //console.log(names);
   };
+
+  useEffect(() => {
+    const callback = (data) => {
+      const lobbyObj = { content: data };
+      updatingUsers(lobbyObj);
+    };
+    socket.on("newLobby", callback);
+    return () => {
+      socket.off("newLobby", callback);
+    };
+  }, []);
 
   return (
     <div>
