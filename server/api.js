@@ -118,6 +118,9 @@ router.post("/userlobbyupdate", (req, res) => {
     })
     .then(() => {
       socketManager.getIo().emit("newLobby", req.body.lobby);
+    })
+    .then(() => {
+      console.log("hahahahsfdsfsf");
     });
 
   Lobby.find({ content: req.body.lobby }).then((lob) => {
