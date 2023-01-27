@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "@reach/router";
 import { NewWord } from "../modules/NewWordInput.js";
 import { get, post } from "../../utilities";
@@ -7,18 +7,18 @@ import "../pages/Title.js";
 import "../../utilities.css";
 
 const MultiPlayerGame = (props) => {
-  // const names = [];
+  const [names, setNames] = useState([]);
 
-  // const updatingUsers = (lobbyObj) => {
-  //   const lobs = { lobby: lobbyObj.content };
-  //   get("/api/lobbyusers", lobs).then((usersObjs) => {
-  //     console.log(usersObjs);
-  //     for (let i = 0; i < usersObjs.length; i++) {
-  //       names.push(usersObjs[i].name);
-  //       console.log(usersObjs[i]);
-  //     }
-  //   });
-  // };
+  const updatingUsers = (lobbyObj) => {
+    const lobs = { lobby: lobbyObj.content };
+    console.log(lobs);
+    get("/api/lobbyusers", lobs).then((usersObjs) => {
+      console.log(usersObjs);
+      for (let i = 0; i < usersObjs.length; i++) {
+        setNames([...names, usersObjs[i].name]);
+      }
+    });
+  };
 
   const addNewLobby = (lobbyObj) => {
     //console.log(props);
@@ -26,7 +26,7 @@ const MultiPlayerGame = (props) => {
     post("/api/userlobbyupdate", body).then((res) => {
       //post("/api/lobbydbupdate", body);
     });
-    //updatingUsers(lobbyObj);
+    updatingUsers(lobbyObj);
     //console.log(names);
   };
 
@@ -35,7 +35,7 @@ const MultiPlayerGame = (props) => {
       <h1>Multi Player</h1>
       <div>
         Create/Join a Lobby: Users in Lobby:
-        {/* {names} */}
+        {names}
         <NewWord addNewWord={addNewLobby} />
       </div>
 
