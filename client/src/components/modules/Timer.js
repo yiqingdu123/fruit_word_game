@@ -5,9 +5,10 @@ import { BigramList } from "../modules/BigramList.js";
 import { get, post } from "../../utilities";
 
 import "../pages/SinglePlayerGame.css";
+
 /*
 
-Code modified from https://www.geeksforgeeks.org/how-to-create-a-countdown-timer-using-reactjs/
+Code for timer modified from https://www.geeksforgeeks.org/how-to-create-a-countdown-timer-using-reactjs/
 
 */
 
@@ -17,27 +18,12 @@ let startFall = 0;
 const Timer = (props) => {
   const Ref = useRef(null);
 
-  //   window.addEventListener("keydown", (event) => {
-  //     if (event.key === "Enter") {
-  //       if (words.length === WordCount) {
-  //         clearTimer(getDeadTime());
-  //         WordCount = WordCount + 1;
-  //       }
-  //     }
-  //   });
-
-  // The state for our timer
   const [timer, setTimer] = useState("8");
 
   const getTimeRemaining = (e) => {
     const total = Date.parse(e) - Date.parse(new Date());
     const seconds = Math.floor((total / 1000) % 60);
     startFall = 1;
-
-    ///////
-    //setPositionY(total / 10 + 78 - 150);
-    //setFruitPositionY(total / 10 - 150);
-    ///////
 
     return {
       total,
@@ -75,29 +61,6 @@ const Timer = (props) => {
     }
   };
 
-  ///////
-
-  //const [reRender, setReRender] = useState("");
-
-  // let subPos = 0;
-  //
-  // useEffect(() => {
-  //   const interval = setInterval((e) => {
-  //     if (startFall === 1) {
-  //       if (resetTemp === 0) {
-  //         subPos = 0;
-  //         console.log(subPos);
-  //       }
-  //       setPositionY(778 - 50 - subPos);
-  //       setFruitPositionY(700 - 50 - subPos);
-  //       subPos = subPos + 1;
-  //     }
-  //   }, 12.5);
-  //   return () => clearInterval(interval);
-  // }, []);
-
-  ///////
-
   let [subPos, setSubPos] = useState(0);
 
   useEffect(() => {
@@ -116,7 +79,6 @@ const Timer = (props) => {
   if (props.score != 0) {
     startFall = 1;
   }
-  ///////
 
   const clearTimer = (e) => {
     setTimer("8");
@@ -148,19 +110,10 @@ const Timer = (props) => {
     fails = 0;
   };
 
-  //   const WordCount = 1;
-
-  //   if (words.length === WordCount) {
-  //     //clearTimer(getDeadTime());
-  //     WordCount = WordCount + 1;
-  //   }
-
   useEffect(() => {
     socket.on("update", (update) => {
       processUpdate(update);
     });
-    //   clearTimer(getDeadTime());
-    //   noTime();
     return () => {
       clearInterval(Ref.current);
       fails = 0;
