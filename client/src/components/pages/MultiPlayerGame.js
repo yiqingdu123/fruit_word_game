@@ -14,9 +14,12 @@ const MultiPlayerGame = (props) => {
     console.log(lobs);
     get("/api/lobbyusers", lobs).then((usersObjs) => {
       console.log(usersObjs);
-      for (let i = 0; i < usersObjs.length; i++) {
-        setNames([...names, usersObjs[i].name]);
-      }
+
+      setNames(usersObjs.map((x) => x.name));
+
+      // for (let i = 0; i < usersObjs.length; i++) {
+      //   setNames([...names, usersObjs[i].name]);
+      // }
     });
   };
 
