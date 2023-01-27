@@ -125,7 +125,8 @@ router.post("/userlobbyupdate", (req, res) => {
 });
 
 router.get("/lobbyusers", (req, res) => {
-  User.find({ lobby: req.body.lobby }).then((users) => {
+  console.log(req.query.lobby);
+  User.find({ lobby: req.query.lobby }).then((users) => {
     console.log(users);
     res.send(users);
   });
