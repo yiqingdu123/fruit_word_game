@@ -111,17 +111,10 @@ router.post("/userupdateSP", (req, res) => {
 });
 
 router.post("/userlobbyupdate", (req, res) => {
-  User.findById(req.body.id)
-    .then((user) => {
-      user.lobby = req.body.lobby;
-      user.save();
-    })
-    .then(() => {
-      socketManager.getIo().emit("newLobby", req.body.lobby);
-    })
-    .then(() => {
-      console.log("hahahahsfdsfsf");
-    });
+  User.findById(req.body.id).then((user) => {
+    user.lobby = req.body.lobby;
+    user.save();
+  });
 
   Lobby.find({ content: req.body.lobby }).then((lob) => {
     if (lob.length == 0) {
@@ -132,6 +125,8 @@ router.post("/userlobbyupdate", (req, res) => {
       newLobby.save().then((lobby) => res.send(lobby));
     }
   });
+
+  socketManager.getIo().emit("newLobby", req.body.lobby);
 });
 
 router.get("/lobbyusers", (req, res) => {

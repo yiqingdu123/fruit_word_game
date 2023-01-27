@@ -34,7 +34,6 @@ const MultiPlayerGame = (props) => {
   useEffect(() => {
     const callback = (data) => {
       const lobbyObj = { content: data };
-      console.log("hahahahahahahahahazha");
       updatingUsers(lobbyObj);
     };
     socket.on("newLobby", callback);
