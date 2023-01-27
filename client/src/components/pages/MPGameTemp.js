@@ -8,6 +8,7 @@ import { socket } from "../../client-socket.js";
 import Timer from "../modules/Timer.js";
 import { MasterWordList } from "../modules/MasterWordList.js";
 import { BigramList } from "../modules/BigramList.js";
+import { gameState } from "../../../../server/game-logic.js";
 
 import "./SinglePlayerGame.css";
 import "../pages/Title.js";
@@ -28,6 +29,8 @@ const MPGameTemp = (props) => {
   const [wordsList, setWordsList] = useState([]);
 
   const [bigram, setBigram] = useState("ui");
+
+  const [user, setUser] = useState();
 
   useEffect(() => {
     document.title = "Profile Page";
@@ -143,6 +146,24 @@ const MPGameTemp = (props) => {
 
   const [initialApplePos, setInitialApplePos] = useState("visible");
 
+  ///////////////////////////////////////////////////////////////////
+  //MULTIPLAYER STUFF
+  ///////////////////////////////////////////////////////////////////
+
+  let joinButton = (
+    <div>
+      <button
+        onClick={() => {
+          post("/api/joingame", { userid: props.userId });
+        }}
+      >
+        Join Game
+      </button>
+    </div>
+  );
+
+  console.log(gameState);
+
   return (
     <div className="background">
       <h1 className="nomargin" style={{ visibility: "hidden" }}>
@@ -180,6 +201,7 @@ const MPGameTemp = (props) => {
           Quit Game
         </Link>
       </h1>
+      <h1>{joinButton}</h1>
     </div>
   );
 };

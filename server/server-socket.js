@@ -1,3 +1,5 @@
+const gameLogic = require("./game-logic");
+
 let io;
 
 const userToSocketMap = {}; // maps user ID to socket object
@@ -6,6 +8,14 @@ const socketToUserMap = {}; // maps socket ID to user object
 const getSocketFromUserID = (userid) => userToSocketMap[userid];
 const getUserFromSocketID = (socketid) => socketToUserMap[socketid];
 const getSocketFromSocketID = (socketid) => io.sockets.connected[socketid];
+
+const addUserToGame = (user) => {
+  gameLogic.spawnPlayer(user._id);
+};
+
+const removeUserFromGame = (user) => {
+  gameLogic.removePlayer(user._id);
+};
 
 const addUser = (user, socket) => {
   const oldSocket = userToSocketMap[user._id];
@@ -40,6 +50,8 @@ module.exports = {
 
   addUser: addUser,
   removeUser: removeUser,
+  addUserToGame: addUserToGame,
+  removeUserFromGame: removeUserFromGame,
 
   getSocketFromUserID: getSocketFromUserID,
   getUserFromSocketID: getUserFromSocketID,

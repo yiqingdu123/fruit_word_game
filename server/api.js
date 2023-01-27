@@ -141,4 +141,18 @@ router // anything else falls to this "not found" case
     res.status(404).send({ msg: "API route not found" });
   });
 
+router.post("/joingame", (req, res) => {
+  if (req.user) {
+    socketManager.addUserToGame(req.user);
+  }
+  res.send({});
+});
+
+router.post("/leavegame", (req, res) => {
+  if (req.user) {
+    socketManager.removeUserFromGame(req.user);
+  }
+  res.send({});
+});
+
 module.exports = router;
