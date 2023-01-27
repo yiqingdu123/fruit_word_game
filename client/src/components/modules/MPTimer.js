@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Link } from "@reach/router";
 import { socket } from "../../client-socket.js";
-import { BigramList } from "../modules/BigramList.js";
+import { BigramList } from "./BigramList.js";
 import { get, post } from "../../utilities";
 
 import "../pages/SinglePlayerGame.css";
@@ -15,7 +15,7 @@ Code for timer modified from https://www.geeksforgeeks.org/how-to-create-a-count
 let fails = 0;
 let startFall = 0;
 
-const Timer = (props) => {
+const MPTimer = (props) => {
   const Ref = useRef(null);
 
   const [timer, setTimer] = useState("8");
@@ -141,9 +141,9 @@ const Timer = (props) => {
   if (fails === 3) {
     console.log("game over");
 
-    const body = { id: props.userId, score: props.score };
-    console.log(body);
-    post("/api/userupdateSP", body);
+    // const body = { id: props.userId, score: props.score };
+    // console.log(body);
+    // post("/api/userupdateSP", body);
     window.location.href = "/gameover";
     fails = 4;
   }
@@ -192,4 +192,4 @@ const Timer = (props) => {
   );
 };
 
-export default Timer;
+export default MPTimer;

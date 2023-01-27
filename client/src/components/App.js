@@ -11,6 +11,7 @@ import Profile from "./pages/Profile.js";
 import GameMenu from "./pages/GameMenu.js";
 import Timer from "./modules/Timer.js";
 import GameOver from "./pages/GameOver.js";
+import MPGameTemp from "./pages/MPGameTemp.js";
 
 import "../utilities.css";
 
@@ -59,6 +60,7 @@ const App = () => {
         <GameMenu path="/gamemenu/" userId={userId} />
         <Timer path="/timer/" userId={userId} />
         <GameOver path="/gameover/" userId={userId} />
+        <MPGameTemp path="/mpgametemp/" userId={userId} />
         <NotFound default />
       </Router>
     </>

@@ -19,7 +19,7 @@ Code for adding new words is from Weblab Staff / Catbook-React
 
 */
 
-const SinglePlayerGame = (props) => {
+const MPGameTemp = (props) => {
   const [words, setWords] = useState([]);
   const [inMasterList, setInMasterList] = useState(false);
   const [notRepeated, setNotRepeated] = useState(false);
@@ -28,6 +28,11 @@ const SinglePlayerGame = (props) => {
   const [wordsList, setWordsList] = useState([]);
 
   const [bigram, setBigram] = useState("ui");
+
+  useEffect(() => {
+    document.title = "Profile Page";
+    get("/api/user", { userid: props.userId }).then((userObj) => setUser(userObj));
+  }, []);
 
   useEffect(() => {
     // get("/api/words").then((wordsObjs) => {
@@ -153,7 +158,7 @@ const SinglePlayerGame = (props) => {
       </div> */}
       <div>
         <p className="score">Score: {score}</p>
-        <Timer
+        {/* <Timer
           reset={reset}
           handleWordCount={handleWordCount}
           bigram={bigram}
@@ -161,7 +166,7 @@ const SinglePlayerGame = (props) => {
           score={score}
           userId={props.userId}
           initialApplePos={initialApplePos}
-        />
+        /> */}
       </div>
       <div className="wordContainer">
         <div className="invalidWord" style={{ visibility: validOpacity }}>
@@ -179,4 +184,4 @@ const SinglePlayerGame = (props) => {
   );
 };
 
-export default SinglePlayerGame;
+export default MPGameTemp;
