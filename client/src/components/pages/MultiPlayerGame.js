@@ -42,6 +42,9 @@ const MultiPlayerGame = (props) => {
       <h1>
         <Link to="/gamemenu">Back </Link>
       </h1>
+      <h1>
+        <Link to="/mpgametemp">temp </Link>
+      </h1>
     </div>
   );
 };
