@@ -122,6 +122,8 @@ router.post("/userlobbyupdate", (req, res) => {
       newLobby.save().then((lobby) => res.send(lobby));
     }
   });
+
+  socketManager.getIo().emit("newLobby", req.body.lobby);
 });
 
 router.get("/lobbyusers", (req, res) => {
