@@ -23,23 +23,25 @@ const MultiPlayerGame = (props) => {
   const addNewLobby = (lobbyObj) => {
     //console.log(props);
     const body = { id: props.userId, lobby: lobbyObj.content };
-    post("/api/userlobbyupdate", body).then((res) => {
-      //post("/api/lobbydbupdate", body);
+    post("/api/userlobbyupdate", body).then(() => {
+      console.log("user lobby update worked");
+      updatingUsers(lobbyObj);
     });
-    updatingUsers(lobbyObj);
+
     //console.log(names);
   };
 
   useEffect(() => {
     const callback = (data) => {
       const lobbyObj = { content: data };
+      console.log("hahahahahahahahahazha");
       updatingUsers(lobbyObj);
     };
     socket.on("newLobby", callback);
     return () => {
       socket.off("newLobby", callback);
     };
-  }, []);
+  });
 
   return (
     <div>
