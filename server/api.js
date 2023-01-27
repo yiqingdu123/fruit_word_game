@@ -24,6 +24,7 @@ const router = express.Router();
 
 //initialize socket
 const socketManager = require("./server-socket");
+const { gameState } = require("./game-logic");
 
 router.post("/login", auth.login);
 
@@ -39,9 +40,11 @@ router.get("/whoami", (req, res) => {
 });
 
 router.get("/user", (req, res) => {
-  User.findById(req.query.userid).then((user) => {
-    res.send(user);
-  });
+  if (!req.user) {
+    User.findById(req.query.userid).then((user) => {
+      res.send(user);
+    });
+  }
 });
 
 router.post("/initsocket", (req, res) => {
@@ -136,16 +139,11 @@ router.get("/lobbyusers", (req, res) => {
 //   Word.findOneAndDelete()/*gameId: req.body.gameId}).then(() => res.status(200))*/
 // })
 
-router // anything else falls to this "not found" case
-  .all("*", (req, res) => {
-    console.log(`API route not found: ${req.method} ${req.url}`);
-    res.status(404).send({ msg: "API route not found" });
-  });
-
 router.post("/joingame", (req, res) => {
   if (req.user) {
     socketManager.addUserToGame(req.user);
   }
+  console.log(gameState);
   res.send({});
 });
 
@@ -155,5 +153,13 @@ router.post("/leavegame", (req, res) => {
   }
   res.send({});
 });
+
+// Keep this VVV at the bottom
+
+router // anything else falls to this "not found" case
+  .all("*", (req, res) => {
+    console.log(`API route not found: ${req.method} ${req.url}`);
+    res.status(404).send({ msg: "API route not found" });
+  });
 
 module.exports = router;

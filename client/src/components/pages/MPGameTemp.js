@@ -35,7 +35,7 @@ const MPGameTemp = (props) => {
   useEffect(() => {
     document.title = "Profile Page";
     get("/api/user", { userid: props.userId }).then((userObj) => setUser(userObj));
-  }, []);
+  }, [props.userId]);
 
   useEffect(() => {
     // get("/api/words").then((wordsObjs) => {
@@ -144,7 +144,7 @@ const MPGameTemp = (props) => {
     setTimeout(handleWordCount, 1);
   }
 
-  const [initialApplePos, setInitialApplePos] = useState("visible");
+  const [joinButtonVis, setJoinButtonVis] = useState("visible");
 
   ///////////////////////////////////////////////////////////////////
   //MULTIPLAYER STUFF
@@ -153,16 +153,16 @@ const MPGameTemp = (props) => {
   let joinButton = (
     <div>
       <button
+        style={{ visibility: joinButtonVis }}
         onClick={() => {
           post("/api/joingame", { userid: props.userId });
+          setJoinButtonVis("hidden");
         }}
       >
         Join Game
       </button>
     </div>
   );
-
-  console.log(gameState);
 
   return (
     <div className="background">
