@@ -126,6 +126,7 @@ const MPGameTemp = (props) => {
     socket.on("update", (update) => {
       processUpdate(update);
     });
+    return () => post("/api/stoptimer");
   }, []);
 
   let [WordCount, setWordCount] = useState(0);
@@ -160,6 +161,18 @@ const MPGameTemp = (props) => {
         }}
       >
         Join Game
+      </button>
+    </div>
+  );
+
+  let startServerTimer = (
+    <div>
+      <button
+        onClick={() => {
+          post("/api/servertimer");
+        }}
+      >
+        Start Timer
       </button>
     </div>
   );
@@ -202,6 +215,7 @@ const MPGameTemp = (props) => {
         </Link>
       </h1>
       <h1>{joinButton}</h1>
+      <h1>{startServerTimer}</h1>
     </div>
   );
 };

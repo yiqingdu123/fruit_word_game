@@ -160,6 +160,16 @@ router.post("/leavegame", (req, res) => {
   res.send({});
 });
 
+router.post("/servertimer", (req, res) => {
+  socketManager.serverTimer();
+  res.send({});
+});
+
+router.post("/stoptimer", (req, res) => {
+  socketManager.stopTimer();
+  res.send({});
+});
+
 // Keep this VVV at the bottom
 
 router // anything else falls to this "not found" case

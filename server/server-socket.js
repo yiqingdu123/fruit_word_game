@@ -17,6 +17,14 @@ const removeUserFromGame = (user) => {
   gameLogic.removePlayer(user._id);
 };
 
+const serverTimer = () => {
+  gameLogic.serverTimer();
+};
+
+const stopTimer = () => {
+  gameLogic.stopTimer();
+};
+
 const addUser = (user, socket) => {
   const oldSocket = userToSocketMap[user._id];
   if (oldSocket && oldSocket.id !== socket.id) {
@@ -52,6 +60,8 @@ module.exports = {
   removeUser: removeUser,
   addUserToGame: addUserToGame,
   removeUserFromGame: removeUserFromGame,
+  serverTimer: serverTimer,
+  stopTimer: stopTimer,
 
   getSocketFromUserID: getSocketFromUserID,
   getUserFromSocketID: getUserFromSocketID,
