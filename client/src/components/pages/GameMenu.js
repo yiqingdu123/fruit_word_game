@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "@reach/router";
+import { get, post } from "../../utilities";
 
 import "../../utilities.css";
 import "./GameMenu.css";

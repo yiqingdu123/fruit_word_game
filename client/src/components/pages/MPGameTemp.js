@@ -32,28 +32,6 @@ const MPGameTemp = (props) => {
 
   const [user, setUser] = useState();
 
-  useEffect(() => {
-    document.title = "Profile Page";
-    get("/api/user", { userid: props.userId }).then((userObj) => setUser(userObj));
-  }, [props.userId]);
-
-  useEffect(() => {
-    // get("/api/words").then((wordsObjs) => {
-    //   const hasWords = wordsObjs.length !== 0;
-    //   if (hasWords) {
-    //     setWords(
-    //       wordsObjs.map((wordsObj) => (
-    //         <SingleWord
-    //           key={wordsObj._id}
-    //           input_user={wordsObj.input_user}
-    //           content={wordsObj.content}
-    //         />
-    //       ))
-    //     );
-    //   }
-    //});
-  }, []);
-
   const verifyWordInMasterList = (wordObj) => {
     const result = MasterWordList.includes(wordObj);
     setInMasterList(result);
@@ -111,24 +89,6 @@ const MPGameTemp = (props) => {
     }
   };
 
-  const handleBigram = () => {
-    let randomBigram = BigramList[Math.floor(Math.random() * BigramList.length)];
-    setBigram(randomBigram);
-  };
-
-  const clearList = () => {
-    setWords([]);
-    WordCount = 1;
-    // post("/api/delete");
-  };
-
-  useEffect(() => {
-    socket.on("update", (update) => {
-      processUpdate(update);
-    });
-    return () => post("/api/stoptimer");
-  }, []);
-
   let [WordCount, setWordCount] = useState(0);
 
   let handleWordCount = () => {
@@ -177,30 +137,53 @@ const MPGameTemp = (props) => {
     </div>
   );
 
+  let stopServerTimer = (
+    <div>
+      <button
+        onClick={() => {
+          post("/api/stoptimer");
+        }}
+      >
+        Stop Timer
+      </button>
+    </div>
+  );
+
+  useEffect(() => {
+    document.title = "Multiplayer";
+    get("/api/user", { userid: props.userId }).then((userObj) => setUser(userObj));
+  }, [props.userId]);
+
+  useEffect(() => {
+    socket.on("update", (update) => {
+      processUpdate(update);
+    });
+    return () => {
+      post("/api/leavegame", { userid: props.userId });
+    };
+  }, []);
+
+  const [currentBigram, setCurrentBigram] = useState("");
+  const [currentTime, setCurrentTime] = useState("");
+
+  const processUpdate = (update) => {
+    setCurrentBigram(update.bigram);
+    setCurrentTime(update.time);
+  };
+
+  ///////////////////////////////////////////////////////////////////
+
   return (
     <div className="background">
       <h1 className="nomargin" style={{ visibility: "hidden" }}>
         Game
       </h1>
-      {/* <p>Here is the single player game. CSS to be added.</p> */}
       <div>
         <br></br>
         <div className="wordlength">Words: {words.length}</div>
       </div>
-      {/* <div>
-        <DeleteWords handleSubmit={clearList} />
-      </div> */}
       <div>
         <p className="score">Score: {score}</p>
-        {/* <Timer
-          reset={reset}
-          handleWordCount={handleWordCount}
-          bigram={bigram}
-          handleBigram={handleBigram}
-          score={score}
-          userId={props.userId}
-          initialApplePos={initialApplePos}
-        /> */}
       </div>
       <div className="wordContainer">
         <div className="invalidWord" style={{ visibility: validOpacity }}>
@@ -216,6 +199,9 @@ const MPGameTemp = (props) => {
       </h1>
       <h1>{joinButton}</h1>
       <h1>{startServerTimer}</h1>
+      <h1>{stopServerTimer}</h1>
+      <h1>{currentBigram}</h1>
+      <h1>{currentTime}</h1>
     </div>
   );
 };
