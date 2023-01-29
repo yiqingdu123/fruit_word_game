@@ -33,26 +33,9 @@ const MPGameTemp = (props) => {
   const [user, setUser] = useState();
 
   useEffect(() => {
-    document.title = "Profile Page";
+    document.title = "Multiplayer";
     get("/api/user", { userid: props.userId }).then((userObj) => setUser(userObj));
   }, [props.userId]);
-
-  useEffect(() => {
-    // get("/api/words").then((wordsObjs) => {
-    //   const hasWords = wordsObjs.length !== 0;
-    //   if (hasWords) {
-    //     setWords(
-    //       wordsObjs.map((wordsObj) => (
-    //         <SingleWord
-    //           key={wordsObj._id}
-    //           input_user={wordsObj.input_user}
-    //           content={wordsObj.content}
-    //         />
-    //       ))
-    //     );
-    //   }
-    //});
-  }, []);
 
   const verifyWordInMasterList = (wordObj) => {
     const result = MasterWordList.includes(wordObj);
@@ -109,17 +92,6 @@ const MPGameTemp = (props) => {
       setHandleValid("Invalid Word");
       setValidOpacity("visible");
     }
-  };
-
-  const handleBigram = () => {
-    let randomBigram = BigramList[Math.floor(Math.random() * BigramList.length)];
-    setBigram(randomBigram);
-  };
-
-  const clearList = () => {
-    setWords([]);
-    WordCount = 1;
-    // post("/api/delete");
   };
 
   useEffect(() => {

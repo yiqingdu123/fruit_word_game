@@ -25,6 +25,10 @@ const stopTimer = () => {
   gameLogic.stopTimer();
 };
 
+const setBigram = () => {
+  gameLogic.setBigram();
+};
+
 const addUser = (user, socket) => {
   const oldSocket = userToSocketMap[user._id];
   if (oldSocket && oldSocket.id !== socket.id) {
@@ -62,6 +66,7 @@ module.exports = {
   removeUserFromGame: removeUserFromGame,
   serverTimer: serverTimer,
   stopTimer: stopTimer,
+  setBigram: setBigram,
 
   getSocketFromUserID: getSocketFromUserID,
   getUserFromSocketID: getUserFromSocketID,

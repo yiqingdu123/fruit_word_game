@@ -170,6 +170,11 @@ router.post("/stoptimer", (req, res) => {
   res.send({});
 });
 
+router.post("/setbigram", (req, res) => {
+  socketManager.setBigram();
+  res.send({});
+});
+
 // Keep this VVV at the bottom
 
 router // anything else falls to this "not found" case
