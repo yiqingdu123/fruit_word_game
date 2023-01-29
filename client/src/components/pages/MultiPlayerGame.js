@@ -42,6 +42,23 @@ const MultiPlayerGame = (props) => {
     };
   });
 
+  const addReady = () => {
+    const query = { id: props.userId };
+    get("/api/userlobby", query).then((user) => {
+      const body = { lobby: user.lobby };
+      console.log("userlobby works");
+      post("/api/ready", body);
+    });
+  };
+
+  const removeReady = () => {
+    const query = { id: props.userId };
+    get("/api/userlobby", query).then((user) => {
+      const body = { lobby: user.lobby };
+      post("/api/unready", body);
+    });
+  };
+
   return (
     <div>
       <h1>Multi Player</h1>
@@ -51,6 +68,22 @@ const MultiPlayerGame = (props) => {
         <NewWord addNewWord={addNewLobby} />
       </div>
 
+      <button
+        onClick={() => {
+          addReady();
+        }}
+      >
+        {" "}
+        Ready{" "}
+      </button>
+      <button
+        onClick={() => {
+          removeReady();
+        }}
+      >
+        {" "}
+        Unready{" "}
+      </button>
       <h1>
         <Link to="/gamemenu">Back </Link>
       </h1>

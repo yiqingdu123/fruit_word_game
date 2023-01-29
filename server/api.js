@@ -120,6 +120,7 @@ router.post("/userlobbyupdate", (req, res) => {
     if (lob.length == 0) {
       const newLobby = new Lobby({
         content: req.body.lobby,
+        numPlayersReady: 0,
       });
 
       newLobby.save().then((lobby) => {
@@ -138,6 +139,30 @@ router.get("/lobbyusers", (req, res) => {
   User.find({ lobby: req.query.lobby }).then((users) => {
     console.log(users);
     res.send(users);
+  });
+});
+
+router.post("/unready", (req, res) => {
+  Lobby.findOneAndUpdate({ content: req.body.lobby }, { $inc: { numPlayersReady: -1 } }).then(
+    () => {
+      console.log(req.body.lobby);
+      console.log("akdfaldfj");
+    }
+  );
+  res.send({});
+});
+
+router.post("/ready", (req, res) => {
+  Lobby.findOneAndUpdate({ content: req.body.lobby }, { $inc: { numPlayersReady: 1 } }).then(() => {
+    console.log(req.body.lobby);
+    console.log("akdfaldfj");
+  });
+  res.send({});
+});
+
+router.get("/userlobby", (req, res) => {
+  User.findById(req.query.id).then((user) => {
+    res.send(user);
   });
 });
 
