@@ -1,19 +1,28 @@
 const gameState = {
   winner: null,
   players: {},
+  playercount: 0,
   time: 7,
   bigram: "ui",
+  playersGood: 0,
 };
 
 const spawnPlayer = (id) => {
   gameState.players[id] = {
     lives: 3,
+    wordEntered: "false",
   };
+  gameState.playercount++;
 };
 
 const removePlayer = (id) => {
   if (gameState.players[id] != undefined) {
     delete gameState.players[id];
+  }
+  gameState.playercount--;
+  if (gameState.playercount === 0) {
+    stopTimer();
+    bigramUI();
   }
 };
 
@@ -47,6 +56,20 @@ const stopTimer = () => {
 const setBigram = () => {
   let randomBigram = BigramList[Math.floor(Math.random() * BigramList.length)];
   gameState.bigram = randomBigram;
+};
+
+const bigramUI = () => {
+  gameState.bigram = "ui";
+};
+
+const updateGameState = () => {
+  let playersGood = 0;
+  for (let i = 0; i < gameState.players.length; i++) {
+    if (gameState.players[i].wordEntered) {
+      playersGood = playersGood + 1;
+    }
+  }
+  gameState.playersGood = playersGood;
 };
 
 const BigramList = [
@@ -216,4 +239,7 @@ module.exports = {
   removePlayer,
   serverTimer,
   stopTimer,
+  setBigram,
+  updateGameState,
+  bigramUI,
 };

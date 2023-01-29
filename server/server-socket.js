@@ -29,6 +29,24 @@ const setBigram = () => {
   gameLogic.setBigram();
 };
 
+const bigramUI = () => {
+  gameLogic.bigramUI();
+};
+
+const sendGameState = () => {
+  io.emit("update", gameLogic.gameState);
+};
+
+const startRunningGame = () => {
+  let winResetTimer = 0;
+  setInterval(() => {
+    gameLogic.updateGameState();
+    sendGameState();
+  }, 1000 / 60); // 60 frames per second
+};
+
+startRunningGame();
+
 const addUser = (user, socket) => {
   const oldSocket = userToSocketMap[user._id];
   if (oldSocket && oldSocket.id !== socket.id) {
@@ -67,6 +85,7 @@ module.exports = {
   serverTimer: serverTimer,
   stopTimer: stopTimer,
   setBigram: setBigram,
+  bigramUI: bigramUI,
 
   getSocketFromUserID: getSocketFromUserID,
   getUserFromSocketID: getUserFromSocketID,
