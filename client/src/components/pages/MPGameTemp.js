@@ -26,7 +26,7 @@ const MPGameTemp = (props) => {
   const [notRepeated, setNotRepeated] = useState(false);
   const [containsBigram, setContainsBigram] = useState(false);
   const [validWord, setValidWord] = useState(false);
-  const [wordsList, setWordsList] = useState([]);
+  const [wordsList, setWordsList] = useState(["hi"]);
 
   const [bigram, setBigram] = useState("ui");
 
@@ -165,12 +165,14 @@ const MPGameTemp = (props) => {
     };
   }, []);
 
-  const [currentBigram, setCurrentBigram] = useState("");
   const [currentTime, setCurrentTime] = useState("");
+  const [lives, setLives] = useState(0);
 
-  const processUpdate = (update) => {
-    setCurrentBigram(update.bigram);
+  const processUpdate = (update, props) => {
     setCurrentTime(update.time);
+    setWordsList(update.wordsList);
+    setBigram(update.bigram);
+    //setLives(update.players[props.userId].lives);
   };
 
   ///////////////////////////////////////////////////////////////////
@@ -202,8 +204,9 @@ const MPGameTemp = (props) => {
       <h1>{joinButton}</h1>
       <h1>{startServerTimer}</h1>
       <h1>{stopServerTimer}</h1>
-      <h1>{currentBigram}</h1>
+      <h1>{bigram}</h1>
       <h1>{currentTime}</h1>
+      <h1>Lives: {lives}</h1>
     </div>
   );
 };

@@ -2,26 +2,33 @@ const gameState = {
   winner: null,
   players: {},
   playercount: 0,
-  time: 7,
+  deadPlayers: 0,
+  time: 8,
   bigram: "ui",
   playersGood: 0,
   wordsList: [],
-  usedWordsList: [],
 };
 
 const spawnPlayer = (id) => {
   gameState.players[id] = {
-    lives: 3,
+    lives: 5,
     wordValid: "false",
   };
   gameState.playercount++;
+  //REMOVE GAMESTATE.PLAYERCOUNT++;
+  //WHEN LOBBY IS READY, SET NUMBER OF PLAYERS TO BE PLAYERCOUNT
+  //AT GAMEOVER SCREEN CALL A RESET POST REQUEST
 };
 
 const removePlayer = (id) => {
   if (gameState.players[id] != undefined) {
     delete gameState.players[id];
+    gameState.playercount--;
   }
-  gameState.playercount--;
+
+  if (gameState.playercount < 0) {
+    gameState.playercount = 0;
+  }
   if (gameState.playercount === 0) {
     bigramUI();
     stopTimer();
@@ -36,17 +43,26 @@ const serverTimer = () => {
   timerState = 0;
   const timerId = setInterval(() => {
     if (remainingTime === 0) {
-      gameState.time = remainingTime;
+      gameState.time = 8;
       setBigram();
-      console.log(gameState);
+      console.log(gameState.time);
       remainingTime = 7;
+
+      //LOGIC FOR WHEN TIME IS OUT
+
+      for (const id in gameState.players) {
+        if (!gameState.players[id].wordValid) {
+          gameState.players[id].lives--;
+        }
+        gameState.players[id].wordValid = "false";
+      }
     } else {
       gameState.time = remainingTime;
       remainingTime--;
-      console.log(gameState);
+      console.log(gameState.time);
     }
     if (timerState === 1) {
-      gameState.time = 7;
+      gameState.time = 8;
       clearInterval(timerId);
     }
   }, 1000);
@@ -80,12 +96,9 @@ const updateGameState = () => {
 
 const setWordsList = (words, user) => {
   gameState.wordsList[gameState.wordsList.length] = words;
-  console.log(gameState.wordsList);
   gameState.players[user].wordValid = "true";
   console.log(gameState.players);
   gameState.playersGood++;
-  console.log("playersgood" + gameState.playersGood);
-  console.log("playercount" + gameState.playercount);
 };
 
 const checkPlayersGood = () => {
@@ -96,8 +109,14 @@ const checkPlayersGood = () => {
     for (const id in gameState.players) {
       gameState.players[id].wordValid = "false";
     }
+
     gameState.playersGood = 0;
     console.log("reset");
+    setBigram();
+
+    // gameState.time = 8;
+    // remainingTime = 7;
+    //this doesnt want to work so solution is to clear interval each time by swapping between 2 timers lmao
   }
 };
 
@@ -277,4 +296,5 @@ module.exports = {
   bigramUI,
   setWordsList,
   resetList,
+  checkPlayersGood,
 };
