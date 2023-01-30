@@ -127,29 +127,29 @@ const MPGameTemp = (props) => {
     </div>
   );
 
-  let startServerTimer = (
-    <div>
-      <button
-        onClick={() => {
-          post("/api/servertimer");
-        }}
-      >
-        Start Timer
-      </button>
-    </div>
-  );
+  // let startServerTimer = (
+  //   <div>
+  //     <button
+  //       onClick={() => {
+  //         post("/api/servertimer");
+  //       }}
+  //     >
+  //       Start Timer
+  //     </button>
+  //   </div>
+  // );
 
-  let stopServerTimer = (
-    <div>
-      <button
-        onClick={() => {
-          post("/api/stoptimer");
-        }}
-      >
-        Stop Timer
-      </button>
-    </div>
-  );
+  // let stopServerTimer = (
+  //   <div>
+  //     <button
+  //       onClick={() => {
+  //         post("/api/stoptimer");
+  //       }}
+  //     >
+  //       Stop Timer
+  //     </button>
+  //   </div>
+  // );
 
   useEffect(() => {
     document.title = "Multiplayer";
@@ -202,8 +202,8 @@ const MPGameTemp = (props) => {
         </Link>
       </h1>
       <h1>{joinButton}</h1>
-      <h1>{startServerTimer}</h1>
-      <h1>{stopServerTimer}</h1>
+      {/* <h1>{startServerTimer}</h1>
+      <h1>{stopServerTimer}</h1> */}
       <h1>{bigram}</h1>
       <h1>{currentTime}</h1>
       <h1>Lives: {lives}</h1>

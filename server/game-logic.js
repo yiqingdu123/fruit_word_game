@@ -58,11 +58,12 @@ const serverTimer = () => {
       //LOGIC FOR WHEN TIME IS OUT
 
       for (const id in gameState.players) {
-        if (!gameState.players[id].wordValid) {
-          gameState.players[id].lives--;
+        if (gameState.players[id].wordValid === "false") {
+          gameState.players[id].lives = gameState.players[id].lives - 1;
         }
         gameState.players[id].wordValid = "false";
       }
+      gameState.playersGood = 0;
     } else if (timerState != 2) {
       gameState.time = remainingTime;
       remainingTime--;
@@ -94,11 +95,12 @@ const serverTimer2 = () => {
       //LOGIC FOR WHEN TIME IS OUT
 
       for (const id in gameState.players) {
-        if (!gameState.players[id].wordValid) {
-          gameState.players[id].lives--;
+        if (gameState.players[id].wordValid === "false") {
+          gameState.players[id].lives = gameState.players[id].lives - 1;
         }
         gameState.players[id].wordValid = "false";
       }
+      gameState.playersGood = 0;
     } else if (timerState != 1) {
       gameState.time = remainingTime;
       remainingTime--;
@@ -159,9 +161,14 @@ const checkPlayersGood = () => {
     console.log("reset");
     setBigram();
 
-    // gameState.time = 8;
-    // remainingTime = 7;
-    //this doesnt want to work so solution is to clear interval each time by swapping between 2 timers lmao
+    // RESET TIMER
+
+    console.log("timerstate" + timerState);
+
+    if (timerState === 0) {
+      timerState = 1;
+    }
+
     if (timerState === 1) {
       gameState.time = 8;
       remainingTime = 7;
