@@ -36,12 +36,19 @@ const removePlayer = (id) => {
   }
 };
 
-let timerState = 0;
+/////////////////
+//TIMER 1
+/////////////////
+
+let timerState = 1;
 
 const serverTimer = () => {
   let remainingTime = 7;
-  timerState = 0;
+
   const timerId = setInterval(() => {
+    if (timerState === 2) {
+      clearInterval(timerId);
+    }
     if (remainingTime === 0) {
       gameState.time = 8;
       setBigram();
@@ -56,20 +63,58 @@ const serverTimer = () => {
         }
         gameState.players[id].wordValid = "false";
       }
-    } else {
+    } else if (timerState != 2) {
       gameState.time = remainingTime;
       remainingTime--;
       console.log(gameState.time);
     }
-    if (timerState === 1) {
+    if (timerState === 0) {
       gameState.time = 8;
       clearInterval(timerId);
     }
   }, 1000);
 };
 
+//////////////////
+//TIMER 2
+//////////////////
+const serverTimer2 = () => {
+  remainingTime = 7;
+
+  const timerId2 = setInterval(() => {
+    if (timerState === 1) {
+      clearInterval(timerId2);
+    }
+    if (remainingTime === 0) {
+      gameState.time = 8;
+      setBigram();
+      console.log(gameState.time);
+      remainingTime = 7;
+
+      //LOGIC FOR WHEN TIME IS OUT
+
+      for (const id in gameState.players) {
+        if (!gameState.players[id].wordValid) {
+          gameState.players[id].lives--;
+        }
+        gameState.players[id].wordValid = "false";
+      }
+    } else if (timerState != 1) {
+      gameState.time = remainingTime;
+      remainingTime--;
+      console.log(gameState.time);
+    }
+    if (timerState === 0) {
+      gameState.time = 8;
+      clearInterval(timerId2);
+    }
+  }, 1000);
+};
+
+/////////////////////////
+
 const stopTimer = () => {
-  timerState = 1;
+  timerState = 0;
 };
 
 const setBigram = () => {
@@ -117,6 +162,19 @@ const checkPlayersGood = () => {
     // gameState.time = 8;
     // remainingTime = 7;
     //this doesnt want to work so solution is to clear interval each time by swapping between 2 timers lmao
+    if (timerState === 1) {
+      gameState.time = 8;
+      remainingTime = 7;
+      timerState = 2;
+      console.log("timerstate " + timerState);
+      serverTimer2();
+    } else if (timerState === 2) {
+      gameState.time = 8;
+      remainingTime = 7;
+      timerState = 1;
+      console.log("timerstate " + timerState);
+      serverTimer();
+    }
   }
 };
 
@@ -290,6 +348,7 @@ module.exports = {
   spawnPlayer,
   removePlayer,
   serverTimer,
+  serverTimer2,
   stopTimer,
   setBigram,
   updateGameState,
