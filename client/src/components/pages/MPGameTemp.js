@@ -167,12 +167,14 @@ const MPGameTemp = (props) => {
 
   const [currentTime, setCurrentTime] = useState("");
   const [lives, setLives] = useState(0);
+  const [playercount, setPlayercount] = useState(0);
 
   const processUpdate = (update, props) => {
     setCurrentTime(update.time);
     setWordsList(update.wordsList);
     setBigram(update.bigram);
     //setLives(update.players[props.userId].lives);
+    setPlayercount(update.playercount);
   };
 
   ///////////////////////////////////////////////////////////////////
@@ -207,6 +209,7 @@ const MPGameTemp = (props) => {
       <h1>{bigram}</h1>
       <h1>{currentTime}</h1>
       <h1>Lives: {lives}</h1>
+      <h1>Playercount: {playercount}</h1>
     </div>
   );
 };

@@ -62,6 +62,9 @@ const serverTimer = () => {
           gameState.players[id].lives = gameState.players[id].lives - 1;
         }
         gameState.players[id].wordValid = "false";
+        if (gameState.players[id].lives === 0) {
+          removePlayer(id);
+        }
       }
       gameState.playersGood = 0;
     } else if (timerState != 2) {
@@ -99,6 +102,9 @@ const serverTimer2 = () => {
           gameState.players[id].lives = gameState.players[id].lives - 1;
         }
         gameState.players[id].wordValid = "false";
+        if (gameState.players[id].lives === 0) {
+          removePlayer(id);
+        }
       }
       gameState.playersGood = 0;
     } else if (timerState != 1) {
