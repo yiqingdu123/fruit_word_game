@@ -89,7 +89,7 @@ const setWordsList = (words, user) => {
 };
 
 const checkPlayersGood = () => {
-  if (gameState.playersGood === gameState.playercount) {
+  if (gameState.playersGood === gameState.playercount && gameState.playercount != 0) {
     // Object.keys(gameState.players).forEach((element) => {
     //   gameState.players[element].wordValid = "false";
     // });
@@ -97,7 +97,7 @@ const checkPlayersGood = () => {
       gameState.players[id].wordValid = "false";
     }
     gameState.playersGood = 0;
-    console.log(gameState.players);
+    console.log("reset");
   }
 };
 
