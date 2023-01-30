@@ -66,13 +66,16 @@ const bigramUI = () => {
 };
 
 const updateGameState = () => {
-  let playersGood = 0;
-  // for (let i = 0; i < gameState.players.length; i++) {
-  //   if (gameState.players[i].wordValid) {
-  //     playersGood = playersGood + 1;
+  // let good = 0;
+
+  // for (const id in gameState.players) {
+  //   if (gameState.players[id].wordValid) {
+  //     good++;
+  //     console.log(good);
   //   }
   // }
-  gameState.playersGood = playersGood;
+  // gameState.playersGood = good;
+  checkPlayersGood();
 };
 
 const setWordsList = (words, user) => {
@@ -81,6 +84,11 @@ const setWordsList = (words, user) => {
   gameState.players[user].wordValid = "true";
   console.log(gameState.players);
   gameState.playersGood++;
+  console.log("playersgood" + gameState.playersGood);
+  console.log("playercount" + gameState.playercount);
+};
+
+const checkPlayersGood = () => {
   if (gameState.playersGood === gameState.playercount) {
     // Object.keys(gameState.players).forEach((element) => {
     //   gameState.players[element].wordValid = "false";
@@ -88,6 +96,7 @@ const setWordsList = (words, user) => {
     for (const id in gameState.players) {
       gameState.players[id].wordValid = "false";
     }
+    gameState.playersGood = 0;
     console.log(gameState.players);
   }
 };
