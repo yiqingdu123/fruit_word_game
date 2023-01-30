@@ -47,6 +47,10 @@ const startRunningGame = () => {
 
 startRunningGame();
 
+const setWordsList = (words) => {
+  gameLogic.setWordsList(words);
+};
+
 const addUser = (user, socket) => {
   const oldSocket = userToSocketMap[user._id];
   if (oldSocket && oldSocket.id !== socket.id) {
@@ -86,6 +90,7 @@ module.exports = {
   stopTimer: stopTimer,
   setBigram: setBigram,
   bigramUI: bigramUI,
+  setWordsList: setWordsList,
 
   getSocketFromUserID: getSocketFromUserID,
   getUserFromSocketID: getUserFromSocketID,

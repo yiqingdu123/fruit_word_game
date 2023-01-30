@@ -72,14 +72,16 @@ const MPGameTemp = (props) => {
     );
 
     if (verifyWord(wordObj.content)) {
-      setWords([...words, newWordsObj]);
-      setWordsList([...wordsList, wordObj.content]);
+      // setWords([...words, newWordsObj]);
+      // setWordsList([...wordsList, wordObj.content]);
+      post("/api/setWordsList", { words: wordObj.content }).then(() => {
+        console.log(wordObj.content);
+      });
       setHandleValid("");
       setScore(score + wordObj.content.length);
-      let randomBigram = BigramList[Math.floor(Math.random() * BigramList.length)];
-      setBigram(randomBigram);
+      // let randomBigram = BigramList[Math.floor(Math.random() * BigramList.length)];
+      // setBigram(randomBigram);
       setValidOpacity("hidden");
-      setInitialApplePos("hidden");
     } else if (!verifyNotRepeated(wordObj.content)) {
       setHandleValid("Word Already Used");
       setValidOpacity("visible");

@@ -5,12 +5,13 @@ const gameState = {
   time: 7,
   bigram: "ui",
   playersGood: 0,
+  wordsList: [],
 };
 
 const spawnPlayer = (id) => {
   gameState.players[id] = {
     lives: 3,
-    wordEntered: "false",
+    wordValid: "false",
   };
   gameState.playercount++;
 };
@@ -23,6 +24,7 @@ const removePlayer = (id) => {
   if (gameState.playercount === 0) {
     bigramUI();
     stopTimer();
+    resetList();
   }
 };
 
@@ -64,12 +66,21 @@ const bigramUI = () => {
 
 const updateGameState = () => {
   let playersGood = 0;
-  for (let i = 0; i < gameState.players.length; i++) {
-    if (gameState.players[i].wordEntered) {
-      playersGood = playersGood + 1;
-    }
-  }
+  // for (let i = 0; i < gameState.players.length; i++) {
+  //   if (gameState.players[i].wordValid) {
+  //     playersGood = playersGood + 1;
+  //   }
+  // }
   gameState.playersGood = playersGood;
+};
+
+const setWordsList = (words) => {
+  gameState.wordsList[gameState.wordsList.length] = words;
+  console.log(gameState.wordsList);
+};
+
+const resetList = () => {
+  gameState.wordsList = [];
 };
 
 const BigramList = [
@@ -242,4 +253,6 @@ module.exports = {
   setBigram,
   updateGameState,
   bigramUI,
+  setWordsList,
+  resetList,
 };

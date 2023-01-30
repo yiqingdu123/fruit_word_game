@@ -205,6 +205,11 @@ router.post("/setbigram", (req, res) => {
   res.send({});
 });
 
+router.post("/setWordsList", (req, res) => {
+  socketManager.setWordsList(req.body.words);
+  res.send({});
+});
+
 // Keep this VVV at the bottom
 
 router // anything else falls to this "not found" case
