@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 
 const LobbySchema = new mongoose.Schema({
   content: String,
+  numPlayersReady: Number,
 });
 
 // compile model from schema
