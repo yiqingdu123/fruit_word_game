@@ -59,6 +59,9 @@ const MultiPlayerGame = (props) => {
     });
   };
 
+  const [readyButtonVis, setReadyButtonVis] = useState("visible");
+  const [unReadyButtonVis, setUnReadyButtonVis] = useState("hidden");
+
   return (
     <div>
       <h1>Multi Player</h1>
@@ -69,16 +72,22 @@ const MultiPlayerGame = (props) => {
       </div>
 
       <button
+        style={{ visibility: readyButtonVis }}
         onClick={() => {
           addReady();
+          setReadyButtonVis("hidden");
+          setUnReadyButtonVis("visible");
         }}
       >
         {" "}
         Ready{" "}
       </button>
       <button
+        style={{ visibility: unReadyButtonVis }}
         onClick={() => {
           removeReady();
+          setReadyButtonVis("visible");
+          setUnReadyButtonVis("hidden");
         }}
       >
         {" "}
