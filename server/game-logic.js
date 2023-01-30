@@ -21,8 +21,8 @@ const removePlayer = (id) => {
   }
   gameState.playercount--;
   if (gameState.playercount === 0) {
-    stopTimer();
     bigramUI();
+    stopTimer();
   }
 };
 
@@ -32,10 +32,6 @@ const serverTimer = () => {
   let remainingTime = 7;
   timerState = 0;
   const timerId = setInterval(() => {
-    if (timerState === 1) {
-      clearInterval(timerId);
-      gameState.time = 7;
-    }
     if (remainingTime === 0) {
       gameState.time = remainingTime;
       setBigram();
@@ -45,6 +41,10 @@ const serverTimer = () => {
       gameState.time = remainingTime;
       remainingTime--;
       console.log(gameState);
+    }
+    if (timerState === 1) {
+      gameState.time = 7;
+      clearInterval(timerId);
     }
   }, 1000);
 };
