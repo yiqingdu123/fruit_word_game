@@ -74,7 +74,7 @@ const MPGameTemp = (props) => {
     if (verifyWord(wordObj.content)) {
       // setWords([...words, newWordsObj]);
       // setWordsList([...wordsList, wordObj.content]);
-      post("/api/setWordsList", { words: wordObj.content }).then(() => {
+      post("/api/setWordsList", { words: wordObj.content, user: props.userId }).then(() => {
         console.log(wordObj.content);
       });
       setHandleValid("");

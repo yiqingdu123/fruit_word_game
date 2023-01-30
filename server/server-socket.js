@@ -47,8 +47,8 @@ const startRunningGame = () => {
 
 startRunningGame();
 
-const setWordsList = (words) => {
-  gameLogic.setWordsList(words);
+const setWordsList = (words, user) => {
+  gameLogic.setWordsList(words, user);
 };
 
 const addUser = (user, socket) => {

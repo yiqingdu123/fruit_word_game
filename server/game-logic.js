@@ -6,6 +6,7 @@ const gameState = {
   bigram: "ui",
   playersGood: 0,
   wordsList: [],
+  usedWordsList: [],
 };
 
 const spawnPlayer = (id) => {
@@ -74,9 +75,21 @@ const updateGameState = () => {
   gameState.playersGood = playersGood;
 };
 
-const setWordsList = (words) => {
+const setWordsList = (words, user) => {
   gameState.wordsList[gameState.wordsList.length] = words;
   console.log(gameState.wordsList);
+  gameState.players[user].wordValid = "true";
+  console.log(gameState.players);
+  gameState.playersGood++;
+  if (gameState.playersGood === gameState.playercount) {
+    // Object.keys(gameState.players).forEach((element) => {
+    //   gameState.players[element].wordValid = "false";
+    // });
+    for (const id in gameState.players) {
+      gameState.players[id].wordValid = "false";
+    }
+    console.log(gameState.players);
+  }
 };
 
 const resetList = () => {

@@ -206,7 +206,7 @@ router.post("/setbigram", (req, res) => {
 });
 
 router.post("/setWordsList", (req, res) => {
-  socketManager.setWordsList(req.body.words);
+  socketManager.setWordsList(req.body.words, req.body.user);
   res.send({});
 });
 
