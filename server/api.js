@@ -166,6 +166,12 @@ router.get("/userlobby", (req, res) => {
   });
 });
 
+router.get("/numberusersready", (req, res) => {
+  Lobby.find({ content: req.query.lobby }).then((numberUsers) => {
+    res.send(numberUsers);
+  });
+});
+
 // router.post("/delete", (req,res) => {
 //   Word.findOneAndDelete()/*gameId: req.body.gameId}).then(() => res.status(200))*/
 // })

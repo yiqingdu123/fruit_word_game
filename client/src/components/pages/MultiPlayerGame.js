@@ -9,6 +9,7 @@ import "../../utilities.css";
 
 const MultiPlayerGame = (props) => {
   const [names, setNames] = useState([]);
+  const [lobbyName, setLobbyName] = useState("");
 
   const updatingUsers = (lobbyObj) => {
     const lobs = { lobby: lobbyObj.content };
@@ -23,6 +24,7 @@ const MultiPlayerGame = (props) => {
   const addNewLobby = (lobbyObj) => {
     //console.log(props);
     const body = { id: props.userId, lobby: lobbyObj.content };
+    setLobbyName(lobbyObj.content);
     post("/api/userlobbyupdate", body).then(() => {
       console.log("user lobby update worked");
       updatingUsers(lobbyObj);
@@ -61,6 +63,24 @@ const MultiPlayerGame = (props) => {
 
   const [readyButtonVis, setReadyButtonVis] = useState("visible");
   const [unReadyButtonVis, setUnReadyButtonVis] = useState("hidden");
+  const [readyPlayers, setReadyPlayers] = useState(0);
+  const [userNum, setUserNum] = useState(0);
+
+  const checkReadyPlayers = () => {
+    get("/api/lobbyusers", { lobby: lobbyName }).then((usersObjs) => {
+      setUserNum(usersObjs.length);
+    });
+
+    get("/api/numberusersready", { lobby: lobbyName }).then((numReady) => {
+      setReadyPlayers(numReady);
+    });
+
+    if (userNum == readyPlayers) {
+      window.location.href = "/mpgametemp";
+    }
+  };
+
+  checkReadyPlayers();
 
   return (
     <div>
