@@ -141,7 +141,8 @@ const Timer = (props) => {
     const body = { id: props.userId, score: props.score };
     console.log(body);
     post("/api/userupdateSP", body);
-    window.location.href = "/gameover";
+    let link = "/gameover/" + props.userId;
+    window.location = link;
     fails = 4;
   }
 
