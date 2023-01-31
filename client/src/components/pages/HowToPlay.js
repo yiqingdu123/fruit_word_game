@@ -7,7 +7,7 @@ import "./HowToPlay.css";
 const HowToPlay = (props) => {
   return (
     <div className="background">
-      <div className="backbox">
+      <div className="instruct-backbox">
         <h1>How to Play</h1>
         <div className="instruct-pinkbox">
           <div className="instruct-whitebox">
