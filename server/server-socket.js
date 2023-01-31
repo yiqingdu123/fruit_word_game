@@ -51,6 +51,10 @@ const setWordsList = (words, user) => {
   gameLogic.setWordsList(words, user);
 };
 
+const sendName = (user, userId) => {
+  gameLogic.sendName(user, userId);
+};
+
 const addUser = (user, socket) => {
   const oldSocket = userToSocketMap[user._id];
   if (oldSocket && oldSocket.id !== socket.id) {
@@ -91,6 +95,7 @@ module.exports = {
   setBigram: setBigram,
   bigramUI: bigramUI,
   setWordsList: setWordsList,
+  sendName: sendName,
 
   getSocketFromUserID: getSocketFromUserID,
   getUserFromSocketID: getUserFromSocketID,
