@@ -43,7 +43,7 @@ const MultiPlayerGame = (props) => {
       socket.off("newLobby", callback);
       // post("/api/deleteuserlobby", { id: props.userId });
     };
-  });
+  }, []);
 
   const addReady = () => {
     const query = { id: props.userId };
