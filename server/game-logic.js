@@ -6,7 +6,7 @@ const gameState = {
   time: 8,
   bigram: "ui",
   playersGood: 0,
-  IDcount: 0,
+  IDcount: 1,
   wordsList: [],
   gameStarted: "false",
 };
@@ -15,6 +15,7 @@ const spawnPlayer = (id) => {
   if (gameState.gameStarted === "false") {
     if (gameState.players[id] === undefined) {
       gameState.players[id] = {
+        userID: id,
         lives: 5,
         wordValid: "false",
         alive: "true",
@@ -166,6 +167,7 @@ const updateGameState = () => {
 const setWordsList = (words, user) => {
   gameState.wordsList[gameState.wordsList.length] = words;
   gameState.players[user].wordValid = "true";
+  gameState.players[user].currentWord = words;
   console.log(gameState.players);
   gameState.playersGood++;
 };

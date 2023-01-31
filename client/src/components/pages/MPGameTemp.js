@@ -12,6 +12,7 @@ import { BigramList } from "../modules/BigramList.js";
 import "./SinglePlayerGame.css";
 import "../pages/Title.js";
 import "../../utilities.css";
+import { gameState } from "../../../../server/game-logic.js";
 
 /*
 
@@ -157,11 +158,13 @@ const MPGameTemp = (props) => {
   }, []);
 
   useEffect(() => {
-    post("/api/joingame", { userid: props.userId }).then(() => {
-      console.log("user", user);
-      console.log(user.name);
-      post("/api/sendName", { user: user.name, userId: props.userId });
-    });
+    if (user != undefined) {
+      post("/api/joingame", { userid: props.userId }).then(() => {
+        //console.log("user", user);
+        //console.log(user.name);
+        post("/api/sendName", { user: user.name, userId: props.userId });
+      });
+    }
   }, [user]);
 
   useEffect(() => {
@@ -174,6 +177,7 @@ const MPGameTemp = (props) => {
 
       return () => {
         post("/api/leavegame", { userid: props.userId });
+        socket.off("update");
       };
     }
   }, [props.userId, user]);
@@ -188,7 +192,97 @@ const MPGameTemp = (props) => {
 
   const [usernames, setUsernames] = useState("");
 
+  // const [ID1, setID1] = useState("");
+  // const [ID2, setID2] = useState("");
+  // const [ID3, setID3] = useState("");
+  // const [ID4, setID4] = useState("");
+  // const [ID5, setID5] = useState("");
+
+  const [word1, setWord1] = useState("");
+  const [word2, setWord2] = useState("");
+  const [word3, setWord3] = useState("");
+  const [word4, setWord4] = useState("");
+  const [word5, setWord5] = useState("");
+
+  const [name1, setName1] = useState("");
+  const [name2, setName2] = useState("");
+  const [name3, setName3] = useState("");
+  const [name4, setName4] = useState("");
+  const [name5, setName5] = useState("");
+
+  let i1 = 0;
+  let i2 = 0;
+  let i3 = 0;
+  let i4 = 0;
+  let i5 = 0;
+
+  let ID1 = "";
+  let ID2 = "";
+  let ID3 = "";
+  let ID4 = "";
+  let ID5 = "";
+
   const processUpdate = (update) => {
+    for (const id in update.players) {
+      if (update.players[id].playerID === 1 && i1 === 0) {
+        //setID1(id);
+        ID1 = id;
+        i1++;
+        //console.log(i1, "set");
+      }
+      if (update.players[id].playerID === 2 && i2 === 0) {
+        ID2 = id;
+        i2++;
+      }
+      if (update.players[id].playerID === 3 && i3 === 0) {
+        ID3 = id;
+        i3++;
+      }
+      if (update.players[id].playerID === 4 && i4 === 0) {
+        ID4 = id;
+        i4++;
+      }
+      if (update.players[id].playerID === 5 && i5 === 0) {
+        ID5 = id;
+        i5++;
+      }
+    }
+
+    /////SET NAME AND WORD
+    // console.log(ID1);
+    if (ID1 != "") {
+      if (update.players[ID1] != undefined) {
+        setWord1(update.players[ID1].currentWord);
+        setName1(update.players[ID1].userName);
+      }
+    }
+    if (ID2 != "") {
+      if (update.players[ID2] != undefined) {
+        setWord2(update.players[ID2].currentWord);
+        setName2(update.players[ID2].userName);
+      }
+    }
+    if (ID3 != "") {
+      if (update.players[ID3] != undefined) {
+        setWord3(update.players[ID3].currentWord);
+        setName3(update.players[ID3].userName);
+      }
+    }
+    if (ID4 != "") {
+      if (update.players[ID4] != undefined) {
+        setWord4(update.players[ID4].currentWord);
+        setName4(update.players[ID4].userName);
+      }
+    }
+    if (ID5 != "") {
+      if (update.players[ID5] != undefined) {
+        setWord5(update.players[ID5].currentWord);
+        setName5(update.players[ID5].userName);
+      }
+    }
+
+    /////
+
     setCurrentTime(update.time);
     setWordsList(update.wordsList);
     setBigram(update.bigram);
@@ -197,20 +291,21 @@ const MPGameTemp = (props) => {
       setPlayerID(update.players[props.userId].playerID);
       setAlive(update.players[props.userId].alive);
       setCurrentWords(update.players[props.userId].currentWord);
-
-      //////// THESE DONT WORK VVV
-      //setUsernames(update.players[props.userId].userName);
+      setUsernames(update.players[props.userId].userName);
       //console.log(update.players[props.userId].userName);
       //console.log(usernames);
       //console.log(currentWords);
-      ////////
-
-      //console.log(currentWords + "+" + names);
-      //console.log(update.players);
     }
     setPlayercount(update.playercount);
     //console.log(names, currentWords);
   };
+
+  useEffect(() => {
+    console.log(word1);
+  }, [word1]);
+  useEffect(() => {
+    console.log(name1);
+  }, [name1]);
 
   let fruit2 = <div></div>;
 
@@ -247,6 +342,16 @@ const MPGameTemp = (props) => {
       <h1>{currentTime}</h1>
       <h1>Lives: {lives}</h1>
       <h1>Playercount: {playercount}</h1>
+      <div>{name1}</div>
+      <div>{word1}</div>
+      <div>{name2}</div>
+      <div>{word2}</div>
+      <div>{name3}</div>
+      <div>{word3}</div>
+      <div>{name4}</div>
+      <div>{word4}</div>
+      <div>{name5}</div>
+      <div>{word5}</div>
     </div>
   );
 };
