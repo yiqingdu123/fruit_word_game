@@ -91,7 +91,7 @@ const MultiPlayerGame = (props) => {
     return () => {
       socket.off("userReadied", checkReadyPlayers);
       socket.off("userUnreadied", checkReadyPlayers);
-      post("/api/deleteuserlobby", { id: props.userId });
+      //post("/api/deleteuserlobby", { id: props.userId });
     };
   }, []);
 
