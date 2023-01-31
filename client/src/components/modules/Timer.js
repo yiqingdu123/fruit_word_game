@@ -111,9 +111,6 @@ const Timer = (props) => {
   };
 
   useEffect(() => {
-    socket.on("update", (update) => {
-      processUpdate(update);
-    });
     return () => {
       clearInterval(Ref.current);
       fails = 0;

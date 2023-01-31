@@ -40,11 +40,9 @@ router.get("/whoami", (req, res) => {
 });
 
 router.get("/user", (req, res) => {
-  if (!req.user) {
-    User.findById(req.query.userid).then((user) => {
-      res.send(user);
-    });
-  }
+  User.findById(req.query.userid).then((user) => {
+    res.send(user);
+  });
 });
 
 router.post("/initsocket", (req, res) => {
@@ -225,6 +223,11 @@ router.post("/setbigram", (req, res) => {
 
 router.post("/setWordsList", (req, res) => {
   socketManager.setWordsList(req.body.words, req.body.user);
+  res.send({});
+});
+
+router.post("/sendName", (req, res) => {
+  socketManager.sendName(req.body.user, req.body.userId);
   res.send({});
 });
 
