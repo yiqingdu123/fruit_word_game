@@ -114,12 +114,6 @@ const SinglePlayerGame = (props) => {
     // post("/api/delete");
   };
 
-  useEffect(() => {
-    socket.on("update", (update) => {
-      processUpdate(update);
-    });
-  }, []);
-
   let [WordCount, setWordCount] = useState(0);
 
   let handleWordCount = () => {
