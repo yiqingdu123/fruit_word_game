@@ -132,7 +132,9 @@ const MultiPlayerGame = (props) => {
         <Link to="/gamemenu">Back </Link>
       </h1>
       <h1>
-        <Link to="/mpgametemp">temp </Link>
+        <Link to="/mpgametemp" state={{ userId: props.userId }}>
+          temp
+        </Link>
       </h1>
     </div>
   );

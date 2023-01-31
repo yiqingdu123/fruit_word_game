@@ -26,7 +26,7 @@ const MPGameTemp = (props) => {
   const [notRepeated, setNotRepeated] = useState(false);
   const [containsBigram, setContainsBigram] = useState(false);
   const [validWord, setValidWord] = useState(false);
-  const [wordsList, setWordsList] = useState([]);
+  const [wordsList, setWordsList] = useState(["hi"]);
 
   const [bigram, setBigram] = useState("ui");
 
@@ -67,6 +67,7 @@ const MPGameTemp = (props) => {
   const [validOpacity, setValidOpacity] = useState("hidden");
 
   const addNewWord = (wordObj) => {
+    console.log(props.userId);
     const newWordsObj = (
       <SingleWord key={wordObj._id} input_user={wordObj.input_user} content={wordObj.content} />
     );
@@ -127,50 +128,59 @@ const MPGameTemp = (props) => {
     </div>
   );
 
-  let startServerTimer = (
-    <div>
-      <button
-        onClick={() => {
-          post("/api/servertimer");
-        }}
-      >
-        Start Timer
-      </button>
-    </div>
-  );
+  // let startServerTimer = (
+  //   <div>
+  //     <button
+  //       onClick={() => {
+  //         post("/api/servertimer");
+  //       }}
+  //     >
+  //       Start Timer
+  //     </button>
+  //   </div>
+  // );
 
-  let stopServerTimer = (
-    <div>
-      <button
-        onClick={() => {
-          post("/api/stoptimer");
-        }}
-      >
-        Stop Timer
-      </button>
-    </div>
-  );
+  // let stopServerTimer = (
+  //   <div>
+  //     <button
+  //       onClick={() => {
+  //         post("/api/stoptimer");
+  //       }}
+  //     >
+  //       Stop Timer
+  //     </button>
+  //   </div>
+  // );
 
   useEffect(() => {
     document.title = "Multiplayer";
     get("/api/user", { userid: props.userId }).then((userObj) => setUser(userObj));
-  }, [props.userId]);
-
-  useEffect(() => {
-    socket.on("update", (update) => {
-      processUpdate(update);
-    });
-    return () => {
-      post("/api/leavegame", { userid: props.userId });
-    };
   }, []);
 
-  const [currentBigram, setCurrentBigram] = useState("");
+  useEffect(() => {
+    if (props.userId) {
+      socket.on("update", (update) => {
+        processUpdate(update);
+      });
+      return () => {
+        post("/api/leavegame", { userid: props.userId });
+      };
+    }
+  }, [props.userId]);
+
   const [currentTime, setCurrentTime] = useState("");
+  const [lives, setLives] = useState(5);
+  const [playercount, setPlayercount] = useState(0);
 
   const processUpdate = (update) => {
-    setCurrentBigram(update.bigram);
     setCurrentTime(update.time);
+    setWordsList(update.wordsList);
+    setBigram(update.bigram);
+    if (update.players[props.userId] != undefined) {
+      setLives(update.players[props.userId].lives);
+    }
+
+    setPlayercount(update.playercount);
   };
 
   ///////////////////////////////////////////////////////////////////
@@ -200,10 +210,12 @@ const MPGameTemp = (props) => {
         </Link>
       </h1>
       <h1>{joinButton}</h1>
-      <h1>{startServerTimer}</h1>
-      <h1>{stopServerTimer}</h1>
-      <h1>{currentBigram}</h1>
+      {/* <h1>{startServerTimer}</h1>
+      <h1>{stopServerTimer}</h1> */}
+      <h1>{bigram}</h1>
       <h1>{currentTime}</h1>
+      <h1>Lives: {lives}</h1>
+      <h1>Playercount: {playercount}</h1>
     </div>
   );
 };
