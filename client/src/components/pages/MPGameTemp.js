@@ -67,6 +67,7 @@ const MPGameTemp = (props) => {
   const [validOpacity, setValidOpacity] = useState("hidden");
 
   const addNewWord = (wordObj) => {
+    console.log(props.userId);
     const newWordsObj = (
       <SingleWord key={wordObj._id} input_user={wordObj.input_user} content={wordObj.content} />
     );
@@ -154,26 +155,31 @@ const MPGameTemp = (props) => {
   useEffect(() => {
     document.title = "Multiplayer";
     get("/api/user", { userid: props.userId }).then((userObj) => setUser(userObj));
-  }, [props.userId]);
-
-  useEffect(() => {
-    socket.on("update", (update) => {
-      processUpdate(update);
-    });
-    return () => {
-      post("/api/leavegame", { userid: props.userId });
-    };
   }, []);
 
+  useEffect(() => {
+    if (props.userId) {
+      socket.on("update", (update) => {
+        processUpdate(update);
+      });
+      return () => {
+        post("/api/leavegame", { userid: props.userId });
+      };
+    }
+  }, [props.userId]);
+
   const [currentTime, setCurrentTime] = useState("");
-  const [lives, setLives] = useState(0);
+  const [lives, setLives] = useState(5);
   const [playercount, setPlayercount] = useState(0);
 
-  const processUpdate = (update, props) => {
+  const processUpdate = (update) => {
     setCurrentTime(update.time);
     setWordsList(update.wordsList);
     setBigram(update.bigram);
-    //setLives(update.players[props.userId].lives);
+    if (update.players[props.userId] != undefined) {
+      setLives(update.players[props.userId].lives);
+    }
+
     setPlayercount(update.playercount);
   };
 

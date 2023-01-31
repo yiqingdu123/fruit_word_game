@@ -7,14 +7,21 @@ const gameState = {
   bigram: "ui",
   playersGood: 0,
   wordsList: [],
+  gameStarted: "false",
 };
 
 const spawnPlayer = (id) => {
-  gameState.players[id] = {
-    lives: 5,
-    wordValid: "false",
-  };
-  gameState.playercount++;
+  if (gameState.gameStarted === "false") {
+    if (gameState.players[id] === undefined) {
+      gameState.players[id] = {
+        lives: 5,
+        wordValid: "false",
+        alive: "true",
+      };
+      gameState.playercount++;
+    }
+  }
+
   //REMOVE GAMESTATE.PLAYERCOUNT++;
   //WHEN LOBBY IS READY, SET NUMBER OF PLAYERS TO BE PLAYERCOUNT
   //AT GAMEOVER SCREEN CALL A RESET POST REQUEST
@@ -33,6 +40,7 @@ const removePlayer = (id) => {
     bigramUI();
     stopTimer();
     resetList();
+    gameState.gameStarted = "false";
   }
 };
 
@@ -166,6 +174,7 @@ const checkPlayersGood = () => {
     gameState.playersGood = 0;
     console.log("reset");
     setBigram();
+    gameState.gameStarted = "true";
 
     // RESET TIMER
 
