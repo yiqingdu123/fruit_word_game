@@ -1,0 +1,57 @@
+.backbox {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 100 px;
+  height: 80%;
+  width: 80%;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 30px;
+  display: flex;
+  flex-direction: column;
+}
+
+h1 {
+  color: white;
+  font: 40px;
+  text-align: center;
+}
+
+.instruct-type {
+  color: black;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  margin: 10px;
+}
+
+.instruct-pinkbox {
+  margin: auto;
+  /* margin-bottom: 50px; */
+  height: 75%;
+  width: 80%;
+  background: #ff6f6f;
+  border-radius: 30px;
+  display: flex;
+  flex-direction: row;
+}
+.instruct-whitebox {
+  margin: 16px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 60px;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  flex-basis: 50%;
+}
+.instruct-back-button {
+  position: absolute;
+  bottom: 0;
+  right: 15px;
+}
+.back-button-area {
+  display: flex;
+  padding: 40px;
+  /* background: rgba(160, 0, 0, 0.7); */
+}
