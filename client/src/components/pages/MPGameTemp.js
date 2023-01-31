@@ -8,7 +8,6 @@ import { socket } from "../../client-socket.js";
 import Timer from "../modules/Timer.js";
 import { MasterWordList } from "../modules/MasterWordList.js";
 import { BigramList } from "../modules/BigramList.js";
-import { gameState } from "../../../../server/game-logic.js";
 
 import "./SinglePlayerGame.css";
 import "../pages/Title.js";
@@ -29,8 +28,6 @@ const MPGameTemp = (props) => {
   const [wordsList, setWordsList] = useState(["hi"]);
 
   const [bigram, setBigram] = useState("ui");
-
-  const [user, setUser] = useState();
 
   const verifyWordInMasterList = (wordObj) => {
     const result = MasterWordList.includes(wordObj);
@@ -152,25 +149,44 @@ const MPGameTemp = (props) => {
   //   </div>
   // );
 
+  const [user, setUser] = useState();
+
   useEffect(() => {
     document.title = "Multiplayer";
     get("/api/user", { userid: props.userId }).then((userObj) => setUser(userObj));
   }, []);
 
   useEffect(() => {
+    post("/api/joingame", { userid: props.userId }).then(() => {
+      console.log("user", user);
+      console.log(user.name);
+      post("/api/sendName", { user: user.name, userId: props.userId });
+    });
+  }, [user]);
+
+  useEffect(() => {
     if (props.userId) {
-      socket.on("update", (update) => {
-        processUpdate(update);
-      });
+      if (user != undefined) {
+        socket.on("update", (update) => {
+          processUpdate(update);
+        });
+      }
+
       return () => {
         post("/api/leavegame", { userid: props.userId });
       };
     }
-  }, [props.userId]);
+  }, [props.userId, user]);
 
   const [currentTime, setCurrentTime] = useState("");
   const [lives, setLives] = useState(5);
   const [playercount, setPlayercount] = useState(0);
+  const [playerID, setPlayerID] = useState(0);
+  const [alive, setAlive] = useState("true");
+
+  const [currentWords, setCurrentWords] = useState("");
+
+  const [usernames, setUsernames] = useState("");
 
   const processUpdate = (update) => {
     setCurrentTime(update.time);
@@ -178,10 +194,25 @@ const MPGameTemp = (props) => {
     setBigram(update.bigram);
     if (update.players[props.userId] != undefined) {
       setLives(update.players[props.userId].lives);
-    }
+      setPlayerID(update.players[props.userId].playerID);
+      setAlive(update.players[props.userId].alive);
+      setCurrentWords(update.players[props.userId].currentWord);
 
+      //////// THESE DONT WORK VVV
+      //setUsernames(update.players[props.userId].userName);
+      //console.log(update.players[props.userId].userName);
+      //console.log(usernames);
+      //console.log(currentWords);
+      ////////
+
+      //console.log(currentWords + "+" + names);
+      //console.log(update.players);
+    }
     setPlayercount(update.playercount);
+    //console.log(names, currentWords);
   };
+
+  let fruit2 = <div></div>;
 
   ///////////////////////////////////////////////////////////////////
 
@@ -209,7 +240,7 @@ const MPGameTemp = (props) => {
           Quit Game
         </Link>
       </h1>
-      <h1>{joinButton}</h1>
+      {/* <h1>{joinButton}</h1> */}
       {/* <h1>{startServerTimer}</h1>
       <h1>{stopServerTimer}</h1> */}
       <h1>{bigram}</h1>
