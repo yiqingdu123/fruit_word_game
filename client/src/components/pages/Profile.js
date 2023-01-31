@@ -19,6 +19,11 @@ const Profile = (props) => {
   if (!user) {
     return <div> Loading! </div>;
   }
+
+  const changeProfilePic = () => {
+    return <div></div>;
+  };
+
   if (props.userId) {
     const spScore = user.scoreslistSP.map((score, i) => <li key={i}>{score}</li>);
     console.log(spScore);
@@ -49,7 +54,7 @@ const Profile = (props) => {
               <div className="scoreslist-box">
                 <div className="scoreslist-text">
                   <div className="scoreslist-label">Singleplayer Scores</div>
-                  <div className="scoreslist-list">17 and {spScore}</div>
+                  <div className="scoreslist-list">17 {spScore}</div>
                 </div>
                 <div className="scoreslist-text">
                   <div className="scoreslist-label">Multiplayer Scores</div>
@@ -57,10 +62,12 @@ const Profile = (props) => {
                 </div>
               </div>
             </div>
+            <div className="back-button-area">
+              <h1 className="back-button">
+                <Link to="/">Back </Link>
+              </h1>
+            </div>
           </div>
-          <h1>
-            <Link to="/">Back </Link>
-          </h1>
         </div>
       </div>
     );

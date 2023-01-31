@@ -28,7 +28,6 @@
   max-width: 100%;
   width: 100%;
   height: auto;
-  display: block;
   /* div height to be the same as width*/
   padding-top: 100%;
 
@@ -56,7 +55,7 @@
   position: fixed;
   top: 55%;
   left: 60%;
-  transform: translate(-40%, -50%);
+  transform: translate(-37%, -57%);
   padding: 100 px;
   height: 80%;
   width: 60%;
@@ -67,27 +66,30 @@
 }
 
 .stat-display {
-  flex-grow: 1;
   margin: 8px;
   background: rgba(255, 255, 255, 0.9);
   border-radius: 60px;
   display: flex;
   flex-direction: row;
+  padding: 10px;
 }
 
 .scoreslist-box {
-  flex-grow: 6;
   margin: 8px;
   display: flex;
   flex-direction: row;
+  overflow: scroll;
 }
 
 .scoreslist-text {
-  flex-grow: 1;
-  flex-direction: row;
+  flex-basis: 50%;
+  flex-direction: column;
   margin: 8px;
   background: rgba(255, 255, 255, 0.9);
   border-radius: 60px;
+  height: 30 px;
+  overflow: auto;
+  display: flex;
 }
 
 .scoreslist-label {
@@ -100,6 +102,7 @@
   text-align: left;
   margin-left: 20px;
   margin-top: 10px;
+  align-self: start;
 }
 .label {
   flex-grow: 9;
@@ -119,10 +122,17 @@
 h1 {
   color: white;
   font: 40px;
+  text-align: center;
 }
 
 h3 {
   color: rgb(0, 0, 0);
   font-size: 30px;
   text-align: center;
+}
+
+.back-button {
+  position: absolute;
+  bottom: 0;
+  right: 15px;
 }
