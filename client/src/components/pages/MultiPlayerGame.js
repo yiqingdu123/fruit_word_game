@@ -41,6 +41,7 @@ const MultiPlayerGame = (props) => {
     socket.on("newLobby", callback);
     return () => {
       socket.off("newLobby", callback);
+      // post("/api/deleteuserlobby", { id: props.userId });
     };
   });
 
@@ -67,20 +68,34 @@ const MultiPlayerGame = (props) => {
   const [userNum, setUserNum] = useState(0);
 
   const checkReadyPlayers = () => {
+    console.log("entered checkReadyPlayers");
+
     get("/api/lobbyusers", { lobby: lobbyName }).then((usersObjs) => {
       setUserNum(usersObjs.length);
+      console.log(userNum);
     });
 
     get("/api/numberusersready", { lobby: lobbyName }).then((numReady) => {
       setReadyPlayers(numReady);
+      console.log(numReady);
     });
 
-    if (userNum == readyPlayers) {
+    if (userNum == readyPlayers && userNum > 1) {
       window.location.href = "/mpgametemp";
     }
   };
 
-  checkReadyPlayers();
+  useEffect(() => {
+    socket.on("userReadied", checkReadyPlayers);
+    socket.on("userUnreadied", checkReadyPlayers);
+    return () => {
+      socket.off("userReadied", checkReadyPlayers);
+      socket.off("userUnreadied", checkReadyPlayers);
+      post("/api/deleteuserlobby", { id: props.userId });
+    };
+  }, []);
+
+  //checkReadyPlayers();
 
   return (
     <div>

@@ -135,29 +135,41 @@ router.post("/userlobbyupdate", (req, res) => {
 });
 
 router.get("/lobbyusers", (req, res) => {
-  console.log(req.query.lobby);
+  // console.log(req.query.lobby);
   User.find({ lobby: req.query.lobby }).then((users) => {
-    console.log(users);
+    //console.log(users);
     res.send(users);
   });
 });
 
 router.post("/unready", (req, res) => {
-  Lobby.findOneAndUpdate({ content: req.body.lobby }, { $inc: { numPlayersReady: -1 } }).then(
-    () => {
+  Lobby.findOneAndUpdate({ content: req.body.lobby }, { $inc: { numPlayersReady: -1 } })
+    .then(() => {
       console.log(req.body.lobby);
       console.log("akdfaldfj");
-    }
-  );
+      socketManager.getIo().emit("userUnreadied", {});
+    })
+    .then(() => {});
   res.send({});
 });
 
 router.post("/ready", (req, res) => {
-  Lobby.findOneAndUpdate({ content: req.body.lobby }, { $inc: { numPlayersReady: 1 } }).then(() => {
-    console.log(req.body.lobby);
-    console.log("akdfaldfj");
-  });
+  Lobby.findOneAndUpdate({ content: req.body.lobby }, { $inc: { numPlayersReady: 1 } })
+    .then(() => {
+      console.log(req.body.lobby);
+      console.log("akdfaldfj");
+      socketManager.getIo().emit("userReadied", {});
+    })
+    .then(() => {});
   res.send({});
+});
+
+router.post("/deleteuserlobby", (req, res) => {
+  User.findById(req.body.id).then((user) => {
+    user.lobby = "";
+    user.save();
+    res.send({});
+  });
 });
 
 router.get("/userlobby", (req, res) => {
