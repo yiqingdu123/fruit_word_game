@@ -478,10 +478,10 @@ const MPGameTemp = (props) => {
       {/* <h1>{joinButton}</h1> */}
       {/* <h1>{startServerTimer}</h1>
       <h1>{stopServerTimer}</h1> */}
-      <h1>{bigram}</h1>
+      {/* <h1>{bigram}</h1> */}
       <h1 className="timerMP">{currentTime}</h1>
       {/* <h1>Lives: {lives}</h1> */}
-      <h1>Playercount: {playercount}</h1>
+      {/* <h1>Playercount: {playercount}</h1> */}
       <div className="container1">
         <div className="name">{name1}</div>
         <div className="word">{word1}</div>
