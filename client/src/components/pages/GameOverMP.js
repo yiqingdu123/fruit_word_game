@@ -11,7 +11,7 @@ const GameOverMP = (props) => {
   useEffect(() => {
     document.title = "GameOverMP";
     get("/api/user", { userid: props.userId }).then((userObj) => setUser(userObj));
-  }, []);
+  }, [user]);
   let page = null;
   if (!user) {
     return <div> bruh </div>;

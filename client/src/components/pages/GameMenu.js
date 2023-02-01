@@ -35,7 +35,7 @@ const GameMenu = (props) => {
         </a>
 
         <a href="/" className="button33">
-          <div className="icons1">Menu</div>
+          <div className="icons1">Main Menu</div>
         </a>
 
         {/* <h1>Game Menu</h1>

@@ -11,13 +11,13 @@ const GameOver = (props) => {
   useEffect(() => {
     document.title = "GameOver";
     get("/api/user", { userid: props.userId }).then((userObj) => setUser(userObj));
-  }, []);
+  }, [user]);
   let page = null;
   if (!user) {
     return <div> bruh </div>;
   }
   if (props.userId) {
-    let lastScore = user.scoreslistSP[user.scoreslistSP.length - 1];
+    let lastScore = user.scoreslistSP.slice(-1);
     page = (
       <div className="background">
         <div className="instruct-backbox">
