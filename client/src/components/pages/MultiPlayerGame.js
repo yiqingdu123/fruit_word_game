@@ -21,6 +21,7 @@ const MultiPlayerGame = (props) => {
 
       setNames(usersObjs.map((x) => x.name));
     });
+    setReadyButtonVis("visible");
   };
 
   const addNewLobby = (lobbyObj) => {
@@ -66,7 +67,7 @@ const MultiPlayerGame = (props) => {
     });
   };
 
-  const [readyButtonVis, setReadyButtonVis] = useState("visible");
+  const [readyButtonVis, setReadyButtonVis] = useState("hidden");
   const [unReadyButtonVis, setUnReadyButtonVis] = useState("hidden");
   const [readyPlayers, setReadyPlayers] = useState(0);
   const [userNum, setUserNum] = useState(0);
