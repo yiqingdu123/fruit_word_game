@@ -20,7 +20,7 @@ const spawnPlayer = (id) => {
         wordValid: "false",
         alive: "true",
         playerID: gameState.IDcount,
-        currentWord: "temp",
+        currentWord: "",
         userName: "name",
       };
       gameState.IDcount++;

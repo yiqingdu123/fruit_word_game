@@ -394,21 +394,29 @@ const MPGameTemp = (props) => {
       <h1>{stopServerTimer}</h1> */}
       <h1>{bigram}</h1>
       <h1 className="timerMP">{currentTime}</h1>
-      <h1>Lives: {lives}</h1>
+      {/* <h1>Lives: {lives}</h1> */}
       <h1>Playercount: {playercount}</h1>
       <div className="container1">
-        <div className="name1">{name1}</div>
-        <div className="word1">{word1}</div>
+        <div className="name">{name1}</div>
+        <div className="word">{word1}</div>
+      </div>
+      <div className="container2">
+        <div className="name">{name2}</div>
+        <div className="word">{word2}</div>
+      </div>
+      <div className="container3">
+        <div className="name">{name3}</div>
+        <div className="word">{word3}</div>
+      </div>
+      <div className="container4">
+        <div className="name">{name4}</div>
+        <div className="word">{word5}</div>
+      </div>
+      <div className="container5">
+        <div className="name">{name5}</div>
+        <div className="word">{word5}</div>
       </div>
 
-      <div>{name2}</div>
-      <div>{word2}</div>
-      <div>{name3}</div>
-      <div>{word3}</div>
-      <div>{name4}</div>
-      <div>{word4}</div>
-      <div>{name5}</div>
-      <div>{word5}</div>
       <div className="heartContainerMP">Lives: </div>
       <div style={{ visibility: heart1 }} className="heart1" />
       <div style={{ visibility: heart2 }} className="heart2" />
