@@ -68,7 +68,10 @@ const serverTimer = () => {
     }
     if (remainingTime === 0) {
       gameState.time = 8;
-      setBigram();
+      if (gameState.playersGood != gameState.playercount) {
+        setBigram();
+      }
+
       console.log(gameState.time);
       remainingTime = 7;
 
@@ -108,7 +111,10 @@ const serverTimer2 = () => {
     }
     if (remainingTime === 0) {
       gameState.time = 8;
-      setBigram();
+      if (gameState.playersGood != gameState.playercount) {
+        setBigram();
+      }
+
       console.log(gameState.time);
       remainingTime = 7;
 
