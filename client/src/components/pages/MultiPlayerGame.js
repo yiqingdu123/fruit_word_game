@@ -21,20 +21,29 @@ const MultiPlayerGame = (props) => {
 
       setNames(usersObjs.map((x) => x.name));
     });
-    setReadyButtonVis("visible");
   };
 
   const addNewLobby = (lobbyObj) => {
     //console.log(props);
-    const body = { id: props.userId, lobby: lobbyObj.content };
+    const body = { id: props.userId, lobby: "lobby" };
     //setLobbyName(lobbyObj.content);
     post("/api/userlobbyupdate", body).then(() => {
       console.log("user lobby update worked");
-      updatingUsers(lobbyObj);
+      updatingUsers({ content: "lobby" });
     });
 
     //console.log(names);
   };
+
+  useEffect(() => {
+    if (props.userId != undefined) {
+      const body = { id: props.userId, lobby: "lobby" };
+      post("/api/userlobbyupdate", body).then(() => {
+        console.log("user lobby update worked");
+        updatingUsers({ content: "lobby" });
+      });
+    }
+  }, [props.userId]);
 
   useEffect(() => {
     const callback = (data) => {
@@ -67,7 +76,7 @@ const MultiPlayerGame = (props) => {
     });
   };
 
-  const [readyButtonVis, setReadyButtonVis] = useState("hidden");
+  const [readyButtonVis, setReadyButtonVis] = useState("visible");
   const [unReadyButtonVis, setUnReadyButtonVis] = useState("hidden");
   const [readyPlayers, setReadyPlayers] = useState(0);
   const [userNum, setUserNum] = useState(0);
@@ -100,16 +109,6 @@ const MultiPlayerGame = (props) => {
     });
   };
 
-  useEffect(() => {
-    const callback = () => {
-      setReadyButtonVis("visible");
-      setUnReadyButtonVis("hidden");
-    };
-    socket.on("userLeft", callback);
-    return () => {
-      socket.off("userLeft", callback);
-    };
-  }, []);
   /*
   useEffect(() => {
     console.log("")
@@ -135,16 +134,24 @@ const MultiPlayerGame = (props) => {
   */
 
   useEffect(() => {
+    const callback = () => {
+      setReadyButtonVis("visible");
+      setUnReadyButtonVis("hidden");
+      updatingUsers({ content: "lobby" });
+    };
+    socket.on("userLeft", callback);
     socket.on("userReadied", checkReadyPlayers);
     socket.on("userUnreadied", checkReadyPlayers);
+
     return () => {
-      socket.off("userReadied", checkReadyPlayers);
-      socket.off("userUnreadied", checkReadyPlayers);
       if (props.userId) {
         setReadyButtonVis("visible");
         setUnReadyButtonVis("hidden");
         post("/api/deleteuserlobby", { id: props.userId });
       }
+      socket.off("userReadied", checkReadyPlayers);
+      socket.off("userUnreadied", checkReadyPlayers);
+      socket.off("userLeft", callback);
     };
   }, [props.userId]);
 
@@ -162,9 +169,6 @@ const MultiPlayerGame = (props) => {
         </ol>
       </div>
 
-      <div>
-        <NewWord addNewWord={addNewLobby} />
-      </div>
       <div className="containerLobby">
         <button
           className="buttonReady"
