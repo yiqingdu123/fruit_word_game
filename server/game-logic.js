@@ -26,7 +26,6 @@ const spawnPlayer = (id) => {
       gameState.IDcount++;
       gameState.playercount++;
     }
-    console.log(gameState.players.playerID);
   }
 };
 
@@ -34,6 +33,7 @@ const removePlayer = (id) => {
   if (gameState.players[id] != undefined) {
     delete gameState.players[id];
     gameState.playercount--;
+    gameState.IDcount--;
   }
 
   if (gameState.playercount < 0) {
@@ -68,7 +68,6 @@ const serverTimer = () => {
         setBigram();
       }
 
-      console.log(gameState.time);
       remainingTime = 7;
 
       //LOGIC FOR WHEN TIME IS OUT
@@ -86,7 +85,6 @@ const serverTimer = () => {
     } else if (timerState != 2) {
       gameState.time = remainingTime;
       remainingTime--;
-      console.log(gameState.time);
     }
     if (timerState === 0) {
       gameState.time = 8;
@@ -111,7 +109,6 @@ const serverTimer2 = () => {
         setBigram();
       }
 
-      console.log(gameState.time);
       remainingTime = 7;
 
       //LOGIC FOR WHEN TIME IS OUT
@@ -129,7 +126,6 @@ const serverTimer2 = () => {
     } else if (timerState != 1) {
       gameState.time = remainingTime;
       remainingTime--;
-      console.log(gameState.time);
     }
     if (timerState === 0) {
       gameState.time = 8;
@@ -154,15 +150,6 @@ const bigramUI = () => {
 };
 
 const updateGameState = () => {
-  // let good = 0;
-
-  // for (const id in gameState.players) {
-  //   if (gameState.players[id].wordValid) {
-  //     good++;
-  //     console.log(good);
-  //   }
-  // }
-  // gameState.playersGood = good;
   checkPlayersGood();
 };
 
@@ -170,7 +157,6 @@ const setWordsList = (words, user) => {
   gameState.wordsList[gameState.wordsList.length] = words;
   gameState.players[user].wordValid = "true";
   gameState.players[user].currentWord = words;
-  console.log(gameState.players);
   gameState.playersGood++;
 };
 
@@ -184,13 +170,10 @@ const checkPlayersGood = () => {
     }
 
     gameState.playersGood = 0;
-    console.log("reset");
     setBigram();
     gameState.gameStarted = "true";
 
     // RESET TIMER
-
-    console.log("timerstate" + timerState);
 
     if (timerState === 0) {
       timerState = 1;
@@ -200,13 +183,11 @@ const checkPlayersGood = () => {
       gameState.time = 8;
       remainingTime = 7;
       timerState = 2;
-      console.log("timerstate " + timerState);
       serverTimer2();
     } else if (timerState === 2) {
       gameState.time = 8;
       remainingTime = 7;
       timerState = 1;
-      console.log("timerstate " + timerState);
       serverTimer();
     }
   }
@@ -217,8 +198,6 @@ const resetList = () => {
 };
 
 const sendName = (user, userId) => {
-  console.log(user, userId);
-  console.log(gameState.players[userId].userName);
   gameState.players[userId].userName = user;
 };
 

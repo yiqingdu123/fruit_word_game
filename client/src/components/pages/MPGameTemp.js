@@ -66,28 +66,29 @@ const MPGameTemp = (props) => {
   const [validOpacity, setValidOpacity] = useState("hidden");
 
   const addNewWord = (wordObj) => {
-    console.log(props.userId);
     const newWordsObj = (
       <SingleWord key={wordObj._id} input_user={wordObj.input_user} content={wordObj.content} />
     );
-
-    if (verifyWord(wordObj.content)) {
-      // setWords([...words, newWordsObj]);
-      // setWordsList([...wordsList, wordObj.content]);
-      post("/api/setWordsList", { words: wordObj.content, user: props.userId }).then(() => {
-        console.log(wordObj.content);
-      });
-      setHandleValid("");
-      setScore(score + wordObj.content.length);
-      // let randomBigram = BigramList[Math.floor(Math.random() * BigramList.length)];
-      // setBigram(randomBigram);
-      setValidOpacity("hidden");
-    } else if (!verifyNotRepeated(wordObj.content)) {
-      setHandleValid("Word Already Used");
-      setValidOpacity("visible");
-    } else {
-      setHandleValid("Invalid Word");
-      setValidOpacity("visible");
+    if (wordEntered === "false") {
+      if (verifyWord(wordObj.content)) {
+        // setWords([...words, newWordsObj]);
+        // setWordsList([...wordsList, wordObj.content]);
+        post("/api/setWordsList", { words: wordObj.content, user: props.userId }).then(() => {
+          console.log(wordObj.content);
+        });
+        setHandleValid("");
+        setScore(score + wordObj.content.length);
+        setWordEntered("true");
+        // let randomBigram = BigramList[Math.floor(Math.random() * BigramList.length)];
+        // setBigram(randomBigram);
+        setValidOpacity("hidden");
+      } else if (!verifyNotRepeated(wordObj.content)) {
+        setHandleValid("Word Already Used");
+        setValidOpacity("visible");
+      } else {
+        setHandleValid("Invalid Word");
+        setValidOpacity("visible");
+      }
     }
   };
 
@@ -102,8 +103,6 @@ const MPGameTemp = (props) => {
   if (words.length === WordCount + 1) {
     setReset(1);
     setWordCount(WordCount + 1);
-    console.log("wordcount" + WordCount);
-    console.log("length" + words.length);
     setTimeout(handleWordCount, 1);
   }
 
@@ -174,8 +173,6 @@ const MPGameTemp = (props) => {
   useEffect(() => {
     if (user != undefined) {
       post("/api/joingame", { userid: props.userId }).then(() => {
-        //console.log("user", user);
-        //console.log(user.name);
         post("/api/sendName", { user: user.name, userId: props.userId });
       });
     }
@@ -217,6 +214,12 @@ const MPGameTemp = (props) => {
   const [name4, setName4] = useState("");
   const [name5, setName5] = useState("");
 
+  const [fruitVis1, setFruitVis1] = useState("hidden");
+  const [fruitVis2, setFruitVis2] = useState("hidden");
+  const [fruitVis3, setFruitVis3] = useState("hidden");
+  const [fruitVis4, setFruitVis4] = useState("hidden");
+  const [fruitVis5, setFruitVis5] = useState("hidden");
+
   let i1 = 0;
   let i2 = 0;
   let i3 = 0;
@@ -231,26 +234,32 @@ const MPGameTemp = (props) => {
 
   let gameover = 0;
 
+  //SOCKET UPDATES
   const processUpdate = (update) => {
     for (const id in update.players) {
       if (update.players[id].playerID >= 1 && i1 === 0) {
         ID1 = id;
+        setFruitVis1("visible");
         i1++;
       }
       if (update.players[id].playerID >= 2 && i2 === 0) {
         ID2 = id;
+        setFruitVis2("visible");
         i2++;
       }
       if (update.players[id].playerID >= 3 && i3 === 0) {
         ID3 = id;
+        setFruitVis3("visible");
         i3++;
       }
       if (update.players[id].playerID >= 4 && i4 === 0) {
         ID4 = id;
+        setFruitVis4("visible");
         i4++;
       }
       if (update.players[id].playerID >= 5 && i5 === 0) {
         ID5 = id;
+        setFruitVis5("visible");
         i5++;
       }
     }
@@ -316,6 +325,7 @@ const MPGameTemp = (props) => {
 
   const [inputVis, setInputVis] = useState("visible");
 
+  //ON DEATH
   useEffect(() => {
     if (alive === "false") {
       setInputVis("hidden");
@@ -333,6 +343,7 @@ const MPGameTemp = (props) => {
   const [heart4, setHeart4] = useState("visible");
   const [heart5, setHeart5] = useState("visible");
 
+  //MODIFY LIVES
   useEffect(() => {
     if (lives === 4) {
       setHeart5("hidden");
@@ -348,15 +359,74 @@ const MPGameTemp = (props) => {
     }
   }, [lives]);
 
+  //ON BIGRAM RESET
+
+  const [wordEntered, setWordEntered] = useState("false");
+
   useEffect(() => {
     if (gameStarted === "true") {
       chooseFruit();
+      if (name1 != "") {
+        setFruitVis1("visible");
+      }
+      if (name2 != "") {
+        setFruitVis2("visible");
+      }
+      if (name3 != "") {
+        setFruitVis3("visible");
+      }
+      if (name4 != "") {
+        setFruitVis4("visible");
+      }
+      if (name5 != "") {
+        setFruitVis5("visible");
+      }
+
+      setWordEntered("false");
+      setPositionY(778 + 70);
+      setFruitPositionY(700 + 70);
+      setSubPos(0);
     }
   }, [bigram]);
 
+  //HIDE FRUIT WHEN WORD ENTERED
+  useEffect(() => {
+    setFruitVis1("hidden");
+    console.log("word change");
+  }, [word1]);
+  useEffect(() => {
+    setFruitVis2("hidden");
+  }, [word2]);
+  useEffect(() => {
+    setFruitVis3("hidden");
+  }, [word3]);
+  useEffect(() => {
+    setFruitVis4("hidden");
+  }, [word4]);
+  useEffect(() => {
+    setFruitVis5("hidden");
+  }, [word5]);
+
+  //FRUIT FALL
   const [positionY, setPositionY] = useState(454);
   const [fruitPositionY, setFruitPositionY] = useState(376);
 
+  let [subPos, setSubPos] = useState(1);
+
+  useEffect(() => {
+    if (lives > 0) {
+      const interval = setInterval(() => {
+        if (gameStarted === "true" && lives > 0 && alive === "true") {
+          setPositionY(778 + 70 - subPos);
+          setFruitPositionY(700 + 70 - subPos);
+          setSubPos(subPos + 2.3);
+        }
+      }, 1000 / 60);
+      return () => clearInterval(interval);
+    }
+  }, [subPos]);
+
+  //RANDOM FRUIT
   const [fruitID, setFruitID] = useState("apple");
   const chooseFruit = () => {
     let randomFruit = Math.floor(Math.random() * 3);
@@ -430,51 +500,101 @@ const MPGameTemp = (props) => {
 
       <div
         className={fruitID}
-        style={{ left: "50%", bottom: fruitPositionY + "px", transform: "translateX(-189px)" }}
+        style={{
+          left: "50%",
+          bottom: fruitPositionY + "px",
+          transform: "translateX(-189px)",
+          visibility: fruitVis1,
+        }}
       />
       <div
         className="bigram"
-        style={{ left: "50%", bottom: positionY + "px", transform: "translateX(-49px)" }}
+        style={{
+          left: "50%",
+          bottom: positionY + "px",
+          transform: "translateX(-49px)",
+          visibility: fruitVis1,
+        }}
       >
         {bigram}
       </div>
       <div
         className={fruitID}
-        style={{ left: "35%", bottom: fruitPositionY + "px", transform: "translateX(-189px)" }}
+        style={{
+          left: "35%",
+          bottom: fruitPositionY + "px",
+          transform: "translateX(-189px)",
+          visibility: fruitVis2,
+        }}
       />
       <div
         className="bigram"
-        style={{ left: "35%", bottom: positionY + "px", transform: "translateX(-49px)" }}
+        style={{
+          left: "35%",
+          bottom: positionY + "px",
+          transform: "translateX(-49px)",
+          visibility: fruitVis2,
+        }}
       >
         {bigram}
       </div>
       <div
         className={fruitID}
-        style={{ left: "65%", bottom: fruitPositionY + "px", transform: "translateX(-189px)" }}
+        style={{
+          left: "65%",
+          bottom: fruitPositionY + "px",
+          transform: "translateX(-189px)",
+          visibility: fruitVis3,
+        }}
       />
       <div
         className="bigram"
-        style={{ left: "65%", bottom: positionY + "px", transform: "translateX(-49px)" }}
+        style={{
+          left: "65%",
+          bottom: positionY + "px",
+          transform: "translateX(-49px)",
+          visibility: fruitVis3,
+        }}
       >
         {bigram}
       </div>
       <div
         className={fruitID}
-        style={{ left: "20%", bottom: fruitPositionY + "px", transform: "translateX(-189px)" }}
+        style={{
+          left: "20%",
+          bottom: fruitPositionY + "px",
+          transform: "translateX(-189px)",
+          visibility: fruitVis4,
+        }}
       />
       <div
         className="bigram"
-        style={{ left: "20%", bottom: positionY + "px", transform: "translateX(-49px)" }}
+        style={{
+          left: "20%",
+          bottom: positionY + "px",
+          transform: "translateX(-49px)",
+          visibility: fruitVis4,
+        }}
       >
         {bigram}
       </div>
       <div
         className={fruitID}
-        style={{ left: "80%", bottom: fruitPositionY + "px", transform: "translateX(-189px)" }}
+        style={{
+          left: "80%",
+          bottom: fruitPositionY + "px",
+          transform: "translateX(-189px)",
+          visibility: fruitVis5,
+        }}
       />
       <div
         className="bigram"
-        style={{ left: "80%", bottom: positionY + "px", transform: "translateX(-49px)" }}
+        style={{
+          left: "80%",
+          bottom: positionY + "px",
+          transform: "translateX(-49px)",
+          visibility: fruitVis5,
+        }}
       >
         {bigram}
       </div>
