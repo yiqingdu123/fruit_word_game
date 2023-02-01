@@ -28,10 +28,6 @@ const spawnPlayer = (id) => {
     }
     console.log(gameState.players.playerID);
   }
-
-  //REMOVE GAMESTATE.PLAYERCOUNT++;
-  //WHEN LOBBY IS READY, SET NUMBER OF PLAYERS TO BE PLAYERCOUNT
-  //AT GAMEOVER SCREEN CALL A RESET POST REQUEST
 };
 
 const removePlayer = (id) => {

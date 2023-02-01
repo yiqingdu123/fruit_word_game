@@ -10,9 +10,10 @@ import { MasterWordList } from "../modules/MasterWordList.js";
 import { BigramList } from "../modules/BigramList.js";
 
 import "./SinglePlayerGame.css";
+import "./MPGame.css";
 import "../pages/Title.js";
 import "../../utilities.css";
-import { gameState } from "../../../../server/game-logic.js";
+//import { gameState } from "../../../../server/game-logic.js";
 
 /*
 
@@ -222,27 +223,29 @@ const MPGameTemp = (props) => {
   let ID4 = "";
   let ID5 = "";
 
+  let gameover = 0;
+
   const processUpdate = (update) => {
     for (const id in update.players) {
-      if (update.players[id].playerID === 1 && i1 === 0) {
+      if (update.players[id].playerID >= 1 && i1 === 0) {
         //setID1(id);
         ID1 = id;
         i1++;
         //console.log(i1, "set");
       }
-      if (update.players[id].playerID === 2 && i2 === 0) {
+      if (update.players[id].playerID >= 2 && i2 === 0) {
         ID2 = id;
         i2++;
       }
-      if (update.players[id].playerID === 3 && i3 === 0) {
+      if (update.players[id].playerID >= 3 && i3 === 0) {
         ID3 = id;
         i3++;
       }
-      if (update.players[id].playerID === 4 && i4 === 0) {
+      if (update.players[id].playerID >= 4 && i4 === 0) {
         ID4 = id;
         i4++;
       }
-      if (update.players[id].playerID === 5 && i5 === 0) {
+      if (update.players[id].playerID >= 5 && i5 === 0) {
         ID5 = id;
         i5++;
       }
@@ -289,25 +292,80 @@ const MPGameTemp = (props) => {
     if (update.players[props.userId] != undefined) {
       setLives(update.players[props.userId].lives);
       setPlayerID(update.players[props.userId].playerID);
-      setAlive(update.players[props.userId].alive);
       setCurrentWords(update.players[props.userId].currentWord);
       setUsernames(update.players[props.userId].userName);
       //console.log(update.players[props.userId].userName);
       //console.log(usernames);
       //console.log(currentWords);
     }
+    if (update.players[props.userId] === undefined && update.gameStarted === "true") {
+      setAlive("false");
+    }
     setPlayercount(update.playercount);
     //console.log(names, currentWords);
+
+    if (update.playercount === 1 && update.gameStarted === "true" && gameover === 0) {
+      let link = "/gameover/" + props.userId;
+      window.location = link;
+      gameover = 1;
+    }
+  };
+
+  ////////////////////////////////////////////////////////
+
+  const [inputVis, setInputVis] = useState("visible");
+
+  useEffect(() => {
+    if (alive === "false") {
+      setInputVis("hidden");
+      setHeart1("hidden");
+      setHeart2("hidden");
+      setHeart3("hidden");
+      setHeart4("hidden");
+      setHeart5("hidden");
+    }
+  }, [alive]);
+
+  const [heart1, setHeart1] = useState("visible");
+  const [heart2, setHeart2] = useState("visible");
+  const [heart3, setHeart3] = useState("visible");
+  const [heart4, setHeart4] = useState("visible");
+  const [heart5, setHeart5] = useState("visible");
+
+  const [positionX, setPositionX] = useState("669px");
+  const [positionY, setPositionY] = useState(454);
+
+  const [fruitPositionX, setFruitPositionX] = useState("529px");
+  const [fruitPositionY, setFruitPositionY] = useState(376);
+
+  const [fruitID, setFruitID] = useState("apple");
+  const chooseFruit = () => {
+    let randomFruit = Math.floor(Math.random() * 3);
+    if (randomFruit === 0) {
+      setFruitID("apple");
+    }
+    if (randomFruit === 1) {
+      setFruitID("orange");
+    }
+    if (randomFruit === 2) {
+      setFruitID("peach");
+    }
   };
 
   useEffect(() => {
-    console.log(word1);
-  }, [word1]);
-  useEffect(() => {
-    console.log(name1);
-  }, [name1]);
-
-  let fruit2 = <div></div>;
+    if (lives === 4) {
+      setHeart5("hidden");
+    }
+    if (lives === 3) {
+      setHeart4("hidden");
+    }
+    if (lives === 2) {
+      setHeart1("hidden");
+    }
+    if (lives === 1) {
+      setHeart2("hidden");
+    }
+  }, [lives]);
 
   ///////////////////////////////////////////////////////////////////
 
@@ -323,7 +381,7 @@ const MPGameTemp = (props) => {
       <div>
         <p className="score">Score: {score}</p>
       </div>
-      <div className="wordContainer">
+      <div className="wordContainer" style={{ visibility: inputVis }}>
         <div className="invalidWord" style={{ visibility: validOpacity }}>
           {handleValid}
         </div>
@@ -352,6 +410,12 @@ const MPGameTemp = (props) => {
       <div>{word4}</div>
       <div>{name5}</div>
       <div>{word5}</div>
+      <div className="heartContainerMP">Lives: </div>
+      <div style={{ visibility: heart1 }} className="heart1" />
+      <div style={{ visibility: heart2 }} className="heart2" />
+      <div style={{ visibility: heart3 }} className="heart3" />
+      <div style={{ visibility: heart4 }} className="heart4" />
+      <div style={{ visibility: heart5 }} className="heart5" />
     </div>
   );
 };
