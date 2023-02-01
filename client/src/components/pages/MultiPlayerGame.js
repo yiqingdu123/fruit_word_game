@@ -6,6 +6,7 @@ import { socket } from "../../client-socket.js";
 
 import "../pages/Title.js";
 import "../../utilities.css";
+import { navigate } from "@reach/router";
 
 const MultiPlayerGame = (props) => {
   const [names, setNames] = useState([]);
@@ -77,22 +78,48 @@ const MultiPlayerGame = (props) => {
     get("/api/userlobby", query).then((user) => {
       console.log("user.lobby: ", user.lobby);
       setLobbyName(user.lobby);
-    });
 
+      get("/api/lobbyusers", { lobby: user.lobby }).then((usersObjs) => {
+        setUserNum(usersObjs.length);
+        console.log("The user num is " + usersObjs.length);
+        get("/api/numberusersready", { lobby: user.lobby }).then((numReady) => {
+          setReadyPlayers(numReady.value);
+          console.log("The num ready is " + numReady.value);
+
+          if (usersObjs.length == numReady.value) {
+            console.log("help i am literally sobbing bro");
+            post("/api/deleteuserlobby", { id: props.userId }).then(() => {
+              navigate("/mpgametemp");
+            });
+            // window.location.href = "/mpgametemp";
+          }
+        });
+      });
+    });
+  };
+  /*
+  useEffect(() => {
+    console.log("")
     get("/api/lobbyusers", { lobby: lobbyName }).then((usersObjs) => {
       setUserNum(usersObjs.length);
-      console.log(userNum);
+      console.log("The user num is " + userNum);
     });
 
     get("/api/numberusersready", { lobby: lobbyName }).then((numReady) => {
       setReadyPlayers(numReady);
-      console.log(numReady);
+      console.log("The num ready is " + numReady);
     });
-
-    if (userNum == readyPlayers && userNum > 1) {
-      window.location.href = "/mpgametemp";
+  }, [lobbyName]);
+  
+  useEffect(() => {
+    if (userNum == readyPlayers && userNum > 0) {
+      post("/api/deleteuserlobby", { id: props.userId }).then(() => {
+        navigate("/mpgametemp");
+      });
+      // window.location.href = "/mpgametemp";
     }
-  };
+  }, [readyPlayers, userNum]);
+  */
 
   useEffect(() => {
     socket.on("userReadied", checkReadyPlayers);
@@ -100,7 +127,7 @@ const MultiPlayerGame = (props) => {
     return () => {
       socket.off("userReadied", checkReadyPlayers);
       socket.off("userUnreadied", checkReadyPlayers);
-      //post("/api/deleteuserlobby", { id: props.userId });
+      //  post("/api/deleteuserlobby", { id: props.userId });
     };
   }, [props.userId]);
 

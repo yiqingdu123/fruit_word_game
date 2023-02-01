@@ -49,6 +49,17 @@ const App = () => {
     post("/api/logout");
   };
 
+  /*
+  window.addEventListener(
+    "pagehide",
+    function () {
+      if (userId) {
+        post("/api/deleteuserlobby", { id: userId });
+      }
+    },
+    { capture: true }
+  );
+  */
   return (
     <>
       <Router>

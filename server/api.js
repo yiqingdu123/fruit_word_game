@@ -25,6 +25,7 @@ const router = express.Router();
 //initialize socket
 const socketManager = require("./server-socket");
 const { gameState } = require("./game-logic");
+const user = require("./models/user");
 
 router.post("/login", auth.login);
 
@@ -135,7 +136,7 @@ router.post("/userlobbyupdate", (req, res) => {
 router.get("/lobbyusers", (req, res) => {
   // console.log(req.query.lobby);
   User.find({ lobby: req.query.lobby }).then((users) => {
-    //console.log(users);
+    console.log(users);
     res.send(users);
   });
 });
@@ -164,9 +165,15 @@ router.post("/ready", (req, res) => {
 
 router.post("/deleteuserlobby", (req, res) => {
   User.findById(req.body.id).then((user) => {
-    user.lobby = "";
-    user.save();
-    res.send({});
+    console.log("The user to delete is " + user);
+    if (user.lobby !== "") {
+      Lobby.findOneAndUpdate({ content: user.lobby }, { numPlayersReady: 0 }).then(() => {
+        user.lobby = "";
+        user.save().then(() => {
+          res.send({});
+        });
+      });
+    }
   });
 });
 
@@ -178,8 +185,9 @@ router.get("/userlobby", (req, res) => {
 });
 
 router.get("/numberusersready", (req, res) => {
-  Lobby.find({ content: req.query.lobby }).then((numberUsers) => {
-    res.send(numberUsers);
+  Lobby.findOne({ content: req.query.lobby }).then((lobby) => {
+    console.log(lobby.numPlayersReady);
+    res.send({ value: lobby.numPlayersReady });
   });
 });
 
