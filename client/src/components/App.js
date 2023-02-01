@@ -59,7 +59,7 @@ const App = () => {
         <MultiPlayerGame path="/multiplayer/" userId={userId} />
         <GameMenu path="/gamemenu/" userId={userId} />
         <Timer path="/timer/" userId={userId} />
-        <GameOver path="/gameover/" userId={userId} />
+        <GameOver path="/gameover/:userId" userId={userId} />
         <MPGameTemp path="/mpgametemp/" userId={userId} />
         <NotFound default />
       </Router>

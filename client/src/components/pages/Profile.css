@@ -78,7 +78,7 @@
   margin: 8px;
   display: flex;
   flex-direction: row;
-  overflow: scroll;
+  overflow: hidden;
 }
 
 .scoreslist-text {
