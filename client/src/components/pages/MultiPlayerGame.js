@@ -10,7 +10,7 @@ import "./MultiPlayerGame.css";
 import { navigate } from "@reach/router";
 
 const MultiPlayerGame = (props) => {
-  const [names, setNames] = useState(["abby", "betsy"]);
+  const [names, setNames] = useState([]);
   const [lobbyName, setLobbyName] = useState("");
 
   const updatingUsers = (lobbyObj) => {
@@ -151,49 +151,55 @@ const MultiPlayerGame = (props) => {
 
   return (
     <div className="background">
-      <div className="container1">
+      <div className="containerLobby">
         <div className="joinLobby">Create/Join Party:</div>
         <div className="usersInLobby">Users in Party:</div>
-        {names}
+        <ol className="names">
+          {names.map((name) => (
+            <li key={name}>{name}</li>
+          ))}
+        </ol>
       </div>
-      <div>{names}</div>
 
       <div>
         <NewWord addNewWord={addNewLobby} />
       </div>
+      <div className="containerLobby">
+        <button
+          className="buttonReady"
+          style={{ visibility: readyButtonVis }}
+          onClick={() => {
+            addReady();
+            setReadyButtonVis("hidden");
+            setUnReadyButtonVis("visible");
+          }}
+        >
+          {" "}
+          Ready{" "}
+        </button>
 
-      <button
-        style={{ visibility: readyButtonVis }}
-        onClick={() => {
-          addReady();
-          setReadyButtonVis("hidden");
-          setUnReadyButtonVis("visible");
-        }}
-      >
-        {" "}
-        Ready{" "}
-      </button>
-      <button
-        style={{ visibility: unReadyButtonVis }}
-        onClick={() => {
-          removeReady();
-          setReadyButtonVis("visible");
-          setUnReadyButtonVis("hidden");
-        }}
-      >
-        {" "}
-        Unready{" "}
-      </button>
+        <button
+          className="buttonReady"
+          style={{ visibility: unReadyButtonVis }}
+          onClick={() => {
+            removeReady();
+            setReadyButtonVis("visible");
+            setUnReadyButtonVis("hidden");
+          }}
+        >
+          {" "}
+          Unready{" "}
+        </button>
+      </div>
+
       <h1>
-        <Link className="back" to="/gamemenu">
+        <Link to="/gamemenu" className="back">
           Back{" "}
         </Link>
       </h1>
-      <h1>
-        <Link to="/mpgametemp" state={{ userId: props.userId }}>
+      {/* <Link to="/mpgametemp" state={{ userId: props.userId }}>
           aldkfjalkfdjakldfjalkjflkjkljtemp
-        </Link>
-      </h1>
+        </Link> */}
     </div>
   );
 };
