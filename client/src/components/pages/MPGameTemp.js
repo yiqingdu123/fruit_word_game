@@ -153,16 +153,18 @@ const MPGameTemp = (props) => {
 
   const [user, setUser] = useState();
 
-  // useEffect(() => {
-  //   document.title = "Multiplayer";
-  //   get("/api/user", { userid: props.userId }).then((userObj) => setUser(userObj));
-  // }, []);
-
   useEffect(() => {
-    get("/api/whoami")
-      .then((userObj) => setUser(userObj))
-      .then(() => get("/api/user", { userid: user._id }).then((userObj) => setUser(userObj)));
+    document.title = "Multiplayer";
+    if (props.userId != undefined) {
+      get("/api/user", { userid: props.userId }).then((userObj) => setUser(userObj));
+    }
   }, []);
+
+  // useEffect(() => {
+  //   get("/api/whoami")
+  //     .then((userObj) => setUser(userObj))
+  //     .then(() => get("/api/user", { userid: user._id }).then((userObj) => setUser(userObj)));
+  // }, []);
 
   // useEffect(() => {
   //   document.title = "Multiplayer";
