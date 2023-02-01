@@ -74,18 +74,10 @@ const MultiPlayerGame = (props) => {
 
     const query = { id: props.userId };
     console.log("api 3", query);
-    get("/api/userlobby", query)
-      .then((user) => {
-        console.log("user.lobby: ", user.lobby);
-        setLobbyName(user.lobby);
-      })
-      .then(console.log("lobby name: ", lobbyName));
-
-    // useEffect(() => {
-
-    // }, [lobbyName]);
-
-    // console.log("lobby name: ", lobbyName);
+    get("/api/userlobby", query).then((user) => {
+      console.log("user.lobby: ", user.lobby);
+      setLobbyName(user.lobby);
+    });
 
     get("/api/lobbyusers", { lobby: lobbyName }).then((usersObjs) => {
       setUserNum(usersObjs.length);
