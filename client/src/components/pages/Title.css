@@ -6,15 +6,17 @@
   position: absolute;
   width: 607px;
   height: 218px;
-  left: 417px;
+  left: 50%;
   top: 177px;
+
+  transform: translateX(-303px);
 
   font-family: "Inter";
   font-style: normal;
   font-weight: 1000;
   font-size: 180px;
   line-height: 218px;
-  /* identical to box height */
+
   text-align: center;
 
   color: #ff6f6f;
@@ -80,8 +82,10 @@
   position: absolute;
   width: 788px;
   height: 111px;
-  left: 326px;
+  left: 50%;
   top: 453px;
+
+  transform: translateX(-394px);
 
   background: rgba(255, 255, 255, 0.9);
   border: 10px solid #ff6f6f;
@@ -103,8 +107,10 @@
   position: absolute;
   width: 788px;
   height: 111px;
-  left: 326px;
+  left: 50%;
   top: 453px;
+
+  transform: translateX(-394px);
 
   background: rgba(255, 255, 255, 0.9);
   border: 10px solid #ff6f6f;
@@ -123,8 +129,10 @@
   position: absolute;
   width: 788px;
   height: 111px;
-  left: 326px;
+  left: 50%;
   top: 453px;
+
+  transform: translateX(-394px);
 
   background: rgba(255, 255, 255, 0.9);
   border: 10px solid #ff6f6f;
