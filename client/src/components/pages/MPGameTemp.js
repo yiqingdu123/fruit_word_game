@@ -30,7 +30,7 @@ const MPGameTemp = (props) => {
   const [wordsList, setWordsList] = useState(["hi"]);
 
   const [bigram, setBigram] = useState("ui");
-
+  console.log("Game props: ", props);
   const verifyWordInMasterList = (wordObj) => {
     const result = MasterWordList.includes(wordObj);
     setInMasterList(result);
@@ -154,9 +154,15 @@ const MPGameTemp = (props) => {
   const [user, setUser] = useState();
 
   useEffect(() => {
-    document.title = "Multiplayer";
-    get("/api/user", { userid: props.userId }).then((userObj) => setUser(userObj));
+    get("/api/whoami")
+      .then((userObj) => setUser(userObj))
+      .then(() => get("/api/user", { userid: user._id }).then((userObj) => setUser(userObj)));
   }, []);
+
+  // useEffect(() => {
+  //   document.title = "Multiplayer";
+
+  // }, []);
 
   useEffect(() => {
     if (user != undefined) {
