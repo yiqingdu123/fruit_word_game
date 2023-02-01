@@ -24,7 +24,7 @@ const MultiPlayerGame = (props) => {
   const addNewLobby = (lobbyObj) => {
     //console.log(props);
     const body = { id: props.userId, lobby: lobbyObj.content };
-    setLobbyName(lobbyObj.content);
+    //setLobbyName(lobbyObj.content);
     post("/api/userlobbyupdate", body).then(() => {
       console.log("user lobby update worked");
       updatingUsers(lobbyObj);
@@ -47,6 +47,7 @@ const MultiPlayerGame = (props) => {
 
   const addReady = () => {
     const query = { id: props.userId };
+    console.log("api 1", query);
     get("/api/userlobby", query).then((user) => {
       const body = { lobby: user.lobby };
       console.log("userlobby works");
@@ -56,6 +57,7 @@ const MultiPlayerGame = (props) => {
 
   const removeReady = () => {
     const query = { id: props.userId };
+    console.log("api 2", query);
     get("/api/userlobby", query).then((user) => {
       const body = { lobby: user.lobby };
       post("/api/unready", body);
@@ -69,6 +71,21 @@ const MultiPlayerGame = (props) => {
 
   const checkReadyPlayers = () => {
     console.log("entered checkReadyPlayers");
+
+    const query = { id: props.userId };
+    console.log("api 3", query);
+    get("/api/userlobby", query)
+      .then((user) => {
+        console.log("user.lobby: ", user.lobby);
+        setLobbyName(user.lobby);
+      })
+      .then(console.log("lobby name: ", lobbyName));
+
+    // useEffect(() => {
+
+    // }, [lobbyName]);
+
+    // console.log("lobby name: ", lobbyName);
 
     get("/api/lobbyusers", { lobby: lobbyName }).then((usersObjs) => {
       setUserNum(usersObjs.length);
@@ -93,7 +110,7 @@ const MultiPlayerGame = (props) => {
       socket.off("userUnreadied", checkReadyPlayers);
       //post("/api/deleteuserlobby", { id: props.userId });
     };
-  }, []);
+  }, [props.userId]);
 
   //checkReadyPlayers();
 

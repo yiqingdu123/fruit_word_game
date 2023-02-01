@@ -143,8 +143,8 @@ router.get("/lobbyusers", (req, res) => {
 router.post("/unready", (req, res) => {
   Lobby.findOneAndUpdate({ content: req.body.lobby }, { $inc: { numPlayersReady: -1 } })
     .then(() => {
-      console.log(req.body.lobby);
-      console.log("akdfaldfj");
+      // console.log(req.body.lobby);
+      // console.log("akdfaldfj");
       socketManager.getIo().emit("userUnreadied", {});
     })
     .then(() => {});
@@ -154,8 +154,8 @@ router.post("/unready", (req, res) => {
 router.post("/ready", (req, res) => {
   Lobby.findOneAndUpdate({ content: req.body.lobby }, { $inc: { numPlayersReady: 1 } })
     .then(() => {
-      console.log(req.body.lobby);
-      console.log("akdfaldfj");
+      // console.log(req.body.lobby);
+      // console.log("akdfaldfj");
       socketManager.getIo().emit("userReadied", {});
     })
     .then(() => {});
@@ -171,6 +171,7 @@ router.post("/deleteuserlobby", (req, res) => {
 });
 
 router.get("/userlobby", (req, res) => {
+  console.log("userlobby id", req.query.id);
   User.findById(req.query.id).then((user) => {
     res.send(user);
   });
@@ -190,7 +191,7 @@ router.post("/joingame", (req, res) => {
   if (req.user) {
     socketManager.addUserToGame(req.user);
   }
-  console.log(gameState);
+  // console.log(gameState);
   res.send({});
 });
 
