@@ -332,10 +332,10 @@ const MPGameTemp = (props) => {
   const [heart4, setHeart4] = useState("visible");
   const [heart5, setHeart5] = useState("visible");
 
-  const [positionX, setPositionX] = useState("669px");
+  const [positionX, setPositionX] = useState(669);
   const [positionY, setPositionY] = useState(454);
 
-  const [fruitPositionX, setFruitPositionX] = useState("529px");
+  const [fruitPositionX, setFruitPositionX] = useState(529);
   const [fruitPositionY, setFruitPositionY] = useState(376);
 
   const [fruitID, setFruitID] = useState("apple");
@@ -375,10 +375,6 @@ const MPGameTemp = (props) => {
         Game
       </h1>
       <div>
-        <br></br>
-        <div className="wordlength">Words: {words.length}</div>
-      </div>
-      <div>
         <p className="score">Score: {score}</p>
       </div>
       <div className="wordContainer" style={{ visibility: inputVis }}>
@@ -397,11 +393,14 @@ const MPGameTemp = (props) => {
       {/* <h1>{startServerTimer}</h1>
       <h1>{stopServerTimer}</h1> */}
       <h1>{bigram}</h1>
-      <h1>{currentTime}</h1>
+      <h1 className="timerMP">{currentTime}</h1>
       <h1>Lives: {lives}</h1>
       <h1>Playercount: {playercount}</h1>
-      <div>{name1}</div>
-      <div>{word1}</div>
+      <div className="container1">
+        <div className="name1">{name1}</div>
+        <div className="word1">{word1}</div>
+      </div>
+
       <div>{name2}</div>
       <div>{word2}</div>
       <div>{name3}</div>

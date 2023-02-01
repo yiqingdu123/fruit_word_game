@@ -64,3 +64,78 @@
   font-size: 24px;
   padding: 6px 15px;
 }
+
+.timerMP {
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+
+  box-sizing: border-box;
+
+  position: fixed;
+  width: 200px;
+  height: 200px;
+  left: 10px;
+  top: -70px;
+
+  background: rgba(255, 255, 255, 0.7);
+  border: 10px solid #ff6f6f;
+  border-radius: 100px;
+
+  padding: 18px 10px;
+
+  font-size: 120px;
+  text-align: center;
+  color: #ff6f6f;
+}
+
+.name1 {
+  /* position: absolute; */
+
+  width: 316px;
+  height: 24px;
+  /* left: 520px;
+  top: 20px; */
+
+  border-radius: 15px;
+
+  font-size: 20px;
+  font-weight: 600;
+  text-align: center;
+  color: #ff6f6f;
+  transition: box-shadow 0.1s;
+  background: rgba(255, 255, 255, 0.7);
+  padding: 1px 12px;
+}
+
+.word1 {
+  /* position: absolute; */
+
+  /* width: auto; */
+  height: 20px;
+  /* left: 520px;
+  top: 50px; */
+
+  border-radius: 15px;
+
+  font-size: 16px;
+  font-weight: 600;
+  text-align: center;
+  color: #ff6f6f;
+  transition: box-shadow 0.1s;
+  background: rgba(255, 255, 255, 0.7);
+  padding: 1px 12px;
+  margin: 5px;
+}
+
+.container1 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  width: 350px;
+  transform: translateX(-175px);
+}
