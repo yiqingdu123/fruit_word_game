@@ -2,8 +2,10 @@
   position: absolute;
   width: 800px;
   height: 218px;
-  left: 320px;
+  left: 50%;
   top: 177px;
+
+  transform: translateX(-400px);
 
   font-family: "Inter";
   font-style: normal;
@@ -44,8 +46,9 @@
   position: absolute;
   width: 600px;
   height: 90px;
-  left: 420px;
+  left: 50%;
   top: 453px;
+  transform: translateX(-300px);
 
   background: rgba(255, 255, 255, 0.9);
   border: 10px solid #ff6f6f;
@@ -67,8 +70,9 @@
   position: absolute;
   width: 600px;
   height: 90px;
-  left: 420px;
+  left: 50%;
   top: 453px;
+  transform: translateX(-300px);
 
   background: rgba(255, 255, 255, 0.9);
   border: 10px solid #ff6f6f;
@@ -87,8 +91,9 @@
   position: absolute;
   width: 600px;
   height: 90px;
-  left: 420px;
+  left: 50%;
   top: 453px;
+  transform: translateX(-300px);
 
   background: rgba(255, 255, 255, 0.9);
   border: 10px solid #ff6f6f;
