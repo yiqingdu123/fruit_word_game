@@ -20,22 +20,22 @@
   margin-top: -110px;
 }
 
-.usersInLobby {
+.info {
   font-size: 32px;
   font-weight: 600;
 
-  top: 100px;
+  top: 70px;
   left: 570px;
   color: #ff6f6f;
   background: rgba(255, 255, 255, 0.7);
   border-radius: 15px;
   padding: 5px;
-  margin: 30px;
+
   text-align: center;
   width: 225px;
 }
 
-.joinLobby {
+.lobby {
   font-size: 40px;
   font-weight: 600;
 
@@ -47,7 +47,7 @@
   padding: 5px;
   width: 350px;
   text-align: center;
-  margin: 30px;
+  margin: 20px;
 }
 
 .containerLobby {
