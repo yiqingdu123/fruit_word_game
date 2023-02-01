@@ -164,6 +164,7 @@ router.post("/ready", (req, res) => {
 });
 
 router.post("/deleteuserlobby", (req, res) => {
+  socketManager.getIo().emit("userLeft", {});
   User.findById(req.body.id).then((user) => {
     console.log("The user to delete is " + user);
     if (user.lobby !== "") {

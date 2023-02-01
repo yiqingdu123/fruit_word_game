@@ -97,6 +97,17 @@ const MultiPlayerGame = (props) => {
       });
     });
   };
+
+  useEffect(() => {
+    const callback = () => {
+      setReadyButtonVis("visible");
+      setUnReadyButtonVis("hidden");
+    };
+    socket.on("userLeft", callback);
+    return () => {
+      socket.off("userLeft", callback);
+    };
+  }, []);
   /*
   useEffect(() => {
     console.log("")
@@ -127,7 +138,11 @@ const MultiPlayerGame = (props) => {
     return () => {
       socket.off("userReadied", checkReadyPlayers);
       socket.off("userUnreadied", checkReadyPlayers);
-      //  post("/api/deleteuserlobby", { id: props.userId });
+      if (props.userId) {
+        setReadyButtonVis("visible");
+        setUnReadyButtonVis("hidden");
+        post("/api/deleteuserlobby", { id: props.userId });
+      }
     };
   }, [props.userId]);
 
