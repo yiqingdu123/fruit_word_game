@@ -6,10 +6,11 @@ import { socket } from "../../client-socket.js";
 
 import "../pages/Title.js";
 import "../../utilities.css";
+import "./MultiPlayerGame.css";
 import { navigate } from "@reach/router";
 
 const MultiPlayerGame = (props) => {
-  const [names, setNames] = useState([]);
+  const [names, setNames] = useState(["abby", "betsy"]);
   const [lobbyName, setLobbyName] = useState("");
 
   const updatingUsers = (lobbyObj) => {
@@ -149,11 +150,15 @@ const MultiPlayerGame = (props) => {
   //checkReadyPlayers();
 
   return (
-    <div>
-      <h1>Multi Player</h1>
-      <div>
-        Create/Join a Lobby: Users in Lobby:
+    <div className="background">
+      <div className="container1">
+        <div className="joinLobby">Create/Join Party:</div>
+        <div className="usersInLobby">Users in Party:</div>
         {names}
+      </div>
+      <div>{names}</div>
+
+      <div>
         <NewWord addNewWord={addNewLobby} />
       </div>
 
@@ -180,11 +185,13 @@ const MultiPlayerGame = (props) => {
         Unready{" "}
       </button>
       <h1>
-        <Link to="/gamemenu">Back </Link>
+        <Link className="back" to="/gamemenu">
+          Back{" "}
+        </Link>
       </h1>
       <h1>
         <Link to="/mpgametemp" state={{ userId: props.userId }}>
-          temp
+          aldkfjalkfdjakldfjalkjflkjkljtemp
         </Link>
       </h1>
     </div>

@@ -1,0 +1,63 @@
+.back {
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+
+  box-sizing: border-box;
+
+  position: fixed;
+  width: 180px;
+  height: 50px;
+  right: 10px;
+  top: 120px;
+
+  background: rgba(255, 255, 255, 0.7);
+  border: 4px solid #ff6f6f;
+  border-radius: 15px;
+
+  padding: 1px 8px;
+
+  margin-top: -110px;
+}
+
+.usersInLobby {
+  font-size: 30px;
+  font-weight: 600;
+
+  top: 100px;
+  left: 570px;
+  color: #ff6f6f;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 15px;
+  padding: 5px;
+  margin: 30px;
+  text-align: center;
+  width: 225px;
+}
+
+.joinLobby {
+  font-size: 40px;
+  font-weight: 600;
+
+  top: 100px;
+  left: 570px;
+  color: #ff6f6f;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 15px;
+  padding: 5px;
+  width: 350px;
+  text-align: center;
+  margin: 30px;
+}
+
+.container1 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  width: 250px;
+  transform: translateX(-125px);
+}
