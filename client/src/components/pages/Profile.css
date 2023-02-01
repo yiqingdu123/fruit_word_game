@@ -54,19 +54,20 @@
 .pinkbox {
   position: fixed;
   top: 55%;
-  left: 60%;
+  left: 58%;
   transform: translate(-37%, -57%);
   padding: 100 px;
-  height: 80%;
+  height: 75%;
   width: 60%;
   background: #ff6f6f;
   border-radius: 30px;
   display: flex;
   flex-direction: column;
+  padding-top: 8px;
 }
 
 .stat-display {
-  margin: 8px;
+  margin: 8px 16px;
   background: rgba(255, 255, 255, 0.9);
   border-radius: 60px;
   display: flex;
@@ -86,7 +87,7 @@
   flex-direction: column;
   margin: 8px;
   background: rgba(255, 255, 255, 0.9);
-  border-radius: 60px;
+  border-radius: 40px;
   height: 30 px;
   overflow: auto;
   display: flex;

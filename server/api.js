@@ -109,6 +109,18 @@ router.post("/userupdateSP", (req, res) => {
   });
 });
 
+router.post("/userupdateMP", (req, res) => {
+  User.findById(req.body.id).then((user) => {
+    user.scoreslistMP.push(req.body.score);
+
+    if (req.body.score > user.highscoreMP) {
+      user.highscoreMP = req.body.score;
+    }
+
+    user.save();
+  });
+});
+
 router.post("/userlobbyupdate", (req, res) => {
   User.findById(req.body.id).then((user) => {
     user.lobby = req.body.lobby;

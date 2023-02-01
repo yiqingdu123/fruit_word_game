@@ -8,12 +8,14 @@ import { socket } from "../../client-socket.js";
 import Timer from "../modules/Timer.js";
 import { MasterWordList } from "../modules/MasterWordList.js";
 import { BigramList } from "../modules/BigramList.js";
+import { navigate } from "@reach/router";
 
 import "./SinglePlayerGame.css";
 import "./MPGame.css";
 import "../pages/Title.js";
 import "../../utilities.css";
-//import { gameState } from "../../../../server/game-logic.js";
+
+//IGNORE FILE NAME, THIS IS THE MULTIPLAYER LOBBY
 
 /*
 
@@ -315,13 +317,23 @@ const MPGameTemp = (props) => {
     }
 
     if (update.playercount === 1 && update.gameStarted === "true" && gameover === 0) {
-      let link = "/profile/" + props.userId;
-      window.location = link;
+      setNav(1);
       gameover = 1;
     }
   };
 
   ////////////////////////////////////////////////////////
+
+  const [nav, setNav] = useState(0);
+
+  useEffect(() => {
+    if (nav === 1) {
+      const body = { id: props.userId, score: score };
+
+      let link = "/gameovermp/" + props.userId;
+      post("/api/userupdateMP", body).then(navigate(link));
+    }
+  }, [nav]);
 
   const [inputVis, setInputVis] = useState("visible");
 
