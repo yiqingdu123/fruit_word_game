@@ -86,7 +86,7 @@ const MultiPlayerGame = (props) => {
           setReadyPlayers(numReady.value);
           console.log("The num ready is " + numReady.value);
 
-          if (usersObjs.length == numReady.value) {
+          if (usersObjs.length == numReady.value && usersObjs.length > 1) {
             console.log("help i am literally sobbing bro");
             post("/api/deleteuserlobby", { id: props.userId }).then(() => {
               navigate("/mpgametemp");

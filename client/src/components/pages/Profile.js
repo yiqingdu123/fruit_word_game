@@ -26,7 +26,9 @@ const Profile = (props) => {
 
   if (props.userId) {
     const spScore = user.scoreslistSP.map((score, i) => <li key={i}>{score}</li>);
-    console.log(spScore);
+
+    const mpScore = user.scoreslistMP.map((score, i) => <li key={i}>{score}</li>);
+
     page = (
       <div className="background">
         <div className="backbox">
@@ -46,19 +48,15 @@ const Profile = (props) => {
                 <div className="label">Highest Multiplayer Score:</div>
                 <div className="scores-num">{user.highscoreMP}</div>
               </div>
-              <div className="stat-display">
-                <div className="label">Number of Wins in Multiplayer:</div>
-                <div className="scores-num">{user.MPwins}</div>
-              </div>
 
               <div className="scoreslist-box">
                 <div className="scoreslist-text">
                   <div className="scoreslist-label">Singleplayer Scores</div>
-                  <div className="scoreslist-list">17 {spScore}</div>
+                  <div className="scoreslist-list">{spScore}</div>
                 </div>
                 <div className="scoreslist-text">
                   <div className="scoreslist-label">Multiplayer Scores</div>
-                  <div className="scoreslist-list">15 and {user.scoreslistMP}</div>
+                  <div className="scoreslist-list">{mpScore}</div>
                 </div>
               </div>
             </div>

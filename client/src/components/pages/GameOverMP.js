@@ -5,11 +5,11 @@ import { get } from "../../utilities";
 import "./GameOver.css";
 import "../../utilities.css";
 
-const GameOver = (props) => {
+const GameOverMP = (props) => {
   const [user, setUser] = useState();
 
   useEffect(() => {
-    document.title = "GameOver";
+    document.title = "GameOverMP";
     get("/api/user", { userid: props.userId }).then((userObj) => setUser(userObj));
   }, []);
   let page = null;
@@ -17,16 +17,13 @@ const GameOver = (props) => {
     return <div> bruh </div>;
   }
   if (props.userId) {
-    let lastScore = user.scoreslistSP[user.scoreslistSP.length - 1];
+    let lastScore = user.scoreslistMP.slice(-1);
     page = (
       <div className="background">
         <div className="instruct-backbox">
           <h1 className="gameOver">GAME OVER</h1>
           <p className="instruct-type">SCORE: {lastScore}</p>
           <div className="back-button-area">
-            <h2 className="playAgain">
-              <Link to="/singleplayer">Play Again </Link>
-            </h2>
             <h2 className="instruct-back-button">
               <Link to="/">Back to Menu </Link>
             </h2>
@@ -38,4 +35,4 @@ const GameOver = (props) => {
   return <div>{page}</div>;
 };
 
-export default GameOver;
+export default GameOverMP;

@@ -3,6 +3,7 @@ import { Link } from "@reach/router";
 import { socket } from "../../client-socket.js";
 import { BigramList } from "../modules/BigramList.js";
 import { get, post } from "../../utilities";
+import { navigate } from "@reach/router";
 
 import "../pages/SinglePlayerGame.css";
 
@@ -140,9 +141,8 @@ const Timer = (props) => {
 
     const body = { id: props.userId, score: props.score };
     console.log(body);
-    post("/api/userupdateSP", body);
     let link = "/gameover/" + props.userId;
-    window.location = link;
+    post("/api/userupdateSP", body).then(navigate(link));
     fails = 4;
   }
 
