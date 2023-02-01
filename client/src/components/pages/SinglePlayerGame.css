@@ -5,7 +5,7 @@
   height: 40px;
   bottom: 50px;
   left: 50%;
-  transform: translateX(-240px);
+  transform: translateX(-210px);
 
   border: 4px solid #ff6f6f;
   border-radius: 15px;
@@ -28,7 +28,7 @@
   height: 49px;
   bottom: 50px;
   left: 50%;
-  transform: translateX(116px);
+  transform: translateX(146px);
 
   border: 4px solid #ff6f6f;
   border-radius: 15px;
@@ -213,7 +213,8 @@
 .invalidWord {
   position: fixed;
   bottom: 105px;
-  left: 600px;
+  left: 50%;
+  transform: translateX(-110px);
 
   font-size: 24px;
   color: #ff6f6f;
@@ -266,7 +267,8 @@
   font-weight: 600;
 
   top: 90px;
-  left: 570px;
+  left: 50%;
+  transform: translateX(-155px);
   color: #ff6f6f;
   background: rgba(255, 255, 255, 0.7);
   border-radius: 15px;

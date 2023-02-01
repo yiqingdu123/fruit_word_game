@@ -10,9 +10,9 @@ const GameMenu = (props) => {
   let loginModal = null;
   if (!props.userId) {
     loginModal = (
-      <div>
-        <h2>Please Login First!</h2>
-        <h1>
+      <div className="background">
+        <h2 className="pleaselogin">Please Log in First!</h2>
+        <h1 className="backbutton">
           <Link to="/">Back </Link>
         </h1>
       </div>

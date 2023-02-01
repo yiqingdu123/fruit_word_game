@@ -150,10 +150,10 @@ const Timer = (props) => {
   const [heart2, setHeart2] = useState("visible");
   const [heart3, setHeart3] = useState("visible");
 
-  const [positionX, setPositionX] = useState("669px");
+  const [positionX, setPositionX] = useState("709px");
   const [positionY, setPositionY] = useState(454);
 
-  const [fruitPositionX, setFruitPositionX] = useState("529px");
+  const [fruitPositionX, setFruitPositionX] = useState("569px");
   const [fruitPositionY, setFruitPositionY] = useState(376);
 
   const [fruitID, setFruitID] = useState("apple");

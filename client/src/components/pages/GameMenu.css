@@ -101,3 +101,44 @@
 
   margin-top: 0px;
 }
+
+.pleaselogin {
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+
+  box-sizing: border-box;
+
+  position: absolute;
+  width: 600px;
+  height: 90px;
+  left: 50%;
+  top: 100px;
+  transform: translateX(-300px);
+
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 60px;
+
+  margin-top: 0px;
+
+  font-size: 48px;
+  color: #ff6f6f;
+  text-align: center;
+  padding-top: 15px;
+}
+
+.backbutton {
+  position: absolute;
+  width: 120px;
+  height: 50px;
+  left: 50%;
+  top: 300px;
+  transform: translateX(-60px);
+
+  background: rgba(255, 255, 255, 0.7);
+  margin-top: 0px;
+
+  border-radius: 60px;
+
+  font-size: 42px;
+}
