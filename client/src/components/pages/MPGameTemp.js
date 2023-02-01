@@ -153,6 +153,11 @@ const MPGameTemp = (props) => {
 
   const [user, setUser] = useState();
 
+  // useEffect(() => {
+  //   document.title = "Multiplayer";
+  //   get("/api/user", { userid: props.userId }).then((userObj) => setUser(userObj));
+  // }, []);
+
   useEffect(() => {
     get("/api/whoami")
       .then((userObj) => setUser(userObj))
@@ -194,16 +199,9 @@ const MPGameTemp = (props) => {
   const [playercount, setPlayercount] = useState(0);
   const [playerID, setPlayerID] = useState(0);
   const [alive, setAlive] = useState("true");
-
+  const [gameStarted, setGameStarted] = useState("false");
   const [currentWords, setCurrentWords] = useState("");
-
   const [usernames, setUsernames] = useState("");
-
-  // const [ID1, setID1] = useState("");
-  // const [ID2, setID2] = useState("");
-  // const [ID3, setID3] = useState("");
-  // const [ID4, setID4] = useState("");
-  // const [ID5, setID5] = useState("");
 
   const [word1, setWord1] = useState("");
   const [word2, setWord2] = useState("");
@@ -234,10 +232,8 @@ const MPGameTemp = (props) => {
   const processUpdate = (update) => {
     for (const id in update.players) {
       if (update.players[id].playerID >= 1 && i1 === 0) {
-        //setID1(id);
         ID1 = id;
         i1++;
-        //console.log(i1, "set");
       }
       if (update.players[id].playerID >= 2 && i2 === 0) {
         ID2 = id;
@@ -258,7 +254,7 @@ const MPGameTemp = (props) => {
     }
 
     /////SET NAME AND WORD
-    // console.log(ID1);
+
     if (ID1 != "") {
       if (update.players[ID1] != undefined) {
         setWord1(update.players[ID1].currentWord);
@@ -294,24 +290,21 @@ const MPGameTemp = (props) => {
 
     setCurrentTime(update.time);
     setWordsList(update.wordsList);
+    setGameStarted(update.gameStarted);
     setBigram(update.bigram);
+    setPlayercount(update.playercount);
     if (update.players[props.userId] != undefined) {
       setLives(update.players[props.userId].lives);
       setPlayerID(update.players[props.userId].playerID);
       setCurrentWords(update.players[props.userId].currentWord);
       setUsernames(update.players[props.userId].userName);
-      //console.log(update.players[props.userId].userName);
-      //console.log(usernames);
-      //console.log(currentWords);
     }
     if (update.players[props.userId] === undefined && update.gameStarted === "true") {
       setAlive("false");
     }
-    setPlayercount(update.playercount);
-    //console.log(names, currentWords);
 
     if (update.playercount === 1 && update.gameStarted === "true" && gameover === 0) {
-      let link = "/gameover/" + props.userId;
+      let link = "/profile/" + props.userId;
       window.location = link;
       gameover = 1;
     }
@@ -338,10 +331,28 @@ const MPGameTemp = (props) => {
   const [heart4, setHeart4] = useState("visible");
   const [heart5, setHeart5] = useState("visible");
 
-  const [positionX, setPositionX] = useState(669);
-  const [positionY, setPositionY] = useState(454);
+  useEffect(() => {
+    if (lives === 4) {
+      setHeart5("hidden");
+    }
+    if (lives === 3) {
+      setHeart4("hidden");
+    }
+    if (lives === 2) {
+      setHeart1("hidden");
+    }
+    if (lives === 1) {
+      setHeart2("hidden");
+    }
+  }, [lives]);
 
-  const [fruitPositionX, setFruitPositionX] = useState(529);
+  useEffect(() => {
+    if (gameStarted === "true") {
+      chooseFruit();
+    }
+  }, [bigram]);
+
+  const [positionY, setPositionY] = useState(454);
   const [fruitPositionY, setFruitPositionY] = useState(376);
 
   const [fruitID, setFruitID] = useState("apple");
@@ -357,21 +368,6 @@ const MPGameTemp = (props) => {
       setFruitID("peach");
     }
   };
-
-  useEffect(() => {
-    if (lives === 4) {
-      setHeart5("hidden");
-    }
-    if (lives === 3) {
-      setHeart4("hidden");
-    }
-    if (lives === 2) {
-      setHeart1("hidden");
-    }
-    if (lives === 1) {
-      setHeart2("hidden");
-    }
-  }, [lives]);
 
   ///////////////////////////////////////////////////////////////////
 
@@ -416,7 +412,7 @@ const MPGameTemp = (props) => {
       </div>
       <div className="container4">
         <div className="name">{name4}</div>
-        <div className="word">{word5}</div>
+        <div className="word">{word4}</div>
       </div>
       <div className="container5">
         <div className="name">{name5}</div>
@@ -429,6 +425,57 @@ const MPGameTemp = (props) => {
       <div style={{ visibility: heart3 }} className="heart3" />
       <div style={{ visibility: heart4 }} className="heart4" />
       <div style={{ visibility: heart5 }} className="heart5" />
+
+      <div
+        className={fruitID}
+        style={{ left: "50%", bottom: fruitPositionY + "px", transform: "translateX(-189px)" }}
+      />
+      <div
+        className="bigram"
+        style={{ left: "50%", bottom: positionY + "px", transform: "translateX(-49px)" }}
+      >
+        {bigram}
+      </div>
+      <div
+        className={fruitID}
+        style={{ left: "35%", bottom: fruitPositionY + "px", transform: "translateX(-189px)" }}
+      />
+      <div
+        className="bigram"
+        style={{ left: "35%", bottom: positionY + "px", transform: "translateX(-49px)" }}
+      >
+        {bigram}
+      </div>
+      <div
+        className={fruitID}
+        style={{ left: "65%", bottom: fruitPositionY + "px", transform: "translateX(-189px)" }}
+      />
+      <div
+        className="bigram"
+        style={{ left: "65%", bottom: positionY + "px", transform: "translateX(-49px)" }}
+      >
+        {bigram}
+      </div>
+      <div
+        className={fruitID}
+        style={{ left: "20%", bottom: fruitPositionY + "px", transform: "translateX(-189px)" }}
+      />
+      <div
+        className="bigram"
+        style={{ left: "20%", bottom: positionY + "px", transform: "translateX(-49px)" }}
+      >
+        {bigram}
+      </div>
+      <div
+        className={fruitID}
+        style={{ left: "80%", bottom: fruitPositionY + "px", transform: "translateX(-189px)" }}
+      />
+      <div
+        className="bigram"
+        style={{ left: "80%", bottom: positionY + "px", transform: "translateX(-49px)" }}
+      >
+        {bigram}
+      </div>
     </div>
   );
 };
