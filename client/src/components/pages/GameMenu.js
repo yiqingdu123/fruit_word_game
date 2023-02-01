@@ -7,7 +7,6 @@ import "./GameMenu.css";
 import "./Title.css";
 
 const GameMenu = (props) => {
-  console.log(props);
   let loginModal = null;
   if (!props.userId) {
     loginModal = (

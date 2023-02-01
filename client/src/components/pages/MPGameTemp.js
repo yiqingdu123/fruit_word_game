@@ -30,7 +30,7 @@ const MPGameTemp = (props) => {
   const [wordsList, setWordsList] = useState(["hi"]);
 
   const [bigram, setBigram] = useState("ui");
-  console.log("Game props: ", props);
+
   const verifyWordInMasterList = (wordObj) => {
     const result = MasterWordList.includes(wordObj);
     setInMasterList(result);
