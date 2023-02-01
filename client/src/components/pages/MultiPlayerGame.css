@@ -92,3 +92,43 @@
   font-weight: 1000;
   position: fixed;
 }
+
+.infosmall {
+  font-size: 24px;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 1000;
+  position: fixed;
+  text-align: center;
+  color: black;
+  margin: 175px;
+  width: 400px;
+
+  background: rgba(255, 255, 255, 0.7);
+  border: 4px solid #ff6f6f;
+  border-radius: 15px;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+.joingame {
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+
+  box-sizing: border-box;
+
+  position: fixed;
+
+  background: rgba(255, 255, 255, 0.7);
+  border: 4px solid #ff6f6f;
+  border-radius: 15px;
+
+  padding: 1px 8px;
+
+  margin-top: 650px;
+
+  font-size: 60px;
+
+  width: 400px;
+}

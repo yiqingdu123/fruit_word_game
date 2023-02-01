@@ -15,7 +15,7 @@ const MultiPlayerGame = (props) => {
       <div className="containerLobby">
         <div className="lobby">Multiplayer Lobby</div>
         <div className="info">Important Info: </div>
-        <div>
+        <div className="infosmall">
           <p>
             Press the button below to join the multiplayer game. If there is already a game ongoing,
             please wait for it to finish.
@@ -32,9 +32,13 @@ const MultiPlayerGame = (props) => {
       <h1 className="back">
         <Link to="/gamemenu">Back</Link>
       </h1>
-      <Link to="/mpgametemp" state={{ userId: props.userId }}>
-        Join Game!
-      </Link>
+      <div className="containerLobby">
+        <h1 className="joingame">
+          <Link to="/mpgametemp" state={{ userId: props.userId }}>
+            Join Game!
+          </Link>
+        </h1>
+      </div>
     </div>
   );
 };
